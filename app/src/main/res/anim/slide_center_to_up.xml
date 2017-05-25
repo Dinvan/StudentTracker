@@ -8,7 +8,7 @@
         android:fillAfter="true"
         android:fromYDelta="0%p"
         android:startOffset="1200"
-        android:toYDelta="-81%p" >
+        android:toYDelta="-45%p" >
     </translate> 
 
    <scale
@@ -19,8 +19,8 @@
         android:pivotX="50%"
         android:pivotY="50%"
          android:startOffset="1200"
-        android:toXScale="0.5"
-        android:toYScale="0.5" >
+        android:toXScale="0.66"
+        android:toYScale="0.66" >
     </scale> 
 
 </set>

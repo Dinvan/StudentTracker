@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Student Tracker</string>
+    <string name="app_name">Rayan School</string>
 
 
     <string name="retry">Retry</string>
@@ -53,6 +53,9 @@
     <string name="back_to">Back to</string>
     <string name="dont_have_account">Don\'t have an account?</string>
     <string name="already_have_account">Already have an account?</string>
+
+    <string name="parent_login">PARENT LOGIN</string>
+    <string name="teacher_login">TEACHER LOGIN</string>
 
 
 </resources>

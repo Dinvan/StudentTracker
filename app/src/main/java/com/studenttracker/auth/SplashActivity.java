@@ -22,9 +22,10 @@ import com.studenttracker.session.SessionParam;
 
 public class SplashActivity extends BaseActivity{
 
-    private final int SplashDuration = 4000;
+    private final int SplashDuration = 2000;
     String session_key = "";
-    private TextView mLogoIV;
+    private TextView mLogoTV;
+    private ImageView mLogoIV;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,29 +34,10 @@ public class SplashActivity extends BaseActivity{
         mContext = this;
         SessionParam mSession = new SessionParam(mContext);
         session_key  = mSession.session_key;
-        mLogoIV = (TextView) findViewById(R.id.app_logo);
-     //   animateLogo();
+        mLogoTV = (TextView) findViewById(R.id.app_logo);
+        mLogoIV = (ImageView) findViewById(R.id.app_logo_iv);
+        showTranslateAnimation();
     //    showTranslateAnimation();
-        ShimmerFrameLayout container =
-                (ShimmerFrameLayout) findViewById(R.id.shimmer_view_container);
-        container.setDuration(1000);
-        container.setRepeatCount(2);
-        container.startShimmerAnimation();
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                if (session_key.length() > 0 && !session_key.equalsIgnoreCase("Profile_Session_Key")) {
-                    startActivity( MainActivity.getIntent(mContext));
-                    overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-                    finishAllActivities();
-                }else{
-                    Intent intent = new Intent(mContext, LoginActivity.class);
-                    startActivity(intent);
-                    overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-                    finishAllActivities();
-                }
-            }
-        }, SplashDuration);
     }
 
     private void showTranslateAnimation() {
@@ -75,8 +57,27 @@ public class SplashActivity extends BaseActivity{
 
             @Override
             public void onAnimationEnd(Animation animation) {
-                session_key = SessionParam.getSessionKey(mContext);
-                go();
+                mLogoTV.setVisibility(View.VISIBLE);
+                ShimmerFrameLayout container =
+                        (ShimmerFrameLayout) findViewById(R.id.shimmer_view_container);
+                container.setDuration(1000);
+                container.setRepeatCount(2);
+                container.startShimmerAnimation();
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (session_key.length() > 0 && !session_key.equalsIgnoreCase("Profile_Session_Key")) {
+                            startActivity( MainActivity.getIntent(mContext));
+                            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                            finishAllActivities();
+                        }else{
+                            Intent intent = new Intent(mContext, PreLoginActivity.class);
+                            startActivity(intent);
+                            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                            finishAllActivities();
+                        }
+                    }
+                }, SplashDuration);
             }
         });
         mLogoIV.startAnimation(slideUp);
@@ -107,6 +108,32 @@ public class SplashActivity extends BaseActivity{
                 }
             }, SplashDuration);
 
+    }
+
+    private void animateLogo() {
+        ObjectAnimator mObjANim = ObjectAnimator.ofInt(mLogoIV.getDrawable(), "level", 0, 10000).setDuration(3000);
+        mObjANim.start();
+        mObjANim.addListener(new Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animation) {
+
+            }
+        });
     }
 }
 
