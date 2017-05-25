@@ -1,0 +1,58 @@
+<resources>
+    <string name="app_name">Student Tracker</string>
+
+
+    <string name="retry">Retry</string>
+    <string name="email_id">Email ID</string>
+    <string name="password">Password</string>
+    <string name="forgot_password">Forgot Password?</string>
+
+
+    <string name="cancel">Cancel</string>
+    <string name="ok">OK</string>
+    <string name="MSG_INTERNETERROR">No network connection, please try again later.</string>
+    <string name="msgTitle">Message</string>
+    <string name="new_version">New Version </string>
+    <string name="new_version_available">A new version available for update, Please update the app to continue.</string>
+
+    <string name="tutorial_header1">Dummy Text1</string>
+    <string name="tutorial_header2">Dummy Text2</string>
+    <string name="tutorial_header3">Dummy Text3</string>
+    <string name="tutorial_header4">Dummy Text4</string>
+    <string name="tutorial_message1">Dummy Message for Hiring Alerts introduction </string>
+    <string name="tutorial_message2">Dummy Message for Hiring Alerts introduction </string>
+    <string name="tutorial_message3">Dummy Message for Hiring Alerts introduction </string>
+    <string name="tutorial_message4">Dummy Message for Hiring Alerts introduction </string>
+
+    <string name="login">Login</string>
+    <string name="signin">Sign In</string>
+    <string name="reset_link">Request Reset Link</string>
+    <string name="register_with_us">Register with us</string>
+    <string name="signup">Signup</string>
+    <string name="err_msg_name">Please Enter Full Name</string>
+    <string name="err_msg_email">Please Enter valid email address</string>
+    <string name="err_msg_password">Please Enter password</string>
+
+    <string name="full_name">Full Name</string>
+    <string name="full_name_star">Full Name*</string>
+    <string name="email_id_star">Email ID*</string>
+    <string name="password_star">Password*</string>
+    <string name="confirm_password_star">Confirm Password*</string>
+    <string name="mobile_number_star">Mobile Number*</string>
+    <string name="enter_verification_code">Enter Verification Code</string>
+
+    <string name="enter_code_sent">Enter code sent on your phone or email inorder to process your verification.</string>
+
+    <string name="verify">Verify</string>
+    <string name="terms">By Clicking Sign Up</string>
+    <string name="terms1">I agree to HiringAlerts</string>
+    <string name="terms2"><u>Terms of Service</u></string>
+
+    <string name="thankyou">Thank You!</string>
+    <string name="reset_thankyou_msg">A password reset link hase been sent to your registered email address.</string>
+    <string name="back_to">Back to</string>
+    <string name="dont_have_account">Don\'t have an account?</string>
+    <string name="already_have_account">Already have an account?</string>
+
+
+</resources>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+   <!-- <color name="colorPrimary">#9B26AF</color>
+    <color name="colorPrimaryDark">#7A1EA1</color>
+    <color name="colorAccent">#9B26AF</color>-->
+    <color name="colorPrimary">#D21D61</color>
+    <color name="colorPrimaryDark">#b91a56</color>
+    <color name="colorAccent">#96FFFFFF</color>
+
+
+    <color name="grey_500">#b3b3b3</color>
+    <color name="grey_200">#EEEEEE</color>
+    <color name="red_500">#ea1c0d</color>
+    <color name="red_200">#EF9A9A</color>
+    <color name="translucent_50">#80000000</color>
+    <color name="Accpeted">#00A700</color>
+
+    <color name="Transparent">#00000000</color>
+    <color name="White">#FFFFFF</color>
+    <color name="tutorial_box_bg">#F0F0F0</color>
+    <color name="text_hint_color">#B5B5B5</color>
+
+    <color name="text_primary">#212121</color>
+    <color name="text_secondary">#66000000</color>
+ <color name="app_bg_color">#F7F7F7</color>
+
+</resources>

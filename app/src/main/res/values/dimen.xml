@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <dimen name="text_caption_">12sp</dimen>
+    <dimen name="text_normal">14sp</dimen>
+    <dimen name="text_title">16sp</dimen>
+    <dimen name="text_title_big">18sp</dimen>
+    <dimen name="text_big_2">20sp</dimen>
+    <dimen name="button_corners">4dp</dimen>
+
+
+    <dimen name="text12">12sp</dimen>
+    <dimen name="text14">14sp</dimen>
+    <dimen name="text16">16sp</dimen>
+    <dimen name="text18">18sp</dimen>
+    <dimen name="text20">20sp</dimen>
+    <dimen name="text22">22sp</dimen>
+    <dimen name="text24">24sp</dimen>
+    <dimen name="text32">32sp</dimen>
+
+    <dimen name="dimen1">1dp</dimen>
+    <dimen name="dimen2">2dp</dimen>
+    <dimen name="dimen3">3dp</dimen>
+    <dimen name="dimen4">4dp</dimen>
+    <dimen name="dimen5">5dp</dimen>
+    <dimen name="dimen6">6dp</dimen>
+    <dimen name="dimen7">7dp</dimen>
+    <dimen name="dimen8">8dp</dimen>
+    <dimen name="dimen9">9dp</dimen>
+    <dimen name="dimen10">10dp</dimen>
+    <dimen name="dimen11">11dp</dimen>
+    <dimen name="dimen12">12dp</dimen>
+    <dimen name="dimen13">13dp</dimen>
+    <dimen name="dimen14">14dp</dimen>
+    <dimen name="dimen15">15dp</dimen>
+    <dimen name="dimen16">16dp</dimen>
+    <dimen name="dimen17">17dp</dimen>
+    <dimen name="dimen18">18dp</dimen>
+    <dimen name="dimen19">19dp</dimen>
+    <dimen name="dimen20">20dp</dimen>
+    <dimen name="dimen25">25dp</dimen>
+    <dimen name="dimen30">30dp</dimen>
+    <dimen name="dimen40">40dp</dimen>
+    <dimen name="dimen50">50dp</dimen>
+    <dimen name="dimen100">100dp</dimen>
+
+
+</resources>

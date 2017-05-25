@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="api_login">users/login</string>
+    <string name="api_signup">users/register</string>
+    <string name="api_forgot_password">users/forgot_password</string>
+    <string name="api_verify">users/verify</string>
+    <string name="api_reset_password">users/reset_password</string>
+
+</resources>

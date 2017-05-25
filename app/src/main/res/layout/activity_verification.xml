@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/colorPrimary"
+              android:orientation="vertical">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:orientation="vertical"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp">
+
+                    <ImageView
+                        android:layout_width="65dp"
+                        android:layout_height="65dp"
+                        android:layout_centerInParent="true"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="40dp"
+                        android:background="@color/Transparent"
+                        android:src="@mipmap/ic_launcher"
+                        />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:gravity="center"
+                        android:text="Thankyou For Registering Us!"
+                        android:textColor="@color/White"
+                        android:textSize="@dimen/text20"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:gravity="center"
+                        android:text="@string/enter_code_sent"
+                        android:textColor="@color/White"
+                        android:textSize="@dimen/text14"/>
+
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="30dp"
+                        android:orientation="horizontal">
+
+                        <EditText
+                            android:id="@+id/otp_1"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:background="@drawable/white_trans_border"
+                            android:gravity="center"
+                            android:hint="-"
+                            android:imeOptions="actionNext"
+                            android:inputType="numberSigned"
+                            android:maxLength="1"
+                            android:textColor="@color/White"
+                            android:textColorHint="@color/White"
+                            android:textSize="@dimen/text_title_big"/>
+
+                        <EditText
+                            android:id="@+id/otp_2"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_marginLeft="10dp"
+
+                            android:background="@drawable/white_trans_border"
+                            android:gravity="center"
+                            android:hint="-"
+                            android:imeOptions="actionNext"
+                            android:inputType="numberSigned"
+                            android:maxLength="1"
+                            android:textColor="@color/White"
+                            android:textColorHint="@color/White"
+                            android:textSize="@dimen/text_title_big"/>
+
+                        <EditText
+                            android:id="@+id/otp_3"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_marginLeft="10dp"
+
+                            android:background="@drawable/white_trans_border"
+                            android:gravity="center"
+                            android:hint="-"
+                            android:imeOptions="actionNext"
+                            android:inputType="numberSigned"
+                            android:maxLength="1"
+                            android:textColor="@color/White"
+                            android:textColorHint="@color/White"
+                            android:textSize="@dimen/text_title_big"/>
+
+                        <EditText
+                            android:id="@+id/otp_4"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_marginLeft="10dp"
+
+                            android:background="@drawable/white_trans_border"
+                            android:gravity="center"
+                            android:hint="-"
+                            android:imeOptions="actionNext"
+                            android:inputType="numberSigned"
+                            android:maxLength="1"
+                            android:textColor="@color/White"
+                            android:textColorHint="@color/White"
+                            android:textSize="@dimen/text_title_big"/>
+
+                        <EditText
+                            android:id="@+id/otp_5"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_marginLeft="10dp"
+
+                            android:background="@drawable/white_trans_border"
+                            android:gravity="center"
+                            android:hint="-"
+                            android:imeOptions="actionNext"
+                            android:inputType="numberSigned"
+                            android:maxLength="1"
+                            android:textColor="@color/White"
+                            android:textColorHint="@color/White"
+                            android:textSize="@dimen/text_title_big"/>
+
+                        <EditText
+                            android:id="@+id/otp_6"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_marginLeft="10dp"
+
+                            android:background="@drawable/white_trans_border"
+                            android:gravity="center"
+                            android:hint="-"
+                            android:imeOptions="actionNext"
+                            android:inputType="numberSigned"
+                            android:maxLength="1"
+                            android:textColor="@color/White"
+                            android:textColorHint="@color/White"
+                            android:textSize="@dimen/text_title_big"/>
+
+                    </LinearLayout>
+
+
+                    <Button
+                        android:id="@+id/verify_btn"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="30dp"
+                        android:background="@drawable/selector_button_main"
+                        android:text="@string/verify"
+                        android:textAllCaps="false"
+                        android:textColor="@color/White"
+                        android:textColorHint="@color/colorAccent"
+                        android:textSize="@dimen/text_title"/>
+
+
+                </LinearLayout>
+
+            </RelativeLayout>
+        </ScrollView>
+
+
+    </RelativeLayout>
+
+</LinearLayout>
