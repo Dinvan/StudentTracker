@@ -16,6 +16,11 @@ public class Config {
      */
     public static final String ENVIRONMENT = "devel";
 
+
+    public static final int LOGIN_TYPE_TEACHER = 1;
+    public static final int LOGIN_TYPE_PARENT = 2;
+    public static final String LOGIN_TYPE = "login_type";
+
     /**
      * Message to show when request is left without completion
      */

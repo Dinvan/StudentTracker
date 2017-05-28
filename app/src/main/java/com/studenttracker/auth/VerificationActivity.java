@@ -40,6 +40,8 @@ public class VerificationActivity extends BaseActivity {
     EditText otp5;
     @Bind(R.id.otp_6)
     EditText otp6;
+    String mMobile;
+    int loginType;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +49,8 @@ public class VerificationActivity extends BaseActivity {
         setContentView(R.layout.activity_verification);
         ButterKnife.bind(this);
         initViews();
+        mMobile = getIntent().getStringExtra("mobile");
+        loginType = getIntent().getIntExtra(Config.LOGIN_TYPE,0);
     }
 
     private void initViews() {
@@ -211,7 +215,7 @@ public class VerificationActivity extends BaseActivity {
                 otp6.requestFocus();
                 otp6.setCursorVisible(true);
 
-                hideSoftKeyboard(this);
+             //   hideSoftKeyboard(this);
 
             }
             break;
@@ -228,8 +232,10 @@ public class VerificationActivity extends BaseActivity {
         }
     }
 
-    public static Intent getIntent(Context context) {
+    public static Intent getIntent(Context context,String mobile,int loginType) {
         Intent intent = new Intent(context, VerificationActivity.class);
+        intent.putExtra("mobile",mobile);
+        intent.putExtra(Config.LOGIN_TYPE,loginType);
         return intent;
     }
 
@@ -245,10 +251,22 @@ public class VerificationActivity extends BaseActivity {
             DialogUtil.Alert(VerificationActivity.this, getString(R.string.enter_code_sent), DialogUtil.AlertType.Error);
 
         } else {
-
-            requestAPI(otp1.getText().toString() + otp2.getText().toString() +
+            SessionParam mSessionParam = new SessionParam(mContext);
+            String session_key = "jhjhjhjhjhj";
+            mSessionParam.setSaveSessionKey(mContext, session_key);
+            mSessionParam.mobile = mMobile;
+            mSessionParam.loginType = loginType;
+            mSessionParam.persistData(mContext);
+            if(loginType==Config.LOGIN_TYPE_PARENT) {
+                startActivity(ParentDashboardActivity.getIntent(mContext));
+            }
+            else if(loginType==Config.LOGIN_TYPE_TEACHER){
+                startActivity(ParentDashboardActivity.getIntent(mContext));
+            }
+            finishAllActivities();
+         /*   requestAPI(otp1.getText().toString() + otp2.getText().toString() +
                     otp3.getText().toString() + otp4.getText().toString() +
-                    otp5.getText().toString() + otp6.getText().toString());
+                    otp5.getText().toString() + otp6.getText().toString());*/
         }
     }
 
@@ -265,7 +283,7 @@ public class VerificationActivity extends BaseActivity {
                     String session_key = ((JSONObject) dataObject).optString("session_key");
                     mSessionParam.setSaveSessionKey(VerificationActivity.this, session_key);
                     mSessionParam.persistData(VerificationActivity.this);
-                    startActivity(MainActivity.getIntent(mContext));
+                    startActivity(ParentDashboardActivity.getIntent(mContext));
                     finishAllActivities();
                 }
             }

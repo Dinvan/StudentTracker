@@ -19,6 +19,7 @@ public class SessionParam implements Serializable {
     public String default_profile_type;
     public String last_login_at;
     public String active_profile_type;
+    public int loginType;
 
     //Please verify your mobile number first.
     public void persistData(Context activity) {
@@ -32,6 +33,7 @@ public class SessionParam implements Serializable {
         editor.putString("default_profile_type", default_profile_type);
         editor.putString("last_login_at", last_login_at);
         editor.putString("active_profile_type", active_profile_type);
+        editor.putInt("login_type", loginType);
         editor.commit();
     }
 
@@ -55,6 +57,7 @@ public class SessionParam implements Serializable {
             default_profile_type = prefs.getString("default_profile_type", "");
             last_login_at = prefs.getString("last_login_at", "");
             active_profile_type = prefs.getString("active_profile_type", "");
+            loginType = prefs.getInt("login_type", 0);
         }
     }
 
@@ -81,6 +84,7 @@ public class SessionParam implements Serializable {
             default_profile_type = jsonObject.optString("default_profile_type", "");
             last_login_at = jsonObject.optString("last_login_at", "");
             active_profile_type = jsonObject.optString("active_profile_type", "");
+            loginType = jsonObject.optInt("login_type");
         }
     }
 

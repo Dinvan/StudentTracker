@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.google.gson.JsonObject;
 import com.studenttracker.R;
@@ -29,13 +31,16 @@ import butterknife.OnClick;
 
 public class LoginActivity extends BaseActivity {
 
-    @Bind(R.id.email_et)
-    EditText emailEt;
-    @Bind(R.id.password_et)
-    EditText passwordEt;
+    @Bind(R.id.mobile_et)
+    EditText mobileEt;
+    @Bind(R.id.login_texttv)
+    TextView mHeaderTV;
+    @Bind(R.id.logo_iv)
+    ImageView mLogoIV;
 
     private BaseRequest baseRequest;
-    private String mEmailId,mPassword;
+    private String mMobileNo;
+    private int LoginType;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,12 +48,21 @@ public class LoginActivity extends BaseActivity {
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
         mContext = this;
-
+        LoginType = getIntent().getIntExtra(Config.LOGIN_TYPE,0);
+        if(LoginType==Config.LOGIN_TYPE_TEACHER){
+            mHeaderTV.setText(getString(R.string.teacher_login));
+            mLogoIV.setImageResource(R.drawable.ic_teacther);
+        }
+        else{
+            mHeaderTV.setText(getString(R.string.parent_login));
+            mLogoIV.setImageResource(R.drawable.ic_parent);
+        }
 //
     }
 
-    public static Intent getIntent(Context context) {
+    public static Intent getIntent(Context context,int loginType) {
         Intent intent = new Intent(context, LoginActivity.class);
+        intent.putExtra(Config.LOGIN_TYPE,loginType);
         return intent;
     }
 
@@ -57,27 +71,26 @@ public class LoginActivity extends BaseActivity {
         switch (view.getId()) {
             case R.id.login_btn:
                 if (checkValidation()) {
-                    UtilityFunctions.hideSoftKeyboard(emailEt);
-                    requestLogin(mEmailId,mPassword);
+                    UtilityFunctions.hideSoftKeyboard(mobileEt);
+                  //  requestLogin(mMobileNo);
+
+                    startActivity(VerificationActivity.getIntent(mContext,mMobileNo,LoginType));
+                    finishAllActivities();
                 }
                 break;
         }
     }
     public boolean checkValidation(){
-        mEmailId = emailEt.getText().toString().trim();
-        mPassword = passwordEt.getText().toString().trim();
-        if (!ValidationMatcher.isValidEmail(mEmailId)) {
-            DialogUtil.Alert(LoginActivity.this, getString(R.string.err_msg_email), DialogUtil.AlertType.Error);
+        mMobileNo = mobileEt.getText().toString().trim();
+        if (mMobileNo.length()!=10) {
+            DialogUtil.Alert(LoginActivity.this, getString(R.string.phone_require), DialogUtil.AlertType.Error);
             return false;
-        } else if (mPassword.length()<6) {
-            DialogUtil.Alert(LoginActivity.this, getString(R.string.err_msg_password), DialogUtil.AlertType.Error);
-            return false;
-        }else{
+        } else{
             return true;
         }
     }
 
-    public void requestLogin(String email, String password) {
+    public void requestLogin(final String mobile) {
 
         baseRequest = new BaseRequest(this);
         baseRequest.setDefaultLoader();
@@ -89,7 +102,7 @@ public class LoginActivity extends BaseActivity {
                     String session_key = ((JSONObject) dataObject).optString("session_key");
                     mSessionParam.setSaveSessionKey(LoginActivity.this, session_key);
                     mSessionParam.persistData(LoginActivity.this);
-                    startActivity(MainActivity.getIntent(mContext));
+                    startActivity(VerificationActivity.getIntent(mContext,mobile,LoginType));
                     finishAllActivities();
                 }
             }
@@ -119,8 +132,8 @@ public class LoginActivity extends BaseActivity {
             object = Functions.getInstance().getJsonObject(
                     "device_type", Config.DEVICE_TYPE_ID,
                     "device_token", "",
-                    "email", email,
-                    "password", password);
+                    "mobile", mobile,
+                    "login_type", String.valueOf(LoginType));
 
 
         baseRequest.callAPIPost(1, object, getAppString(R.string.api_login));

@@ -2,7 +2,6 @@ package com.studenttracker.auth;
 
 import android.animation.Animator;
 import android.animation.ObjectAnimator;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -15,6 +14,7 @@ import android.widget.TextView;
 import com.facebook.shimmer.ShimmerFrameLayout;
 import com.studenttracker.R;
 import com.studenttracker.session.SessionParam;
+import com.studenttracker.utility.Config;
 
 /**
  * Created by Ravi on 5/20/2017.
@@ -26,13 +26,14 @@ public class SplashActivity extends BaseActivity{
     String session_key = "";
     private TextView mLogoTV;
     private ImageView mLogoIV;
+    private SessionParam mSession;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
         mContext = this;
-        SessionParam mSession = new SessionParam(mContext);
+        mSession = new SessionParam(mContext);
         session_key  = mSession.session_key;
         mLogoTV = (TextView) findViewById(R.id.app_logo);
         mLogoIV = (ImageView) findViewById(R.id.app_logo_iv);
@@ -67,7 +68,12 @@ public class SplashActivity extends BaseActivity{
                     @Override
                     public void run() {
                         if (session_key.length() > 0 && !session_key.equalsIgnoreCase("Profile_Session_Key")) {
-                            startActivity( MainActivity.getIntent(mContext));
+                            if(mSession.loginType== Config.LOGIN_TYPE_PARENT) {
+                                startActivity(ParentDashboardActivity.getIntent(mContext));
+                            }
+                            else if(mSession.loginType==Config.LOGIN_TYPE_TEACHER){
+                                startActivity(ParentDashboardActivity.getIntent(mContext));
+                            }
                             overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                             finishAllActivities();
                         }else{
@@ -91,7 +97,7 @@ public class SplashActivity extends BaseActivity{
 
                     if (session_key.length() > 0 && !session_key.equalsIgnoreCase("Profile_Session_Key")) {
 
-                        Intent main_activity = new Intent(mContext, MainActivity.class);
+                        Intent main_activity = new Intent(mContext, ParentDashboardActivity.class);
                         startActivity(main_activity);
 
                         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);

@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:background="@drawable/ic_app_bg"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include
+        android:id="@+id/headerll"
+        layout="@layout/header_toolbar"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen10"/>
+
+            <RelativeLayout
+                android:id="@+id/homework_rl"
+                android:layout_width="match_parent"
+                android:layout_height="80dp">
+
+                <RelativeLayout
+                    android:background="#FF6C5A"
+                    android:layout_toLeftOf="@+id/midpoint1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:layout_centerInParent="true"
+                        android:textColor="@color/White"
+                        android:textSize="@dimen/text18"
+                        android:gravity="center"
+                        android:textStyle="bold"
+                        android:text="@string/class_home_work"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                </RelativeLayout>
+
+
+                <ImageView
+                    android:id="@+id/home_work_iv"
+                    android:src="@drawable/ic_homework"
+                    android:scaleType="fitXY"
+                    android:layout_toRightOf="@+id/midpoint1"
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp" />
+
+                <View
+                    android:id="@+id/midpoint1"
+                    android:layout_centerHorizontal="true"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"/>
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen10"/>
+
+            <RelativeLayout
+                android:id="@+id/attendance_rl"
+                android:layout_width="match_parent"
+                android:layout_height="80dp">
+
+                <RelativeLayout
+                    android:background="#0BB798"
+                    android:layout_toRightOf="@+id/midpoint2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:layout_centerInParent="true"
+                        android:textColor="@color/White"
+                        android:textSize="@dimen/text18"
+                        android:gravity="center"
+                        android:textStyle="bold"
+                        android:text="@string/class_attendance"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                </RelativeLayout>
+
+
+                <ImageView
+                    android:src="@drawable/ic_attandence"
+                    android:scaleType="fitXY"
+                    android:layout_toLeftOf="@+id/midpoint2"
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp" />
+
+                <View
+                    android:id="@+id/midpoint2"
+                    android:layout_centerHorizontal="true"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"/>
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen10"/>
+
+            <RelativeLayout
+                android:id="@+id/notification_rl"
+                android:layout_width="match_parent"
+                android:layout_height="80dp">
+
+                <RelativeLayout
+                    android:background="#B784CF"
+                    android:layout_toLeftOf="@+id/midpoint3"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:layout_centerInParent="true"
+                        android:textColor="@color/White"
+                        android:textSize="@dimen/text18"
+                        android:gravity="center"
+                        android:textStyle="bold"
+                        android:text="@string/notification"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                </RelativeLayout>
+
+
+                <ImageView
+                    android:src="@drawable/ic_notifcaton"
+                    android:scaleType="fitXY"
+                    android:layout_toRightOf="@+id/midpoint3"
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp" />
+
+                <View
+                    android:id="@+id/midpoint3"
+                    android:layout_centerHorizontal="true"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"/>
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen10"/>
+
+            <!--    <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp">
+
+                    <RelativeLayout
+                        android:background="#F6C23A"
+                        android:layout_toRightOf="@+id/midpoint4"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:layout_centerInParent="true"
+                            android:textColor="@color/White"
+                            android:textSize="@dimen/text18"
+                            android:gravity="center"
+                            android:textStyle="bold"
+                            android:text="@string/timetable"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                    </RelativeLayout>
+
+
+                    <ImageView
+                        android:src="@drawable/ic_timetable"
+                        android:scaleType="fitXY"
+                        android:layout_toLeftOf="@+id/midpoint4"
+                        android:layout_width="match_parent"
+                        android:layout_height="80dp" />
+
+                    <View
+                        android:id="@+id/midpoint4"
+                        android:layout_centerHorizontal="true"
+                        android:layout_width="0dp"
+                        android:layout_height="1dp"/>
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dimen10"/>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp">
+
+                    <RelativeLayout
+                        android:background="#0B85B8"
+                        android:layout_toLeftOf="@+id/midpoint5"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:layout_centerInParent="true"
+                            android:textColor="@color/White"
+                            android:textSize="@dimen/text18"
+                            android:gravity="center"
+                            android:textStyle="bold"
+                            android:text="@string/school_fee"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                    </RelativeLayout>
+
+
+                    <ImageView
+                        android:src="@drawable/ic_fees"
+                        android:scaleType="fitXY"
+                        android:layout_toRightOf="@+id/midpoint5"
+                        android:layout_width="match_parent"
+                        android:layout_height="80dp" />
+
+                    <View
+                        android:id="@+id/midpoint5"
+                        android:layout_centerHorizontal="true"
+                        android:layout_width="0dp"
+                        android:layout_height="1dp"/>
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dimen10"/>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp">
+
+                    <RelativeLayout
+                        android:background="#ABBF60"
+                        android:layout_toRightOf="@+id/midpoint6"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:layout_centerInParent="true"
+                            android:textColor="@color/White"
+                            android:textSize="@dimen/text18"
+                            android:gravity="center"
+                            android:textStyle="bold"
+                            android:text="@string/bus_route"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                    </RelativeLayout>
+
+
+                    <ImageView
+                        android:src="@drawable/ic_busroute"
+                        android:scaleType="fitXY"
+                        android:layout_toLeftOf="@+id/midpoint6"
+                        android:layout_width="match_parent"
+                        android:layout_height="80dp" />
+
+                    <View
+                        android:id="@+id/midpoint6"
+                        android:layout_centerHorizontal="true"
+                        android:layout_width="0dp"
+                        android:layout_height="1dp"/>
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dimen10"/>
+
+                <RelativeLayout
+                    android:visibility="gone"
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp">
+
+                    <RelativeLayout
+                        android:background="#D33022"
+                        android:layout_toLeftOf="@+id/midpoint7"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:layout_centerInParent="true"
+                            android:textColor="@color/White"
+                            android:textSize="@dimen/text18"
+                            android:gravity="center"
+                            android:textStyle="bold"
+                            android:text="@string/calendar"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                    </RelativeLayout>
+
+
+                    <ImageView
+                        android:src="@drawable/ic_calender"
+                        android:scaleType="fitXY"
+                        android:layout_toRightOf="@+id/midpoint7"
+                        android:layout_width="match_parent"
+                        android:layout_height="80dp" />
+
+                    <View
+                        android:id="@+id/midpoint7"
+                        android:layout_centerHorizontal="true"
+                        android:layout_width="0dp"
+                        android:layout_height="1dp"/>
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dimen10"/>-->
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

@@ -2,14 +2,16 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android" >
 
 
-    <gradient
+    <!--<gradient
         android:angle="90"
         android:startColor="#ff146d"
         android:centerColor="#e21462"
         android:endColor="#ff146d"
-        ></gradient>
+        ></gradient>-->
+
+    <solid android:color="@color/White"/>
 
 
-    <corners android:radius="@dimen/button_corners" />
+    <corners android:bottomLeftRadius="@dimen/dimen5" android:bottomRightRadius="@dimen/dimen5" android:topLeftRadius="@dimen/dimen5" android:topRightRadius="@dimen/dimen5"/>
 
 </shape>

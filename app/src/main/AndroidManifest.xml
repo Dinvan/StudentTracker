@@ -32,7 +32,7 @@
 
 
         <activity
-            android:name=".auth.MainActivity"
+            android:name=".auth.ParentDashboardActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden"></activity>
 

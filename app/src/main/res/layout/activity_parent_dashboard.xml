@@ -27,6 +27,7 @@
         <ListView
             android:id="@+id/navigation_lv"
             android:layout_width="280dp"
+            android:background="@color/colorPrimary"
             android:layout_height="match_parent"
             android:divider="@null"
             android:dividerHeight="0dp"

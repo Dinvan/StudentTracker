@@ -33,6 +33,7 @@
     <string name="err_msg_email">Please Enter valid email address</string>
     <string name="err_msg_password">Please Enter password</string>
 
+    <string name="phone_require">Please enter your 10 digit mobile number</string>
     <string name="full_name">Full Name</string>
     <string name="full_name_star">Full Name*</string>
     <string name="email_id_star">Email ID*</string>
@@ -41,7 +42,7 @@
     <string name="mobile_number_star">Mobile Number*</string>
     <string name="enter_verification_code">Enter Verification Code</string>
 
-    <string name="enter_code_sent">Enter code sent on your phone or email inorder to process your verification.</string>
+    <string name="enter_code_sent">Enter code sent on your phone inorder to process your verification.</string>
 
     <string name="verify">Verify</string>
     <string name="terms">By Clicking Sign Up</string>
@@ -56,6 +57,34 @@
 
     <string name="parent_login">PARENT LOGIN</string>
     <string name="teacher_login">TEACHER LOGIN</string>
+    <string name="parent">PARENT</string>
+    <string name="teacher">TEACHER</string>
+    <string name="login_message">Please enter your mobile number below to get access to our app</string>
 
 
+
+    <string name="class_home_work">Class \nHome Work</string>
+    <string name="class_attendance">Class \nAttendance</string>
+    <string name="notification">LATEST \n Notification</string>
+    <string name="timetable">Class \nTime Table</string>
+    <string name="school_fee">School \nFees</string>
+    <string name="bus_route">Track \n Bus Route</string>
+    <string name="calendar">School \nCalendar</string>
+
+
+    <string-array name="nav_menu">
+        <item>@string/nav_home</item>
+        <item>@string/nav_about</item>
+        <item>@string/nav_help</item>
+        <item>@string/nav_logout</item>
+
+    </string-array>
+    <string name="nav_home">Home</string>
+    <string name="nav_about">About</string>
+    <string name="nav_help">Help</string>
+    <string name="nav_logout">Logout</string>
+
+    <string name="drawer_close">Close</string>
+    <string name="drawer_open">Open</string>
+    <string name="sure_logout">Are you sure want to logout from app?</string>
 </resources>

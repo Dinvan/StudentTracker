@@ -1,96 +1,122 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/ic_app_bg"
     android:orientation="vertical">
 
-
-    <RelativeLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:fillViewport="true">
 
-        <ScrollView
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:fillViewport="true">
+            android:layout_height="match_parent">
+
 
             <RelativeLayout
+                android:elevation="@dimen/dimen10"
+                android:layout_marginRight="@dimen/dimen20"
+                android:layout_marginLeft="@dimen/dimen20"
+                android:background="@color/Transparent"
+                android:layout_centerInParent="true"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content">
 
-                <LinearLayout
+
+
+
+                <RelativeLayout
+                    android:elevation="@dimen/dimen10"
+                    android:layout_below="@+id/logo_iv"
+                    android:background="@drawable/rounded_background_main"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:orientation="vertical">
 
-                    android:orientation="vertical"
-                    android:paddingLeft="20dp"
-                    android:paddingRight="20dp">
 
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerInParent="true"
+
+                    <TextView
+                        android:id="@+id/login_texttv"
+                        android:gravity="center"
+                        android:textColor="@color/black"
+                        android:layout_centerHorizontal="true"
+                        android:textSize="@dimen/text32"
                         android:layout_marginTop="@dimen/dimen50"
-                        android:src="@drawable/ic_logo"
                         android:layout_gravity="center_horizontal"
-                        android:background="@color/Transparent"
-                        android:scaleType="centerCrop"/>
+                        android:text="@string/parent_login"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
 
+                    <TextView
+                        android:id="@+id/message_tv"
+                        android:layout_below="@+id/login_texttv"
+                        android:gravity="center"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text14"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="@dimen/dimen20"
+                        android:layout_marginBottom="@dimen/dimen20"
+                        android:layout_gravity="center_horizontal"
+                        android:text="@string/login_message"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
 
-                    <android.support.design.widget.TextInputLayout
+                    <EditText
+                        android:id="@+id/mobile_et"
+                        android:layout_below="@id/message_tv"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="20dp"
-                        android:textColorHint="@color/White">
+                        android:layout_margin="@dimen/dimen20"
+                        android:gravity="center_vertical"
+                        android:padding="@dimen/dimen10"
+                        android:drawablePadding="@dimen/dimen10"
+                        android:drawableLeft="@drawable/ic_user"
+                        android:hint="@string/mobile_number_star"
+                        android:inputType="phone"
+                        android:textColor="@color/black"
+                        android:maxLength="10"
+                        android:background="@drawable/input_bg"
+                        android:textColorHint="@color/text_hint_color"
+                        android:textSize="@dimen/text_normal"/>
 
-                        <EditText
-                            android:id="@+id/email_et"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:hint="@string/email_id"
-                            android:inputType="textEmailAddress"
-                            android:textColor="@color/White"
-                            android:textColorHint="@color/White"
-                            android:textSize="@dimen/text_normal"/>
-                    </android.support.design.widget.TextInputLayout>
-
-                    <android.support.design.widget.TextInputLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:textColorHint="@color/White">
-
-                        <EditText
-                            android:id="@+id/password_et"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:hint="@string/password"
-                            android:inputType="textPassword"
-                            android:textColor="@color/White"
-                            android:textSize="@dimen/text_normal"/>
-                    </android.support.design.widget.TextInputLayout>
 
                     <Button
                         android:id="@+id/login_btn"
+                        android:layout_below="@id/mobile_et"
+                        android:elevation="@dimen/dimen10"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="40dp"
+                        android:layout_height="56dp"
+                        android:layout_margin="@dimen/dimen20"
                         android:textAllCaps="false"
-                        android:background="@drawable/selector_button_main"
+                        android:background="@drawable/button_bg"
                         android:text="@string/login"
+                        android:gravity="center"
+                        android:textStyle="bold"
                         android:textColor="@color/White"
                         android:textColorHint="@color/colorAccent"
-                        android:textSize="@dimen/text_title"/>
+                        android:textSize="@dimen/text18"/>
 
-                </LinearLayout>
+
+
+                </RelativeLayout>
+
+                <ImageView
+                    android:id="@+id/logo_iv"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:src="@drawable/ic_parent"
+                    android:layout_width="96dp"
+                    android:layout_height="96dp" />
 
             </RelativeLayout>
-        </ScrollView>
 
 
-        <include
-            layout="@layout/progress_dialog_loader"/>
-    </RelativeLayout>
+        </RelativeLayout>
+    </ScrollView>
 
-</LinearLayout>
+    <include
+        layout="@layout/progress_dialog_loader"/>
+
+</RelativeLayout>
