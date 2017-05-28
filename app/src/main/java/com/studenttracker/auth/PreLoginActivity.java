@@ -36,10 +36,10 @@ public class PreLoginActivity extends BaseActivity {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.parent_rl:
-                startActivity(LoginActivity.getIntent(mContext, Config.LOGIN_TYPE_TEACHER));
+                startActivity(LoginActivity.getIntent(mContext, Config.LOGIN_TYPE_PARENT));
                 break;
             case R.id.teacher_rl:
-                startActivity(LoginActivity.getIntent(mContext, Config.LOGIN_TYPE_PARENT));
+                startActivity(LoginActivity.getIntent(mContext, Config.LOGIN_TYPE_TEACHER));
                 break;
         }
     }

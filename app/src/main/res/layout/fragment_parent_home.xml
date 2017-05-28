@@ -150,7 +150,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dimen10"/>
 
-            <!--    <RelativeLayout
+            <LinearLayout
+                android:id="@+id/upcoming_ll"
+                android:visibility="gone"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="80dp">
 
@@ -274,7 +281,6 @@
                     android:layout_height="@dimen/dimen10"/>
 
                 <RelativeLayout
-                    android:visibility="gone"
                     android:layout_width="match_parent"
                     android:layout_height="80dp">
 
@@ -313,8 +319,8 @@
 
                 <View
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/dimen10"/>-->
-
+                    android:layout_height="@dimen/dimen10"/>
+            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 

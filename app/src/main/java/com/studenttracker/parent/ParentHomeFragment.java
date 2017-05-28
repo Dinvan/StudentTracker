@@ -1,5 +1,6 @@
 package com.studenttracker.parent;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.view.GravityCompat;
@@ -10,10 +11,16 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import com.studenttracker.R;
 import com.studenttracker.auth.BaseFragment;
 import com.studenttracker.auth.ParentDashboardActivity;
+import com.studenttracker.session.SessionParam;
+import com.studenttracker.utility.Config;
+
+import butterknife.Bind;
+import butterknife.ButterKnife;
 
 /**
  * Created by Ravi on 5/28/2017.
@@ -21,11 +28,25 @@ import com.studenttracker.auth.ParentDashboardActivity;
 
 public class ParentHomeFragment extends BaseFragment{
 
+    @Bind(R.id.upcoming_ll)
+    LinearLayout mUpcomingLL;
+    private SessionParam mSessionParam;
+    private Context mContext;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_parent_home,container,false);
+        ButterKnife.bind(this,view);
         initToolBar(view);
+        mContext = getActivity();
+        mSessionParam = new SessionParam(mContext);
+        if(mSessionParam.loginType== Config.LOGIN_TYPE_TEACHER){
+            mUpcomingLL.setVisibility(View.GONE);
+        }
+        else if(mSessionParam.loginType== Config.LOGIN_TYPE_PARENT){
+            mUpcomingLL.setVisibility(View.VISIBLE);
+        }
         return view;
     }
 
