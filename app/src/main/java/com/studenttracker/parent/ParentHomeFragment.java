@@ -28,8 +28,10 @@ import butterknife.ButterKnife;
 
 public class ParentHomeFragment extends BaseFragment{
 
-    @Bind(R.id.upcoming_ll)
-    LinearLayout mUpcomingLL;
+    @Bind(R.id.teacher_ll)
+    LinearLayout mTeacherLL;
+    @Bind(R.id.parent_ll)
+    LinearLayout mParentLL;
     private SessionParam mSessionParam;
     private Context mContext;
 
@@ -42,10 +44,12 @@ public class ParentHomeFragment extends BaseFragment{
         mContext = getActivity();
         mSessionParam = new SessionParam(mContext);
         if(mSessionParam.loginType== Config.LOGIN_TYPE_TEACHER){
-            mUpcomingLL.setVisibility(View.GONE);
+            mTeacherLL.setVisibility(View.VISIBLE);
+            mParentLL.setVisibility(View.GONE);
         }
         else if(mSessionParam.loginType== Config.LOGIN_TYPE_PARENT){
-            mUpcomingLL.setVisibility(View.VISIBLE);
+            mParentLL.setVisibility(View.VISIBLE);
+            mTeacherLL.setVisibility(View.GONE);
         }
         return view;
     }

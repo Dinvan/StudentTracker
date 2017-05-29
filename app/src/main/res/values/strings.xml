@@ -72,6 +72,11 @@
     <string name="calendar">School \nCalendar</string>
 
 
+    <string name="add_class_home_work">Assign \nHome Work</string>
+    <string name="add_class_attendance">Mark \nAttendance</string>
+    <string name="add_notification">Send \n Announcements</string>
+
+
     <string-array name="nav_menu">
         <item>@string/nav_home</item>
         <item>@string/nav_about</item>

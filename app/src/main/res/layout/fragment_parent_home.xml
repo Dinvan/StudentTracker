@@ -19,143 +19,143 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dimen10"/>
-
-            <RelativeLayout
-                android:id="@+id/homework_rl"
-                android:layout_width="match_parent"
-                android:layout_height="80dp">
-
-                <RelativeLayout
-                    android:background="#FF6C5A"
-                    android:layout_toLeftOf="@+id/midpoint1"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <TextView
-                        android:layout_centerInParent="true"
-                        android:textColor="@color/White"
-                        android:textSize="@dimen/text18"
-                        android:gravity="center"
-                        android:textStyle="bold"
-                        android:text="@string/class_home_work"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-
-                </RelativeLayout>
-
-
-                <ImageView
-                    android:id="@+id/home_work_iv"
-                    android:src="@drawable/ic_homework"
-                    android:scaleType="fitXY"
-                    android:layout_toRightOf="@+id/midpoint1"
-                    android:layout_width="match_parent"
-                    android:layout_height="80dp" />
-
-                <View
-                    android:id="@+id/midpoint1"
-                    android:layout_centerHorizontal="true"
-                    android:layout_width="0dp"
-                    android:layout_height="1dp"/>
-            </RelativeLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dimen10"/>
-
-            <RelativeLayout
-                android:id="@+id/attendance_rl"
-                android:layout_width="match_parent"
-                android:layout_height="80dp">
-
-                <RelativeLayout
-                    android:background="#0BB798"
-                    android:layout_toRightOf="@+id/midpoint2"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <TextView
-                        android:layout_centerInParent="true"
-                        android:textColor="@color/White"
-                        android:textSize="@dimen/text18"
-                        android:gravity="center"
-                        android:textStyle="bold"
-                        android:text="@string/class_attendance"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-
-                </RelativeLayout>
-
-
-                <ImageView
-                    android:src="@drawable/ic_attandence"
-                    android:scaleType="fitXY"
-                    android:layout_toLeftOf="@+id/midpoint2"
-                    android:layout_width="match_parent"
-                    android:layout_height="80dp" />
-
-                <View
-                    android:id="@+id/midpoint2"
-                    android:layout_centerHorizontal="true"
-                    android:layout_width="0dp"
-                    android:layout_height="1dp"/>
-            </RelativeLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dimen10"/>
-
-            <RelativeLayout
-                android:id="@+id/notification_rl"
-                android:layout_width="match_parent"
-                android:layout_height="80dp">
-
-                <RelativeLayout
-                    android:background="#B784CF"
-                    android:layout_toLeftOf="@+id/midpoint3"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <TextView
-                        android:layout_centerInParent="true"
-                        android:textColor="@color/White"
-                        android:textSize="@dimen/text18"
-                        android:gravity="center"
-                        android:textStyle="bold"
-                        android:text="@string/notification"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-
-                </RelativeLayout>
-
-
-                <ImageView
-                    android:src="@drawable/ic_notifcaton"
-                    android:scaleType="fitXY"
-                    android:layout_toRightOf="@+id/midpoint3"
-                    android:layout_width="match_parent"
-                    android:layout_height="80dp" />
-
-                <View
-                    android:id="@+id/midpoint3"
-                    android:layout_centerHorizontal="true"
-                    android:layout_width="0dp"
-                    android:layout_height="1dp"/>
-            </RelativeLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dimen10"/>
-
             <LinearLayout
-                android:id="@+id/upcoming_ll"
+                android:id="@+id/parent_ll"
                 android:visibility="gone"
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dimen10"/>
+
+                <RelativeLayout
+                    android:id="@+id/homework_rl"
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp">
+
+                    <RelativeLayout
+                        android:background="#FF6C5A"
+                        android:layout_toLeftOf="@+id/midpoint1"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:layout_centerInParent="true"
+                            android:textColor="@color/White"
+                            android:textSize="@dimen/text18"
+                            android:gravity="center"
+                            android:textStyle="bold"
+                            android:text="@string/class_home_work"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                    </RelativeLayout>
+
+
+                    <ImageView
+                        android:id="@+id/home_work_iv"
+                        android:src="@drawable/ic_homework"
+                        android:scaleType="fitXY"
+                        android:layout_toRightOf="@+id/midpoint1"
+                        android:layout_width="match_parent"
+                        android:layout_height="80dp" />
+
+                    <View
+                        android:id="@+id/midpoint1"
+                        android:layout_centerHorizontal="true"
+                        android:layout_width="0dp"
+                        android:layout_height="1dp"/>
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dimen10"/>
+
+                <RelativeLayout
+                    android:id="@+id/attendance_rl"
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp">
+
+                    <RelativeLayout
+                        android:background="#0BB798"
+                        android:layout_toRightOf="@+id/midpoint2"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:layout_centerInParent="true"
+                            android:textColor="@color/White"
+                            android:textSize="@dimen/text18"
+                            android:gravity="center"
+                            android:textStyle="bold"
+                            android:text="@string/class_attendance"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                    </RelativeLayout>
+
+
+                    <ImageView
+                        android:src="@drawable/ic_attandence"
+                        android:scaleType="fitXY"
+                        android:layout_toLeftOf="@+id/midpoint2"
+                        android:layout_width="match_parent"
+                        android:layout_height="80dp" />
+
+                    <View
+                        android:id="@+id/midpoint2"
+                        android:layout_centerHorizontal="true"
+                        android:layout_width="0dp"
+                        android:layout_height="1dp"/>
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dimen10"/>
+
+                <RelativeLayout
+                    android:id="@+id/notification_rl"
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp">
+
+                    <RelativeLayout
+                        android:background="#B784CF"
+                        android:layout_toLeftOf="@+id/midpoint3"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:layout_centerInParent="true"
+                            android:textColor="@color/White"
+                            android:textSize="@dimen/text18"
+                            android:gravity="center"
+                            android:textStyle="bold"
+                            android:text="@string/notification"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                    </RelativeLayout>
+
+
+                    <ImageView
+                        android:src="@drawable/ic_notifcaton"
+                        android:scaleType="fitXY"
+                        android:layout_toRightOf="@+id/midpoint3"
+                        android:layout_width="match_parent"
+                        android:layout_height="80dp" />
+
+                    <View
+                        android:id="@+id/midpoint3"
+                        android:layout_centerHorizontal="true"
+                        android:layout_width="0dp"
+                        android:layout_height="1dp"/>
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dimen10"/>
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -320,6 +320,147 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dimen10"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/teacher_ll"
+                android:visibility="gone"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dimen10"/>
+
+                <RelativeLayout
+                    android:id="@+id/add_homework_rl"
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp">
+
+                    <RelativeLayout
+                        android:background="#FF6C5A"
+                        android:layout_toLeftOf="@+id/midpoint8"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:layout_centerInParent="true"
+                            android:textColor="@color/White"
+                            android:textSize="@dimen/text18"
+                            android:gravity="center"
+                            android:textStyle="bold"
+                            android:text="@string/add_class_home_work"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                    </RelativeLayout>
+
+
+                    <ImageView
+                        android:id="@+id/add_home_work_iv"
+                        android:src="@drawable/ic_homework"
+                        android:scaleType="fitXY"
+                        android:layout_toRightOf="@+id/midpoint8"
+                        android:layout_width="match_parent"
+                        android:layout_height="80dp" />
+
+                    <View
+                        android:id="@+id/midpoint8"
+                        android:layout_centerHorizontal="true"
+                        android:layout_width="0dp"
+                        android:layout_height="1dp"/>
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dimen10"/>
+
+                <RelativeLayout
+                    android:id="@+id/add_attendance_rl"
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp">
+
+                    <RelativeLayout
+                        android:background="#0BB798"
+                        android:layout_toRightOf="@+id/midpoint9"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:layout_centerInParent="true"
+                            android:textColor="@color/White"
+                            android:textSize="@dimen/text18"
+                            android:gravity="center"
+                            android:textStyle="bold"
+                            android:text="@string/add_class_attendance"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                    </RelativeLayout>
+
+
+                    <ImageView
+                        android:src="@drawable/ic_attandence"
+                        android:scaleType="fitXY"
+                        android:layout_toLeftOf="@+id/midpoint9"
+                        android:layout_width="match_parent"
+                        android:layout_height="80dp" />
+
+                    <View
+                        android:id="@+id/midpoint9"
+                        android:layout_centerHorizontal="true"
+                        android:layout_width="0dp"
+                        android:layout_height="1dp"/>
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dimen10"/>
+
+                <RelativeLayout
+                    android:id="@+id/add_notification_rl"
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp">
+
+                    <RelativeLayout
+                        android:background="#B784CF"
+                        android:layout_toLeftOf="@+id/midpoint10"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:layout_centerInParent="true"
+                            android:textColor="@color/White"
+                            android:textSize="@dimen/text18"
+                            android:gravity="center"
+                            android:textStyle="bold"
+                            android:text="@string/add_notification"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                    </RelativeLayout>
+
+
+                    <ImageView
+                        android:src="@drawable/ic_notifcaton"
+                        android:scaleType="fitXY"
+                        android:layout_toRightOf="@+id/midpoint10"
+                        android:layout_width="match_parent"
+                        android:layout_height="80dp" />
+
+                    <View
+                        android:id="@+id/midpoint10"
+                        android:layout_centerHorizontal="true"
+                        android:layout_width="0dp"
+                        android:layout_height="1dp"/>
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dimen10"/>
+
+
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
