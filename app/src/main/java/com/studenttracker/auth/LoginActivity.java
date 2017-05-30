@@ -8,6 +8,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.gson.JsonObject;
 import com.studenttracker.R;
 import com.studenttracker.session.SessionParam;
@@ -38,6 +39,7 @@ public class LoginActivity extends BaseActivity {
     @Bind(R.id.logo_iv)
     ImageView mLogoIV;
 
+    private String refreshedToken;
     private BaseRequest baseRequest;
     private String mMobileNo;
     private int LoginType;
@@ -70,6 +72,9 @@ public class LoginActivity extends BaseActivity {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.login_btn:
+                refreshedToken = FirebaseInstanceId.getInstance().getToken();
+                if (refreshedToken == null || refreshedToken.length() <= 0)
+                    refreshedToken = "abcd";
                 if (checkValidation()) {
                     UtilityFunctions.hideSoftKeyboard(mobileEt);
                   //  requestLogin(mMobileNo);
@@ -131,7 +136,7 @@ public class LoginActivity extends BaseActivity {
         JsonObject object = null;
             object = Functions.getInstance().getJsonObject(
                     "device_type", Config.DEVICE_TYPE_ID,
-                    "device_token", "",
+                    "device_token", refreshedToken,
                     "mobile", mobile,
                     "login_type", String.valueOf(LoginType));
 

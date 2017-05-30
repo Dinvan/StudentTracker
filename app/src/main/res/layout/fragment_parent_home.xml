@@ -153,7 +153,7 @@
                         android:layout_height="1dp"/>
                 </RelativeLayout>
 
-                <View
+             <!--   <View
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dimen10"/>
 
@@ -192,7 +192,7 @@
                         android:layout_centerHorizontal="true"
                         android:layout_width="0dp"
                         android:layout_height="1dp"/>
-                </RelativeLayout>
+                </RelativeLayout>-->
 
                 <View
                     android:layout_width="match_parent"
@@ -204,7 +204,7 @@
 
                     <RelativeLayout
                         android:background="#0B85B8"
-                        android:layout_toLeftOf="@+id/midpoint5"
+                        android:layout_toRightOf="@+id/midpoint5"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
 
@@ -224,7 +224,7 @@
                     <ImageView
                         android:src="@drawable/ic_fees"
                         android:scaleType="fitXY"
-                        android:layout_toRightOf="@+id/midpoint5"
+                        android:layout_toLeftOf="@+id/midpoint5"
                         android:layout_width="match_parent"
                         android:layout_height="80dp" />
 
@@ -245,7 +245,7 @@
 
                     <RelativeLayout
                         android:background="#ABBF60"
-                        android:layout_toRightOf="@+id/midpoint6"
+                        android:layout_toLeftOf="@+id/midpoint6"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
 
@@ -265,7 +265,7 @@
                     <ImageView
                         android:src="@drawable/ic_busroute"
                         android:scaleType="fitXY"
-                        android:layout_toLeftOf="@+id/midpoint6"
+                        android:layout_toRightOf="@+id/midpoint6"
                         android:layout_width="match_parent"
                         android:layout_height="80dp" />
 
@@ -286,7 +286,7 @@
 
                     <RelativeLayout
                         android:background="#D33022"
-                        android:layout_toLeftOf="@+id/midpoint7"
+                        android:layout_toRightOf="@+id/midpoint7"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
 
@@ -306,7 +306,7 @@
                     <ImageView
                         android:src="@drawable/ic_calender"
                         android:scaleType="fitXY"
-                        android:layout_toRightOf="@+id/midpoint7"
+                        android:layout_toLeftOf="@+id/midpoint7"
                         android:layout_width="match_parent"
                         android:layout_height="80dp" />
 
