@@ -77,10 +77,10 @@ public class LoginActivity extends BaseActivity {
                     refreshedToken = "abcd";
                 if (checkValidation()) {
                     UtilityFunctions.hideSoftKeyboard(mobileEt);
-                  //  requestLogin(mMobileNo);
+                    requestLogin(mMobileNo);
 
-                    startActivity(VerificationActivity.getIntent(mContext,mMobileNo,LoginType));
-                    finishAllActivities();
+                  /*  startActivity(VerificationActivity.getIntent(mContext,mMobileNo,LoginType));
+                    finishAllActivities();*/
                 }
                 break;
         }
@@ -135,13 +135,12 @@ public class LoginActivity extends BaseActivity {
             refreshedToken = "abcd";*/
         JsonObject object = null;
             object = Functions.getInstance().getJsonObject(
-                    "device_type", Config.DEVICE_TYPE_ID,
-                    "device_token", refreshedToken,
-                    "mobile", mobile,
-                    "login_type", String.valueOf(LoginType));
+                 //   "device_type", Config.DEVICE_TYPE_ID,
+            //        "device_token", refreshedToken,
+                    "mobile", mobile);
+             //       "login_type", String.valueOf(LoginType));
 
 
         baseRequest.callAPIPost(1, object, getAppString(R.string.api_login));
     }
-
 }

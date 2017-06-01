@@ -59,11 +59,11 @@ public class SplashActivity extends BaseActivity{
             @Override
             public void onAnimationEnd(Animation animation) {
                 mLogoTV.setVisibility(View.VISIBLE);
-                ShimmerFrameLayout container =
+               /* ShimmerFrameLayout container =
                         (ShimmerFrameLayout) findViewById(R.id.shimmer_view_container);
                 container.setDuration(1000);
                 container.setRepeatCount(2);
-                container.startShimmerAnimation();
+                container.startShimmerAnimation();*/
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {

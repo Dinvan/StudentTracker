@@ -30,7 +30,7 @@ public class Config {
      * \
      * Base API URL
      */
-    public static String BASE_URL = "";
+    public static String BASE_URL = "http://webapp.rayninfolabs.com/";
 
     /**
      * Base API URL

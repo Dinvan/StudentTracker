@@ -12,7 +12,7 @@ import java.util.Iterator;
  */
 
 public class BaseRequestParser {
-    public String message = "Please check your network settings.";
+    public String message = "Server Error! Please retry";
     private boolean status=false;
 
 
@@ -53,7 +53,6 @@ public class BaseRequestParser {
                 e.printStackTrace();
             }
         }
-
         return false;
     }
 
@@ -88,5 +87,4 @@ public class BaseRequestParser {
         }
         return "";
     }
-
 }

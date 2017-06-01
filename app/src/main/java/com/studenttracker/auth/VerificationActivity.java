@@ -251,7 +251,7 @@ public class VerificationActivity extends BaseActivity {
             DialogUtil.Alert(VerificationActivity.this, getString(R.string.enter_code_sent), DialogUtil.AlertType.Error);
 
         } else {
-            SessionParam mSessionParam = new SessionParam(mContext);
+            /*SessionParam mSessionParam = new SessionParam(mContext);
             String session_key = "jhjhjhjhjhj";
             mSessionParam.setSaveSessionKey(mContext, session_key);
             mSessionParam.mobile = mMobile;
@@ -263,10 +263,10 @@ public class VerificationActivity extends BaseActivity {
             else if(loginType==Config.LOGIN_TYPE_TEACHER){
                 startActivity(ParentDashboardActivity.getIntent(mContext));
             }
-            finishAllActivities();
-         /*   requestAPI(otp1.getText().toString() + otp2.getText().toString() +
+            finishAllActivities();*/
+            requestAPI(otp1.getText().toString() + otp2.getText().toString() +
                     otp3.getText().toString() + otp4.getText().toString() +
-                    otp5.getText().toString() + otp6.getText().toString());*/
+                    otp5.getText().toString() + otp6.getText().toString());
         }
     }
 
@@ -300,9 +300,9 @@ public class VerificationActivity extends BaseActivity {
         });
         JsonObject object = null;
         object = Functions.getInstance().getJsonObject(
-                "device_type", Config.DEVICE_TYPE_ID,
-                "device_token", "",
+            //    "device_type", Config.DEVICE_TYPE_ID,
+            //    "device_token", "",
                 "verify_code", otp);
-        baseRequest.callAPIPost(4, object, getAppString(R.string.api_verify));
+        baseRequest.callAPIPost(2, object, getAppString(R.string.api_verify));
     }
 }

@@ -12,24 +12,25 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
-    <com.facebook.shimmer.ShimmerFrameLayout
+    <!--<com.facebook.shimmer.ShimmerFrameLayout
         android:id="@+id/shimmer_view_container"
         android:layout_centerInParent="true"
         android:layout_centerHorizontal="true"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content">-->
 
         <TextView
             android:id="@+id/app_logo"
             android:visibility="gone"
             android:text="@string/app_name"
             android:gravity="center"
+            android:layout_centerInParent="true"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="42sp"
             android:textStyle="bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
-    </com.facebook.shimmer.ShimmerFrameLayout>
+   <!-- </com.facebook.shimmer.ShimmerFrameLayout>-->
 
 
 
