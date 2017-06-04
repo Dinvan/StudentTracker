@@ -16,7 +16,8 @@ public class Config {
      */
     public static final String ENVIRONMENT = "devel";
 
-
+    public static final int TYPE_HOMEWORK = 1;
+    public static final int TYPE_ANNOUNCEMENT = 2;
     public static final int LOGIN_TYPE_TEACHER = 1;
     public static final int LOGIN_TYPE_PARENT = 2;
     public static final String LOGIN_TYPE = "login_type";

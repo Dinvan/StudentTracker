@@ -22,6 +22,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 
+import com.splunk.mint.Mint;
 import com.studenttracker.R;
 import com.studenttracker.utility.Config;
 
@@ -47,11 +48,9 @@ public class BaseActivity extends AppCompatActivity {
         mContext = this;
         sActivities.add(this);
         //    updateLanguage();
-        /*if (Config.ENVIRONMENT.equals("devel")) {
-            Mint.initAndStartSession(this.getApplication(), "7726a37b");
-        } else if (Config.ENVIRONMENT.equals("staging")) {
-            Mint.initAndStartSession(this.getApplication(), "8318db9c");
-        }*/
+        if(Config.ENVIRONMENT.equals("devel")){
+            Mint.initAndStartSession(this.getApplication(), "01d276a4");
+        }
     }
     public void setAppBar(String title, boolean isBackVisible) {
 

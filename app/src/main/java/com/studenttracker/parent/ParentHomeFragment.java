@@ -12,15 +12,20 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.studenttracker.R;
 import com.studenttracker.auth.BaseFragment;
 import com.studenttracker.auth.ParentDashboardActivity;
+import com.studenttracker.school.AnnouncementActivity;
 import com.studenttracker.session.SessionParam;
 import com.studenttracker.utility.Config;
+import com.studenttracker.utility.UtilityFunctions;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * Created by Ravi on 5/28/2017.
@@ -32,6 +37,14 @@ public class ParentHomeFragment extends BaseFragment{
     LinearLayout mTeacherLL;
     @Bind(R.id.parent_ll)
     LinearLayout mParentLL;
+    @Bind(R.id.homework_rl)
+    RelativeLayout mHomeWorkRL;
+    @Bind(R.id.attendance_rl)
+    RelativeLayout mAttendanceRL;
+    @Bind(R.id.notification_rl)
+    RelativeLayout mNotificationRL;
+
+
     private SessionParam mSessionParam;
     private Context mContext;
 
@@ -44,8 +57,10 @@ public class ParentHomeFragment extends BaseFragment{
         mContext = getActivity();
         mSessionParam = new SessionParam(mContext);
         if(mSessionParam.loginType== Config.LOGIN_TYPE_TEACHER){
-            mTeacherLL.setVisibility(View.VISIBLE);
-            mParentLL.setVisibility(View.GONE);
+            /*mTeacherLL.setVisibility(View.VISIBLE);
+            mParentLL.setVisibility(View.GONE);*/
+            mParentLL.setVisibility(View.VISIBLE);
+            mTeacherLL.setVisibility(View.GONE);
         }
         else if(mSessionParam.loginType== Config.LOGIN_TYPE_PARENT){
             mParentLL.setVisibility(View.VISIBLE);
@@ -53,6 +68,22 @@ public class ParentHomeFragment extends BaseFragment{
         }
         return view;
     }
+
+    @OnClick({R.id.homework_rl,R.id.attendance_rl,R.id.notification_rl})
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.homework_rl:
+                startActivity(AnnouncementActivity.getIntent(mContext,Config.TYPE_HOMEWORK));
+                break;
+            case R.id.attendance_rl:
+
+                break;
+            case R.id.notification_rl:
+                    startActivity(AnnouncementActivity.getIntent(mContext,Config.TYPE_ANNOUNCEMENT));
+                break;
+        }
+    }
+
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {

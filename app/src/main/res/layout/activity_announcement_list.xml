@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
+    android:background="@drawable/ic_app_bg"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -10,18 +11,23 @@
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycle_view"
+        android:background="@color/Transparent"
         android:layout_below="@+id/header_ll"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="match_parent"/>
 
     <TextView
         android:id="@+id/no_item_tv"
         android:textSize="@dimen/text16"
         android:textColor="@color/black"
         android:padding="@dimen/dimen10"
-        android:text="Currently No Announcement for you!!!"
+        android:visibility="gone"
+        android:text="@string/add_class_attendance"
         android:layout_centerInParent="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
+
+    <include
+        layout="@layout/progress_dialog_loader"/>
 
 </RelativeLayout>

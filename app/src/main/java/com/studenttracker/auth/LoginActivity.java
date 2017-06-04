@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.google.firebase.iid.FirebaseInstanceId;
@@ -38,6 +39,8 @@ public class LoginActivity extends BaseActivity {
     TextView mHeaderTV;
     @Bind(R.id.logo_iv)
     ImageView mLogoIV;
+    @Bind(R.id.progressBar)
+    ProgressBar mLoader;
 
     private String refreshedToken;
     private BaseRequest baseRequest;
@@ -79,7 +82,7 @@ public class LoginActivity extends BaseActivity {
                     UtilityFunctions.hideSoftKeyboard(mobileEt);
                     requestLogin(mMobileNo);
 
-                  /*  startActivity(VerificationActivity.getIntent(mContext,mMobileNo,LoginType));
+                    /*startActivity(VerificationActivity.getIntent(mContext,mMobileNo,LoginType));
                     finishAllActivities();*/
                 }
                 break;
@@ -98,24 +101,29 @@ public class LoginActivity extends BaseActivity {
     public void requestLogin(final String mobile) {
 
         baseRequest = new BaseRequest(this);
-        baseRequest.setDefaultLoader();
+        baseRequest.setLoaderView(mLoader);
         baseRequest.setBaseRequestListner(new RequestReceiver() {
             @Override
             public void onSuccess(int requestCode, String fullResponse, Object dataObject) {
                 if (dataObject != null) {
-                    SessionParam mSessionParam = new SessionParam(((JSONObject) dataObject).optJSONObject("user_profile"));
+                   /* SessionParam mSessionParam = new SessionParam(((JSONObject) dataObject).optJSONObject("user_profile"));
                     String session_key = ((JSONObject) dataObject).optString("session_key");
                     mSessionParam.setSaveSessionKey(LoginActivity.this, session_key);
-                    mSessionParam.persistData(LoginActivity.this);
-                    startActivity(VerificationActivity.getIntent(mContext,mobile,LoginType));
-                    finishAllActivities();
+                    mSessionParam.persistData(LoginActivity.this);*/
+                    if(baseRequest.status) {
+                        startActivity(VerificationActivity.getIntent(mContext, mobile, LoginType));
+                        finishAllActivities();
+                    }
+                    else{
+                        DialogUtil.Alert(LoginActivity.this, baseRequest.message, DialogUtil.AlertType.Error);
+                    }
                 }
             }
 
             @Override
             public void onFailure(int requestCode, String errorCode, String message) {
                 if (requestCode==417){
-                    startActivity(new Intent(LoginActivity.this, VerificationActivity.class));
+                    DialogUtil.Alert(LoginActivity.this, message, DialogUtil.AlertType.Error);
 
 
                 }else {
@@ -134,11 +142,17 @@ public class LoginActivity extends BaseActivity {
         if (refreshedToken == null || refreshedToken.length() <= 0)
             refreshedToken = "abcd";*/
         JsonObject object = null;
-            object = Functions.getInstance().getJsonObject(
-                 //   "device_type", Config.DEVICE_TYPE_ID,
-            //        "device_token", refreshedToken,
-                    "mobile", mobile);
-             //       "login_type", String.valueOf(LoginType));
+        String mType;
+        if(LoginType==Config.LOGIN_TYPE_PARENT){
+            mType = "parent";
+        }
+        else{
+            mType = "teacher";
+        }
+        object = Functions.getInstance().getJsonObject(
+                "device_token", refreshedToken,
+                "mobile", mobile,
+                "login_type", mType);
 
 
         baseRequest.callAPIPost(1, object, getAppString(R.string.api_login));

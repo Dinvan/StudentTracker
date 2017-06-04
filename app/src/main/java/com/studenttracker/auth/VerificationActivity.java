@@ -7,6 +7,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 
 import com.google.gson.JsonObject;
 import com.studenttracker.R;
@@ -40,6 +41,8 @@ public class VerificationActivity extends BaseActivity {
     EditText otp5;
     @Bind(R.id.otp_6)
     EditText otp6;
+    @Bind(R.id.progressBar)
+    ProgressBar mLoader;
     String mMobile;
     int loginType;
 
@@ -251,7 +254,7 @@ public class VerificationActivity extends BaseActivity {
             DialogUtil.Alert(VerificationActivity.this, getString(R.string.enter_code_sent), DialogUtil.AlertType.Error);
 
         } else {
-            /*SessionParam mSessionParam = new SessionParam(mContext);
+           /* SessionParam mSessionParam = new SessionParam(mContext);
             String session_key = "jhjhjhjhjhj";
             mSessionParam.setSaveSessionKey(mContext, session_key);
             mSessionParam.mobile = mMobile;
@@ -274,17 +277,23 @@ public class VerificationActivity extends BaseActivity {
 
     public void requestAPI(String otp) {
         baseRequest = new BaseRequest(mContext);
-
+        baseRequest.setLoaderView(mLoader);
         baseRequest.setBaseRequestListner(new RequestReceiver() {
             @Override
             public void onSuccess(int requestCode, String fullResponse, Object dataObject) {
                 if (dataObject != null) {
-                    SessionParam mSessionParam = new SessionParam(((JSONObject) dataObject));
-                    String session_key = ((JSONObject) dataObject).optString("session_key");
-                    mSessionParam.setSaveSessionKey(VerificationActivity.this, session_key);
-                    mSessionParam.persistData(VerificationActivity.this);
-                    startActivity(ParentDashboardActivity.getIntent(mContext));
-                    finishAllActivities();
+                    if(baseRequest.status) {
+                        SessionParam mSessionParam = new SessionParam(((JSONObject) dataObject));
+                        String session_key = ((JSONObject) dataObject).optString("session_key");
+                        mSessionParam.loginType = loginType;
+                        mSessionParam.setSaveSessionKey(VerificationActivity.this, session_key);
+                        mSessionParam.persistData(VerificationActivity.this);
+                        startActivity(ParentDashboardActivity.getIntent(mContext));
+                        finishAllActivities();
+                    }
+                    else{
+                        DialogUtil.Alert(VerificationActivity.this, baseRequest.message, DialogUtil.AlertType.Error);
+                    }
                 }
             }
 
@@ -302,7 +311,7 @@ public class VerificationActivity extends BaseActivity {
         object = Functions.getInstance().getJsonObject(
             //    "device_type", Config.DEVICE_TYPE_ID,
             //    "device_token", "",
-                "verify_code", otp);
+                "otp_code", otp);
         baseRequest.callAPIPost(2, object, getAppString(R.string.api_verify));
     }
 }

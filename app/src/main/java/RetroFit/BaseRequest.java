@@ -95,11 +95,11 @@ public class BaseRequest<T> extends BaseRequestParser {
         dialog = getProgressesDialog(context);
     }
 
-    public void setDefaultLoader() {
+    /*public void setDefaultLoader() {
         dialog = getProgressesDialogDefault(mContext);
 
 
-    }
+    }*/
 
     public boolean isAlreadyTaken() {
         return isAlreadyTaken;

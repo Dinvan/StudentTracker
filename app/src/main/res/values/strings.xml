@@ -92,4 +92,9 @@
     <string name="drawer_close">Close</string>
     <string name="drawer_open">Open</string>
     <string name="sure_logout">Are you sure want to logout from app?</string>
+
+    <string name="no_announcement">Currently No Announcement for you!!!</string>
+    <string name="no_homework">Currently No Homework for you!!!</string>
+    <string name="announcement_header">Announcement</string>
+    <string name="home_work_header">HomeWork</string>
 </resources>

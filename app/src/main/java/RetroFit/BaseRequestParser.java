@@ -13,7 +13,7 @@ import java.util.Iterator;
 
 public class BaseRequestParser {
     public String message = "Server Error! Please retry";
-    private boolean status=false;
+    public boolean status=false;
 
 
     public static String newtWorkMessage = "Please check your network settings.";
@@ -26,7 +26,13 @@ public class BaseRequestParser {
                 mRespJSONObject = new JSONObject(json);
                 if (null != mRespJSONObject) {
 
-                    status=mRespJSONObject.optBoolean("status");
+                    String st = mRespJSONObject.optString("status");
+                    if(st.equalsIgnoreCase("success")){
+                        status = true;
+                    }
+                    else{
+                        status = false;
+                    }
                     message = mRespJSONObject.optString("message",
                             message);
 

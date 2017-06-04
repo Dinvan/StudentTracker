@@ -35,7 +35,10 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
 
@@ -320,5 +323,19 @@ public class Functions extends Application {
             }
         }
         return builder.toString();
+    }
+
+    public String formatDate(String date,String formatInput,String formatOutput){
+        String dateToDisplay = "";
+        SimpleDateFormat sdfInput = new SimpleDateFormat(formatInput);
+        SimpleDateFormat sdfOutput = new SimpleDateFormat(formatOutput);
+        try {
+            Date dateInput = sdfInput.parse(date);
+            dateToDisplay = sdfOutput.format(dateInput);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        return dateToDisplay;
     }
 }

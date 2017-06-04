@@ -178,6 +178,9 @@
 
                 </LinearLayout>
 
+                <include
+                    layout="@layout/progress_dialog_loader"/>
+
             </RelativeLayout>
         </ScrollView>
 

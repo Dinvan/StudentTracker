@@ -3,6 +3,6 @@
 
     <string name="api_login">login</string>
     <string name="api_verify">otp</string>
-    <string name="announcement">announcement</string>
+    <string name="api_announcement">announcement-list</string>
 
 </resources>
