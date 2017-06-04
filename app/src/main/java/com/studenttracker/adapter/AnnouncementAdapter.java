@@ -48,6 +48,7 @@ public class AnnouncementAdapter extends RecyclerView.Adapter<AnnouncementAdapte
         }
         catch (Exception e){
             e.printStackTrace();
+            holder.mDateTV.setText(mList.get(position).getDate_created());
         }
     }
 

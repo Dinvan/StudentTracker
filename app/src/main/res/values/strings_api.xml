@@ -4,5 +4,6 @@
     <string name="api_login">login</string>
     <string name="api_verify">otp</string>
     <string name="api_announcement">announcement-list</string>
+    <string name="api_create_announcement">announcements</string>
 
 </resources>

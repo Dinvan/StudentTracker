@@ -19,6 +19,7 @@ import com.studenttracker.R;
 import com.studenttracker.auth.BaseFragment;
 import com.studenttracker.auth.ParentDashboardActivity;
 import com.studenttracker.school.AnnouncementActivity;
+import com.studenttracker.school.CreteAnnouncementActivity;
 import com.studenttracker.session.SessionParam;
 import com.studenttracker.utility.Config;
 import com.studenttracker.utility.UtilityFunctions;
@@ -44,6 +45,13 @@ public class ParentHomeFragment extends BaseFragment{
     @Bind(R.id.notification_rl)
     RelativeLayout mNotificationRL;
 
+    @Bind(R.id.add_homework_rl)
+    RelativeLayout mAddHomeWorkRL;
+    @Bind(R.id.add_attendance_rl)
+    RelativeLayout mAddAttendanceRL;
+    @Bind(R.id.add_notification_rl)
+    RelativeLayout mAddNotificationRL;
+
 
     private SessionParam mSessionParam;
     private Context mContext;
@@ -57,10 +65,10 @@ public class ParentHomeFragment extends BaseFragment{
         mContext = getActivity();
         mSessionParam = new SessionParam(mContext);
         if(mSessionParam.loginType== Config.LOGIN_TYPE_TEACHER){
-            /*mTeacherLL.setVisibility(View.VISIBLE);
-            mParentLL.setVisibility(View.GONE);*/
-            mParentLL.setVisibility(View.VISIBLE);
-            mTeacherLL.setVisibility(View.GONE);
+            mTeacherLL.setVisibility(View.VISIBLE);
+            mParentLL.setVisibility(View.GONE);
+           /* mParentLL.setVisibility(View.VISIBLE);
+            mTeacherLL.setVisibility(View.GONE);*/
         }
         else if(mSessionParam.loginType== Config.LOGIN_TYPE_PARENT){
             mParentLL.setVisibility(View.VISIBLE);
@@ -69,7 +77,7 @@ public class ParentHomeFragment extends BaseFragment{
         return view;
     }
 
-    @OnClick({R.id.homework_rl,R.id.attendance_rl,R.id.notification_rl})
+    @OnClick({R.id.homework_rl,R.id.attendance_rl,R.id.notification_rl,R.id.add_homework_rl,R.id.add_attendance_rl,R.id.add_notification_rl})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.homework_rl:
@@ -79,7 +87,16 @@ public class ParentHomeFragment extends BaseFragment{
 
                 break;
             case R.id.notification_rl:
-                    startActivity(AnnouncementActivity.getIntent(mContext,Config.TYPE_ANNOUNCEMENT));
+                startActivity(AnnouncementActivity.getIntent(mContext,Config.TYPE_ANNOUNCEMENT));
+                break;
+            case R.id.add_homework_rl:
+                startActivity(CreteAnnouncementActivity.getIntent(mContext,Config.TYPE_HOMEWORK));
+                break;
+            case R.id.add_attendance_rl:
+
+                break;
+            case R.id.add_notification_rl:
+                startActivity(CreteAnnouncementActivity.getIntent(mContext,Config.TYPE_ANNOUNCEMENT));
                 break;
         }
     }

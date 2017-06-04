@@ -97,4 +97,14 @@
     <string name="no_homework">Currently No Homework for you!!!</string>
     <string name="announcement_header">Announcement</string>
     <string name="home_work_header">HomeWork</string>
+
+
+    <string name="create_announcement_header">Create Announcement</string>
+    <string name="create_announcement_message">Just write a message or add a image and send to all parents of your class students</string>
+    <string name="enter_message_hint">Enter message here...</string>
+    <string name="submit">Send</string>
+    <string name="select_message_type">Select Message type Text/Image</string>
+    <string name="image_require">Please select image</string>
+    <string name="text_require">Please enter message</string>
+    <string name="homework_require">Please enter Homework</string>
 </resources>
