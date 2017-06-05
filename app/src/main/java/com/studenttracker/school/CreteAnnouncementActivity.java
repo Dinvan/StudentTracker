@@ -1,7 +1,10 @@
 package com.studenttracker.school;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
@@ -10,6 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RelativeLayout;
@@ -21,20 +25,26 @@ import com.studenttracker.models.Announcement;
 import com.studenttracker.utility.Config;
 import com.studenttracker.utility.DialogUtil;
 import com.studenttracker.utility.Functions;
+import com.studenttracker.utility.MediaPickerActivity;
 
 import org.json.JSONObject;
+
+import java.io.File;
 
 import RetroFit.BaseRequest;
 import RetroFit.RequestReceiver;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 
 /**
  * Created by Ravi on 6/4/2017.
  */
 
-public class CreteAnnouncementActivity extends BaseActivity {
+public class CreteAnnouncementActivity extends MediaPickerActivity {
 
 
     private int mType;
@@ -51,9 +61,14 @@ public class CreteAnnouncementActivity extends BaseActivity {
     ProgressBar mLoader;
     @Bind(R.id.submit_btn)
     Button mSubmitBtn;
+    @Bind(R.id.image_iv)
+    ImageView mHomeWorkIV;
     private String title;
     private String requestType;
-    private String filePath = "";
+    private File fileUri;
+    private int type = 0;
+    private String path;
+    private String mFileTemp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -121,10 +136,14 @@ public class CreteAnnouncementActivity extends BaseActivity {
         baseRequest.callAPIPost(1, object, getAppString(R.string.api_create_announcement));
     }
 
-    @OnClick({R.id.image_rb,R.id.text_rb,R.id.submit_btn})
+    @OnClick({R.id.image_rb,R.id.text_rb,R.id.submit_btn,R.id.image_container_rl})
     public void onClick(View view) {
         switch (view.getId()) {
+            case R.id.image_container_rl:
+                chooseImageDialog("", getString(R.string.image_require), mContext, false);
+                break;
             case R.id.image_rb:
+                type = 1;
                 mImageRB.setChecked(true);
                 mTextRB.setChecked(false);
                 mMessageET.setVisibility(View.GONE);
@@ -132,23 +151,25 @@ public class CreteAnnouncementActivity extends BaseActivity {
                 mMessageET.setText("");
                 break;
             case R.id.text_rb:
+                type = 0;
                 mTextRB.setChecked(true);
                 mImageRB.setChecked(false);
                 mMessageET.setVisibility(View.VISIBLE);
                 mImageRL.setVisibility(View.GONE);
-                filePath = "";
+                fileUri = null;
+                mHomeWorkIV.setImageBitmap(null);
                 break;
             case R.id.submit_btn:
-                if(mImageRB.isChecked()){
-                    if(TextUtils.isEmpty(filePath)){
+                if(type==1){
+                    if(null==fileUri){
                         DialogUtil.Alert(CreteAnnouncementActivity.this, getString(R.string.image_require), DialogUtil.AlertType.Error);
                     }
                     else{
-                        requestCreateAnnouncement();
+                        UploadProfileImage(fileUri);
                     }
                 }
 
-                else if(mImageRB.isChecked()){
+                else if(type==0){
                     if(TextUtils.isEmpty(mMessageET.getText().toString())){
                         if(mType== Config.TYPE_ANNOUNCEMENT){
                             DialogUtil.Alert(CreteAnnouncementActivity.this, getString(R.string.text_require), DialogUtil.AlertType.Error);
@@ -164,6 +185,85 @@ public class CreteAnnouncementActivity extends BaseActivity {
                 break;
         }
     }
+
+    private void chooseImageDialog(final String title, String message, final Context context, final boolean redirectToPreviousScreen) {
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(context);
+        alertDialog.setTitle(title);
+        alertDialog.setMessage(message);
+        alertDialog.setPositiveButton(getString(R.string.existing_picture),
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        PickMedia(MediaPickerActivity.MediaPicker.GelleryWithCropper);
+
+                    }
+                });
+        alertDialog.setNegativeButton(getString(R.string.take_picture),
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        PickMedia(MediaPickerActivity.MediaPicker.CameraWithCropper);
+
+                    }
+                });
+        alertDialog.show();
+    }
+
+    @Override
+    protected void onSingleImageSelected(int starterCode, File mFileUri, String imagPath, Bitmap bitmap) {
+
+            if (bitmap != null) {
+                path = imagPath;
+                mFileTemp = mFileUri.getPath();
+                System.out.println("Path: " + mFileTemp);
+                mHomeWorkIV.setImageBitmap(bitmap);
+                fileUri = mFileUri;
+            }
+    }
+
+    private void UploadProfileImage(File file) {
+
+        baseRequest = new RetroFit.BaseRequest(mContext);
+        baseRequest.setLoaderView(mLoader);
+        baseRequest.setBaseRequestListner(new RequestReceiver() {
+            @Override
+            public void onSuccess(int requestCode, String fullResponse, Object dataObject) {
+
+                try {
+                    JSONObject object = (JSONObject) dataObject;
+
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(int requestCode, String errorCode, String message) {
+
+            }
+
+            @Override
+            public void onNetworkFailure(int requestCode, String message) {
+
+            }
+        });
+
+        RequestBody reqFile = RequestBody.create(MediaType.parse("image/*"), file);
+        MultipartBody.Part body = MultipartBody.Part.createFormData("file", file.getName(), reqFile);
+        baseRequest.callAPIPostImage(5, body,getString( R.string.api_create_announcement));
+
+    }
+
+
+    @Override
+    protected void onVideoCaptured(String videoPath) {
+    }
+
+    @Override
+    protected void onMediaPickCanceled(MediaPicker reqCode) {
+    }
+
 
 
     private ActionBar mActionBar;

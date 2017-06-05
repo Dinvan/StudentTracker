@@ -107,4 +107,6 @@
     <string name="image_require">Please select image</string>
     <string name="text_require">Please enter message</string>
     <string name="homework_require">Please enter Homework</string>
+    <string name="existing_picture">Select from Gallery</string>
+    <string name="take_picture">Open Camera</string>
 </resources>
