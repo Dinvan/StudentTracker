@@ -19,6 +19,7 @@
     <dimen name="text24">24sp</dimen>
     <dimen name="text32">32sp</dimen>
 
+    <dimen name="divider_height">0dp</dimen>
     <dimen name="dimen1">1dp</dimen>
     <dimen name="dimen2">2dp</dimen>
     <dimen name="dimen3">3dp</dimen>
@@ -44,6 +45,7 @@
     <dimen name="dimen40">40dp</dimen>
     <dimen name="dimen50">50dp</dimen>
     <dimen name="dimen100">100dp</dimen>
+    <dimen name="dimen_box_height">120dp</dimen>
 
 
 </resources>

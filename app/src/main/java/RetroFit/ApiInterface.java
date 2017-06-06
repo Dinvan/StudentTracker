@@ -6,6 +6,7 @@ import com.google.gson.JsonObject;
 import java.util.Map;
 
 import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
@@ -35,7 +36,8 @@ public interface ApiInterface {
 
     @Multipart
     @POST
-    Call<JsonElement> uploadImage(@Url String remainingURL, @Part MultipartBody.Part file, @Header("session_key") String session_key);
+    Call<JsonElement> uploadImage(@Url String remainingURL, @Part("file\"; filename=\"test.png\" ") RequestBody file, @Part("type") RequestBody body1, @Part("message") RequestBody body2, @Header("session_key") String session_key);
+  //  Call<JsonElement> uploadImage(@Url String remainingURL, @Part MultipartBody.Part file, @Header("session_key") String session_key);
 
 
 }

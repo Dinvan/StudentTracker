@@ -44,6 +44,7 @@ import java.util.ArrayList;
 import java.util.Map;
 
 import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -171,6 +172,8 @@ public class BaseRequest<T> extends BaseRequestParser {
             String responseServer = "";
             mResponseCode = response.code();
             hideLoader();
+
+
             if (null != response.body()) {
                 JsonElement jsonElement = (JsonElement) response.body();
                 if (null != jsonElement) {
@@ -305,12 +308,13 @@ public class BaseRequest<T> extends BaseRequestParser {
         callAPI.enqueue(responseCallback);
     }
 
-    public void callAPIPostImage(final int requestCode, MultipartBody.Part image, String remainingURL) {
+   // public void callAPIPostImage(final int requestCode, MultipartBody.Part image, String remainingURL,MultipartBody.Part input) {
+   public void callAPIPostImage(final int requestCode, RequestBody image, String remainingURL, RequestBody input1, RequestBody input2) {
         RequestCode = requestCode;
         showLoader();
         Log.d("BaseReq", "Input URL : " + remainingURL);
         String sess = SessionParam.getSessionKey(mContext);
-        callAPI = apiInterface.uploadImage(remainingURL, image, sess);
+        callAPI = apiInterface.uploadImage(remainingURL, image,input1,input2, sess);
         callAPI.enqueue(responseCallback);
     }
 

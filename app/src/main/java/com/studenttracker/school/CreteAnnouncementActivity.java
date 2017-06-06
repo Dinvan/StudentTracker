@@ -26,6 +26,7 @@ import com.studenttracker.utility.Config;
 import com.studenttracker.utility.DialogUtil;
 import com.studenttracker.utility.Functions;
 import com.studenttracker.utility.MediaPickerActivity;
+import com.tapadoo.alerter.OnHideAlertListener;
 
 import org.json.JSONObject;
 
@@ -98,13 +99,13 @@ public class CreteAnnouncementActivity extends MediaPickerActivity {
             public void onSuccess(int requestCode, String fullResponse, Object dataObject) {
                 if (dataObject != null) {
 
-                    if(baseRequest.status) {
-                        JSONObject json = (JSONObject) dataObject;
-
-                    }
-                    else{
-                        DialogUtil.Alert(CreteAnnouncementActivity.this, baseRequest.message, DialogUtil.AlertType.Error);
-                    }
+                    mSubmitBtn.setClickable(false);
+                    DialogUtil.Alert(CreteAnnouncementActivity.this, baseRequest.message, DialogUtil.AlertType.Success, new OnHideAlertListener() {
+                        @Override
+                        public void onHide() {
+                            finish();
+                        }
+                    });
                 }
             }
 
@@ -130,7 +131,7 @@ public class CreteAnnouncementActivity extends MediaPickerActivity {
         JsonObject object = null;
 
         object = Functions.getInstance().getJsonObject(
-                "type", requestType);
+                "type", requestType, "message", mMessageET.getText().toString().trim());
 
 
         baseRequest.callAPIPost(1, object, getAppString(R.string.api_create_announcement));
@@ -229,12 +230,21 @@ public class CreteAnnouncementActivity extends MediaPickerActivity {
             @Override
             public void onSuccess(int requestCode, String fullResponse, Object dataObject) {
 
-                try {
-                    JSONObject object = (JSONObject) dataObject;
+                if (dataObject != null) {
 
+                    if(baseRequest.status) {
+                        mSubmitBtn.setClickable(false);
+                        DialogUtil.Alert(CreteAnnouncementActivity.this, baseRequest.message, DialogUtil.AlertType.Success, new OnHideAlertListener() {
+                            @Override
+                            public void onHide() {
+                                finish();
+                            }
+                        });
 
-                } catch (Exception e) {
-                    e.printStackTrace();
+                    }
+                    else{
+                        DialogUtil.Alert(CreteAnnouncementActivity.this, baseRequest.message, DialogUtil.AlertType.Error);
+                    }
                 }
             }
 
@@ -251,7 +261,13 @@ public class CreteAnnouncementActivity extends MediaPickerActivity {
 
         RequestBody reqFile = RequestBody.create(MediaType.parse("image/*"), file);
         MultipartBody.Part body = MultipartBody.Part.createFormData("file", file.getName(), reqFile);
-        baseRequest.callAPIPostImage(5, body,getString( R.string.api_create_announcement));
+        JsonObject input = new JsonObject();
+        input.addProperty("type", requestType);
+      //  MultipartBody.Part body1 = MultipartBody.Part.createFormData("type", requestType);
+      //  MultipartBody.Part body2 = MultipartBody.Part.createFormData("message", "");
+        RequestBody reqType = RequestBody.create(MediaType.parse("text/plain"), requestType);
+        RequestBody reqMessage = RequestBody.create(MediaType.parse("text/plain"), "");
+        baseRequest.callAPIPostImage(5, reqFile,getString( R.string.api_create_announcement),reqType,reqMessage);
 
     }
 

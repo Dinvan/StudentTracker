@@ -28,12 +28,12 @@
 
                 <View
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/dimen10"/>
+                    android:layout_height="@dimen/divider_height"/>
 
                 <RelativeLayout
                     android:id="@+id/homework_rl"
                     android:layout_width="match_parent"
-                    android:layout_height="80dp">
+                    android:layout_height="@dimen/dimen_box_height">
 
                     <RelativeLayout
                         android:background="#FF6C5A"
@@ -60,7 +60,7 @@
                         android:scaleType="fitXY"
                         android:layout_toRightOf="@+id/midpoint1"
                         android:layout_width="match_parent"
-                        android:layout_height="80dp" />
+                        android:layout_height="match_parent" />
 
                     <View
                         android:id="@+id/midpoint1"
@@ -71,12 +71,12 @@
 
                 <View
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/dimen10"/>
+                    android:layout_height="@dimen/divider_height"/>
 
                 <RelativeLayout
                     android:id="@+id/attendance_rl"
                     android:layout_width="match_parent"
-                    android:layout_height="80dp">
+                    android:layout_height="@dimen/dimen_box_height">
 
                     <RelativeLayout
                         android:background="#0BB798"
@@ -102,23 +102,23 @@
                         android:scaleType="fitXY"
                         android:layout_toLeftOf="@+id/midpoint2"
                         android:layout_width="match_parent"
-                        android:layout_height="80dp" />
+                        android:layout_height="match_parent" />
 
                     <View
                         android:id="@+id/midpoint2"
                         android:layout_centerHorizontal="true"
                         android:layout_width="0dp"
-                        android:layout_height="1dp"/>
+                        android:layout_height="@dimen/dimen1"/>
                 </RelativeLayout>
 
                 <View
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/dimen10"/>
+                    android:layout_height="@dimen/divider_height"/>
 
                 <RelativeLayout
                     android:id="@+id/notification_rl"
                     android:layout_width="match_parent"
-                    android:layout_height="80dp">
+                    android:layout_height="@dimen/dimen_box_height">
 
                     <RelativeLayout
                         android:background="#B784CF"
@@ -144,7 +144,7 @@
                         android:scaleType="fitXY"
                         android:layout_toRightOf="@+id/midpoint3"
                         android:layout_width="match_parent"
-                        android:layout_height="80dp" />
+                        android:layout_height="match_parent" />
 
                     <View
                         android:id="@+id/midpoint3"
@@ -196,11 +196,11 @@
 
                 <View
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/dimen10"/>
+                    android:layout_height="@dimen/divider_height"/>
 
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="80dp">
+                    android:layout_height="@dimen/dimen_box_height">
 
                     <RelativeLayout
                         android:background="#0B85B8"
@@ -226,7 +226,7 @@
                         android:scaleType="fitXY"
                         android:layout_toLeftOf="@+id/midpoint5"
                         android:layout_width="match_parent"
-                        android:layout_height="80dp" />
+                        android:layout_height="match_parent" />
 
                     <View
                         android:id="@+id/midpoint5"
@@ -237,11 +237,11 @@
 
                 <View
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/dimen10"/>
+                    android:layout_height="@dimen/divider_height"/>
 
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="80dp">
+                    android:layout_height="@dimen/dimen_box_height">
 
                     <RelativeLayout
                         android:background="#ABBF60"
@@ -267,7 +267,7 @@
                         android:scaleType="fitXY"
                         android:layout_toRightOf="@+id/midpoint6"
                         android:layout_width="match_parent"
-                        android:layout_height="80dp" />
+                        android:layout_height="match_parent" />
 
                     <View
                         android:id="@+id/midpoint6"
@@ -278,11 +278,11 @@
 
                 <View
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/dimen10"/>
+                    android:layout_height="@dimen/divider_height"/>
 
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="80dp">
+                    android:layout_height="@dimen/dimen_box_height">
 
                     <RelativeLayout
                         android:background="#D33022"
@@ -308,7 +308,7 @@
                         android:scaleType="fitXY"
                         android:layout_toLeftOf="@+id/midpoint7"
                         android:layout_width="match_parent"
-                        android:layout_height="80dp" />
+                        android:layout_height="match_parent" />
 
                     <View
                         android:id="@+id/midpoint7"
@@ -319,7 +319,7 @@
 
                 <View
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/dimen10"/>
+                    android:layout_height="@dimen/divider_height"/>
             </LinearLayout>
 
             <LinearLayout
@@ -331,12 +331,12 @@
 
                 <View
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/dimen10"/>
+                    android:layout_height="@dimen/divider_height"/>
 
                 <RelativeLayout
                     android:id="@+id/add_homework_rl"
                     android:layout_width="match_parent"
-                    android:layout_height="80dp">
+                    android:layout_height="@dimen/dimen_box_height">
 
                     <RelativeLayout
                         android:background="#FF6C5A"
@@ -363,7 +363,7 @@
                         android:scaleType="fitXY"
                         android:layout_toRightOf="@+id/midpoint8"
                         android:layout_width="match_parent"
-                        android:layout_height="80dp" />
+                        android:layout_height="match_parent" />
 
                     <View
                         android:id="@+id/midpoint8"
@@ -374,12 +374,12 @@
 
                 <View
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/dimen10"/>
+                    android:layout_height="@dimen/divider_height"/>
 
                 <RelativeLayout
                     android:id="@+id/add_attendance_rl"
                     android:layout_width="match_parent"
-                    android:layout_height="80dp">
+                    android:layout_height="@dimen/dimen_box_height">
 
                     <RelativeLayout
                         android:background="#0BB798"
@@ -405,7 +405,7 @@
                         android:scaleType="fitXY"
                         android:layout_toLeftOf="@+id/midpoint9"
                         android:layout_width="match_parent"
-                        android:layout_height="80dp" />
+                        android:layout_height="match_parent" />
 
                     <View
                         android:id="@+id/midpoint9"
@@ -416,12 +416,12 @@
 
                 <View
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/dimen10"/>
+                    android:layout_height="@dimen/divider_height"/>
 
                 <RelativeLayout
                     android:id="@+id/add_notification_rl"
                     android:layout_width="match_parent"
-                    android:layout_height="80dp">
+                    android:layout_height="@dimen/dimen_box_height">
 
                     <RelativeLayout
                         android:background="#B784CF"
@@ -447,7 +447,7 @@
                         android:scaleType="fitXY"
                         android:layout_toRightOf="@+id/midpoint10"
                         android:layout_width="match_parent"
-                        android:layout_height="80dp" />
+                        android:layout_height="match_parent" />
 
                     <View
                         android:id="@+id/midpoint10"
@@ -458,7 +458,7 @@
 
                 <View
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/dimen10"/>
+                    android:layout_height="@dimen/divider_height"/>
 
 
             </LinearLayout>
