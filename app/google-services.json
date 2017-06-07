@@ -1,33 +1,39 @@
 {
   "project_info": {
-    "project_number": "1067612977131",
-    "project_id": "studenttracker"
+    "project_number": "694645582624",
+    "firebase_url": "https://raynsmartschool.firebaseio.com",
+    "project_id": "raynsmartschool",
+    "storage_bucket": "raynsmartschool.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1067612977131:android:6a2caa76cc86b998",
+        "mobilesdk_app_id": "1:694645582624:android:632a47e64a0df537",
         "android_client_info": {
-          "package_name": "com.studenttracker"
+          "package_name": "com.raynsmartschool"
         }
       },
       "oauth_client": [
         {
-          "client_id": "1067612977131-f9n09656ldgi3hhk9bmuevcfim7e0i1j.apps.googleusercontent.com",
+          "client_id": "694645582624-eo874jv1ld8gkqe5egsgqg7hbtptbb7p.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.raynsmartschool",
+            "certificate_hash": "7a1a93a677867bd579cbc19bd0ec4169a24d4264"
+          }
+        },
+        {
+          "client_id": "694645582624-3hpntpch7o38e8tmu4clgicsikk3uokp.apps.googleusercontent.com",
           "client_type": 3
         },
         {
-          "client_id": "1067612977131-f42dchgll3ig4thovj6r09qicbvgi4tk.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.pdfsauk",
-            "certificate_hash": "297e9176c9fbaf565bbe33c14b847d36e5b0cc85"
-          }
+          "client_id": "694645582624-j5ccf0k4vj478vnukeb7bo0p7bsfvuke.apps.googleusercontent.com",
+          "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDk9NZN3OKd97mPyUUA_Am-K-Lks_vEryc"
+          "current_key": "AIzaSyAY_v1wKZVNQY4K1Ws7XWJTJ6n4u6aZeNY"
         }
       ],
       "services": {
@@ -35,11 +41,16 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "694645582624-3hpntpch7o38e8tmu4clgicsikk3uokp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         },
         "ads_service": {
-          "status": 1
+          "status": 2
         }
       }
     }

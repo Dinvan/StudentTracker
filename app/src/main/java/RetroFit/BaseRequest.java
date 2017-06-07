@@ -18,11 +18,11 @@ import android.view.WindowManager;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import com.studenttracker.R;
-import com.studenttracker.interfaces.OnItemClickInAdapter;
-import com.studenttracker.session.SessionParam;
-import com.studenttracker.utility.Dialogs;
-import com.studenttracker.utility.FileCache;
+import com.raynsmartschool.R;
+import com.raynsmartschool.interfaces.OnItemClickInAdapter;
+import com.raynsmartschool.session.SessionParam;
+import com.raynsmartschool.utility.Dialogs;
+import com.raynsmartschool.utility.FileCache;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -43,7 +43,6 @@ import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.Map;
 
-import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;

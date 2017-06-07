@@ -1,6 +1,6 @@
 package RetroFit;
 
-import com.studenttracker.utility.Config;
+import com.raynsmartschool.utility.Config;
 
 import java.util.concurrent.TimeUnit;
 import okhttp3.OkHttpClient;
