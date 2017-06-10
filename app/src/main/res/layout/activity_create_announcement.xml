@@ -71,15 +71,16 @@
                 android:textColorHint="#A9A9A9"
                 android:minLines="5"
                 android:maxLines="5"
+                android:singleLine="false"
+                android:scrollbars="none"
                 android:gravity="top|left"
                 android:hint="@string/enter_message_hint"
-                android:inputType="textImeMultiLine"
                 android:imeOptions="actionDone"
                 android:layout_margin="@dimen/dimen20"
                 android:padding="@dimen/dimen20"
                 android:layout_centerHorizontal="true"
                 android:layout_width="match_parent"
-                android:layout_height="140dp" />
+                android:layout_height="wrap_content" />
 
 
             <RelativeLayout

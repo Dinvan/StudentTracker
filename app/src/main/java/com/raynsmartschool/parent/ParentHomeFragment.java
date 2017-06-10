@@ -94,7 +94,7 @@ public class ParentHomeFragment extends BaseFragment{
 
                 break;
             case R.id.add_notification_rl:
-                startActivity(CreteAnnouncementActivity.getIntent(mContext,Config.TYPE_ANNOUNCEMENT));
+         //       startActivity(CreteAnnouncementActivity.getIntent(mContext,Config.TYPE_ANNOUNCEMENT));
                 break;
         }
     }

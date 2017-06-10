@@ -2,12 +2,14 @@ package com.raynsmartschool.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.raynsmartschool.R;
+import com.raynsmartschool.interfaces.OnItemClickCustom;
 import com.raynsmartschool.models.Announcement;
 import com.raynsmartschool.utility.Functions;
 
@@ -20,8 +22,10 @@ import java.util.ArrayList;
 public class AnnouncementAdapter extends RecyclerView.Adapter<AnnouncementAdapter.ViewHolder>  {
 
     private Context mContext;
-    public AnnouncementAdapter(Context  context){
+    private OnItemClickCustom mListener;
+    public AnnouncementAdapter(Context  context, OnItemClickCustom listener){
         this.mContext = context;
+        this.mListener = listener;
     }
 
     private ArrayList<Announcement> mList;
@@ -39,15 +43,22 @@ public class AnnouncementAdapter extends RecyclerView.Adapter<AnnouncementAdapte
 
     @Override
     public void onBindViewHolder(AnnouncementAdapter.ViewHolder holder, int position) {
-        holder.mTitleTV.setText(mList.get(position).getMessage());
+        holder.bind(mList.get(position),mListener,position);
+       /* if(!TextUtils.isEmpty(mList.get(position).getMessage())){
+            holder.mTitleTV.setText(mList.get(position).getMessage());
+        }
+        else{
+            holder.mTitleTV.setText("Image");
+        }
         try {
-            String date = Functions.getInstance().formatDate(mList.get(position).getDate_created(), "yyyy-MM-dd hh:mm:ss.a", "MMM dd, yyyy hh:mm a");
+            String date = Functions.getInstance().formatDate(mList.get(position).getDate_created(), "dd-MM-yyyy hh:mm:ss", "MMM dd, yyyy hh:mm a");
             holder.mDateTV.setText(date);
         }
         catch (Exception e){
             e.printStackTrace();
             holder.mDateTV.setText(mList.get(position).getDate_created());
-        }
+        }*/
+
     }
 
     @Override
@@ -64,6 +75,31 @@ public class AnnouncementAdapter extends RecyclerView.Adapter<AnnouncementAdapte
             super(itemView);
             mTitleTV = (TextView) itemView.findViewById(R.id.title_tv);
             mDateTV = (TextView) itemView.findViewById(R.id.time_tv);
+
+
+        }
+
+        public void bind(final Announcement item, final OnItemClickCustom listner, final int position) {
+            if(!TextUtils.isEmpty(mList.get(position).getMessage())){
+                mTitleTV.setText(mList.get(position).getMessage());
+            }
+            else{
+                mTitleTV.setText("Image");
+            }
+            try {
+                String date = Functions.getInstance().formatDate(mList.get(position).getDate_created(), "dd-MM-yyyy hh:mm:ss", "MMM dd, yyyy hh:mm a");
+                mDateTV.setText(date);
+            }
+            catch (Exception e){
+                e.printStackTrace();
+                mDateTV.setText(mList.get(position).getDate_created());
+            }
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    listner.onClick(0,position,item);
+                }
+            });
         }
     }
 }

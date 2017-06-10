@@ -47,7 +47,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
             Log.d(TAG, "Message data payload: " + remoteMessage.getData());
             sendNotification(remoteMessage.getData());
         }*/
-        sendNotification(remoteMessage.getData());
+  //      sendNotification(remoteMessage.getData());
 
         // Check if message contains a notification payload.
         if (remoteMessage.getNotification() != null) {
@@ -126,7 +126,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                 NotificationCompat.Builder(this)
                 //      .setLargeIcon(largeIcon)
                 .setContentTitle(getString(R.string.app_name))
-                .setContentText(messageBody)
+                .setContentText("You have one new message")
                 .setAutoCancel(true)
                 .setContentIntent(pendingIntent);
 

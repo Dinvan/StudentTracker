@@ -16,6 +16,7 @@ import com.google.gson.JsonObject;
 import com.raynsmartschool.R;
 import com.raynsmartschool.adapter.AnnouncementAdapter;
 import com.raynsmartschool.auth.BaseActivity;
+import com.raynsmartschool.interfaces.OnItemClickCustom;
 import com.raynsmartschool.models.Announcement;
 import com.raynsmartschool.utility.Config;
 import com.raynsmartschool.utility.DialogUtil;
@@ -24,6 +25,7 @@ import com.raynsmartschool.utility.Functions;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import RetroFit.BaseRequest;
 import RetroFit.RequestReceiver;
@@ -73,16 +75,23 @@ public class AnnouncementActivity extends BaseActivity {
     }
 
     private void initRecycleView(){
-        mAdapter = new AnnouncementAdapter(mContext);
+        mAdapter = new AnnouncementAdapter(mContext,new OnItemClickCustom(){
+
+            @Override
+            public void onClick(int id, int position, Object object) {
+                startActivity(AnnouncementDetailActivity.getIntent(mContext,mType,mList.get(position)));
+            }
+        });
  //       mRecyclerView.addItemDecoration(new DividerItemDecoration(mContext, DividerItemDecoration.VERTICAL_LIST));
         mRecyclerView.setLayoutManager(new LinearLayoutManager(mContext));
         mRecyclerView.setAdapter(mAdapter);
-        mRecyclerView.setOnClickListener(new View.OnClickListener() {
+       /* mRecyclerView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 int pos = mRecyclerView.getChildPosition(view);
+                startActivity(AnnouncementDetailActivity.getIntent(mContext,mType,mList.get(pos)));
             }
-        });
+        });*/
     }
 
 
@@ -94,12 +103,10 @@ public class AnnouncementActivity extends BaseActivity {
             @Override
             public void onSuccess(int requestCode, String fullResponse, Object dataObject) {
                 if (dataObject != null) {
-
                     if(baseRequest.status) {
                         JSONObject json = (JSONObject) dataObject;
                         mList = baseRequest.getDataList(json.optJSONArray("list"),Announcement.class);
-
-
+                        Collections.reverse(mList);
                         if(null==mList || mList.size()==0){
                             mNoItemTV.setVisibility(View.VISIBLE);
                         }
