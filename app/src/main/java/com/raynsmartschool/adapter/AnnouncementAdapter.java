@@ -80,11 +80,11 @@ public class AnnouncementAdapter extends RecyclerView.Adapter<AnnouncementAdapte
         }
 
         public void bind(final Announcement item, final OnItemClickCustom listner, final int position) {
-            if(!TextUtils.isEmpty(mList.get(position).getMessage())){
-                mTitleTV.setText(mList.get(position).getMessage());
+            if(!TextUtils.isEmpty(mList.get(position).getTitle())){
+                mTitleTV.setText(mList.get(position).getTitle());
             }
             else{
-                mTitleTV.setText("Image");
+                mTitleTV.setText(mList.get(position).getTitle());
             }
             try {
                 String date = Functions.getInstance().formatDate(mList.get(position).getDate_created(), "dd-MM-yyyy hh:mm:ss", "MMM dd, yyyy hh:mm a");

@@ -52,6 +52,8 @@ public class CreteAnnouncementActivity extends MediaPickerActivity {
     RadioButton mImageRB;
     @Bind(R.id.message_et)
     EditText mMessageET;
+    @Bind(R.id.title_et)
+    EditText mTitleET;
     @Bind(R.id.image_container_rl)
     RelativeLayout mImageRL;
     @Bind(R.id.progressBar)
@@ -127,7 +129,7 @@ public class CreteAnnouncementActivity extends MediaPickerActivity {
         JsonObject object = null;
 
         object = Functions.getInstance().getJsonObject(
-                "type", requestType, "message", mMessageET.getText().toString().trim());
+                "type", requestType, "message", mMessageET.getText().toString().trim(),"title",mTitleET.getText().toString().trim());
 
 
         baseRequest.callAPIPost(1, object, getAppString(R.string.api_create_announcement));
@@ -158,7 +160,10 @@ public class CreteAnnouncementActivity extends MediaPickerActivity {
                 break;
             case R.id.submit_btn:
                 if(type==1){
-                    if(null==fileUri){
+                    if(TextUtils.isEmpty(mTitleET.getText().toString().trim())){
+                        DialogUtil.Alert(CreteAnnouncementActivity.this, getString(R.string.title_require), DialogUtil.AlertType.Error);
+                    }
+                    else if(null==fileUri){
                         DialogUtil.Alert(CreteAnnouncementActivity.this, getString(R.string.image_require), DialogUtil.AlertType.Error);
                     }
                     else{
@@ -167,7 +172,10 @@ public class CreteAnnouncementActivity extends MediaPickerActivity {
                 }
 
                 else if(type==0){
-                    if(TextUtils.isEmpty(mMessageET.getText().toString())){
+                    if(TextUtils.isEmpty(mTitleET.getText().toString().trim())){
+                        DialogUtil.Alert(CreteAnnouncementActivity.this, getString(R.string.title_require), DialogUtil.AlertType.Error);
+                    }
+                    else if(TextUtils.isEmpty(mMessageET.getText().toString())){
                         if(mType== Config.TYPE_ANNOUNCEMENT){
                             DialogUtil.Alert(CreteAnnouncementActivity.this, getString(R.string.text_require), DialogUtil.AlertType.Error);
                         }
@@ -263,7 +271,8 @@ public class CreteAnnouncementActivity extends MediaPickerActivity {
       //  MultipartBody.Part body2 = MultipartBody.Part.createFormData("message", "");
         RequestBody reqType = RequestBody.create(MediaType.parse("text/plain"), requestType);
         RequestBody reqMessage = RequestBody.create(MediaType.parse("text/plain"), "");
-        baseRequest.callAPIPostImage(5, reqFile,getString( R.string.api_create_announcement),reqType,reqMessage);
+        RequestBody reqTitle = RequestBody.create(MediaType.parse("text/plain"), mTitleET.getText().toString().trim());
+        baseRequest.callAPIPostImage(5, reqFile,getString( R.string.api_create_announcement),reqType,reqMessage,reqTitle);
 
     }
 

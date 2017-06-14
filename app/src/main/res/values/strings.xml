@@ -101,10 +101,12 @@
 
     <string name="create_announcement_header">Create Announcement</string>
     <string name="create_announcement_message">Just write a message or add a image and send to all parents of your class students</string>
+    <string name="enter_title_hint">Enter title here...</string>
     <string name="enter_message_hint">Enter message here...</string>
     <string name="submit">Send</string>
     <string name="select_message_type">Select Message type Text/Image</string>
     <string name="image_require">Please select image</string>
+    <string name="title_require">Please enter title</string>
     <string name="text_require">Please enter message</string>
     <string name="homework_require">Please enter Homework</string>
     <string name="existing_picture">Select from Gallery</string>

@@ -34,6 +34,8 @@ public class AnnouncementDetailActivity extends BaseActivity {
     TextView mDateTV;
     @Bind(R.id.message_tv)
     TextView mMessageTV;
+    @Bind(R.id.title_tv)
+    TextView mMessageTitleTV;
     private int mType;
     private BaseRequest baseRequest;
     @Bind(R.id.progressBar)
@@ -56,6 +58,7 @@ public class AnnouncementDetailActivity extends BaseActivity {
         }
         initToolBar();
         mAnnouncement = (Announcement) getIntent().getSerializableExtra("Announcement");
+        mMessageTitleTV.setText(mAnnouncement.getTitle());
         if(null!=mAnnouncement){
             if(!TextUtils.isEmpty(mAnnouncement.getMessage())){
                 mMessageTV.setText(mAnnouncement.getMessage());

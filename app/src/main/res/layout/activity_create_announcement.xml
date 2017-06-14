@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
+    android:fitsSystemWindows="true"
     android:background="@drawable/ic_app_bg"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -63,14 +64,33 @@
                 android:layout_height="wrap_content" />
 
             <EditText
-                android:id="@+id/message_et"
+                android:id="@+id/title_et"
                 android:background="@drawable/input_bg"
                 android:layout_below="@+id/text_rb"
                 android:textSize="@dimen/text14"
                 android:textColor="@color/black"
                 android:textColorHint="#A9A9A9"
+                android:minLines="1"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:hint="@string/enter_title_hint"
+                android:imeOptions="actionNext"
+                android:layout_margin="@dimen/dimen20"
+                android:padding="@dimen/dimen20"
+                android:layout_centerHorizontal="true"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <EditText
+                android:id="@+id/message_et"
+                android:background="@drawable/input_bg"
+                android:layout_below="@+id/title_et"
+                android:textSize="@dimen/text14"
+                android:textColor="@color/black"
+                android:textColorHint="#A9A9A9"
                 android:minLines="5"
                 android:maxLines="5"
+                android:visibility="visible"
                 android:singleLine="false"
                 android:scrollbars="none"
                 android:gravity="top|left"
@@ -82,13 +102,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
-
             <RelativeLayout
                 android:id="@+id/image_container_rl"
-                android:layout_below="@+id/text_rb"
+                android:layout_below="@+id/message_et"
                 android:visibility="gone"
                 android:layout_centerHorizontal="true"
-                android:layout_margin="@dimen/dimen20"
+                android:layout_marginLeft="@dimen/dimen20"
+                android:layout_marginRight="@dimen/dimen20"
+                android:layout_marginBottom="@dimen/dimen20"
                 android:background="@drawable/input_bg"
                 android:layout_width="match_parent"
                 android:layout_height="160dp">
@@ -114,8 +135,9 @@
             <Button
                 android:id="@+id/submit_btn"
                 android:textSize="@dimen/text16"
-                android:textColor="@color/White"
                 android:layout_alignParentBottom="true"
+                android:layout_marginTop="@dimen/dimen20"
+                android:textColor="@color/White"
                 android:text="@string/submit"
                 android:gravity="center"
                 android:background="@drawable/button_bottom_round_bg"
@@ -125,6 +147,7 @@
         </RelativeLayout>
 
     </ScrollView>
+
     <include
         layout="@layout/progress_dialog_loader"/>
 

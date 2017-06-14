@@ -10,10 +10,18 @@ public class Announcement  implements Serializable{
 
     public String id;
     public String message;
+    public String title;
     public String image;
     public String mediam;
     public String date_created;
 
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
     public String getId() {
         return id;
