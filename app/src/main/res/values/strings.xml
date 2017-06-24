@@ -111,4 +111,8 @@
     <string name="homework_require">Please enter Homework</string>
     <string name="existing_picture">Select from Gallery</string>
     <string name="take_picture">Open Camera</string>
+    <string name="no_student">No student in your class</string>
+    <string name="select_students">Select Students</string>
+    <string name="done">Done</string>
+    <string name="student_require">Please select at least one student</string>
 </resources>

@@ -5,5 +5,7 @@
     <string name="api_verify">otp</string>
     <string name="api_announcement">announcement-list</string>
     <string name="api_create_announcement">announcements</string>
+    <string name="api_class_list">class-api</string>
+    <string name="api_student_list">student-api</string>
 
 </resources>

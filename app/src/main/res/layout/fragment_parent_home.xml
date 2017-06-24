@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:background="@drawable/ic_app_bg"
     android:layout_width="match_parent"
@@ -10,6 +10,7 @@
         layout="@layout/header_toolbar"/>
 
     <ScrollView
+        android:layout_below="@+id/headerll"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fillViewport="true">
@@ -465,4 +466,7 @@
         </LinearLayout>
     </ScrollView>
 
-</LinearLayout>
+    <include
+        layout="@layout/progress_dialog_loader"/>
+
+</RelativeLayout>

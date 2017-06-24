@@ -28,6 +28,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.raynsmartschool.R;
 import com.raynsmartschool.interfaces.OnItemClickCustom;
+import com.raynsmartschool.models.TeachersClassModel;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -46,6 +47,16 @@ import java.util.Locale;
  * Created by ravib on 05/20/2017.
  */
 public class Functions extends Application {
+
+    private static TeachersClassModel Teacher;
+
+    public TeachersClassModel getTeacher() {
+        return Teacher;
+    }
+
+    public void setTeacher(TeachersClassModel mTeacher) {
+        this.Teacher = mTeacher;
+    }
 
     public static Functions instance = null;
 

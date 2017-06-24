@@ -17,16 +17,22 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.google.gson.JsonObject;
 import com.raynsmartschool.R;
+import com.raynsmartschool.models.StudentModel;
 import com.raynsmartschool.utility.Config;
 import com.raynsmartschool.utility.DialogUtil;
 import com.raynsmartschool.utility.Functions;
 import com.raynsmartschool.utility.MediaPickerActivity;
+import com.raynsmartschool.utility.UtilityFunctions;
 import com.tapadoo.alerter.OnHideAlertListener;
 
+import org.json.JSONArray;
+
 import java.io.File;
+import java.util.ArrayList;
 
 import RetroFit.BaseRequest;
 import RetroFit.RequestReceiver;
@@ -62,12 +68,15 @@ public class CreteAnnouncementActivity extends MediaPickerActivity {
     Button mSubmitBtn;
     @Bind(R.id.image_iv)
     ImageView mHomeWorkIV;
+    @Bind(R.id.student_tv)
+    TextView mStudentTV;
     private String title;
     private String requestType;
     private File fileUri;
     private int type = 0;
     private String path;
     private String mFileTemp;
+    private ArrayList<StudentModel> mStudents;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,7 +98,7 @@ public class CreteAnnouncementActivity extends MediaPickerActivity {
     }
 
     public void requestCreateAnnouncement() {
-
+        UtilityFunctions.hideSoftKeyboard(mTitleET);
         baseRequest = new BaseRequest(this);
         baseRequest.setLoaderView(mLoader);
         baseRequest.setBaseRequestListner(new RequestReceiver() {
@@ -129,13 +138,14 @@ public class CreteAnnouncementActivity extends MediaPickerActivity {
         JsonObject object = null;
 
         object = Functions.getInstance().getJsonObject(
-                "type", requestType, "message", mMessageET.getText().toString().trim(),"title",mTitleET.getText().toString().trim());
+                "type", requestType, "message", mMessageET.getText().toString().trim(),
+                "title",mTitleET.getText().toString().trim(),"students",getSelectedStudent());
 
 
         baseRequest.callAPIPost(1, object, getAppString(R.string.api_create_announcement));
     }
 
-    @OnClick({R.id.image_rb,R.id.text_rb,R.id.submit_btn,R.id.image_container_rl})
+    @OnClick({R.id.image_rb,R.id.text_rb,R.id.submit_btn,R.id.image_container_rl,R.id.student_tv})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.image_container_rl:
@@ -166,6 +176,9 @@ public class CreteAnnouncementActivity extends MediaPickerActivity {
                     else if(null==fileUri){
                         DialogUtil.Alert(CreteAnnouncementActivity.this, getString(R.string.image_require), DialogUtil.AlertType.Error);
                     }
+                    else if(getStudentSelected()==0){
+                        DialogUtil.Alert(CreteAnnouncementActivity.this, getString(R.string.student_require), DialogUtil.AlertType.Error);
+                    }
                     else{
                         UploadProfileImage(fileUri);
                     }
@@ -182,11 +195,18 @@ public class CreteAnnouncementActivity extends MediaPickerActivity {
                         else if(mType==Config.TYPE_HOMEWORK){
                             DialogUtil.Alert(CreteAnnouncementActivity.this, getString(R.string.homework_require), DialogUtil.AlertType.Error);
                         }
-                    } else{
+                    }
+                    else if(getStudentSelected()==0){
+                        DialogUtil.Alert(CreteAnnouncementActivity.this, getString(R.string.student_require), DialogUtil.AlertType.Error);
+                    }
+                    else{
                         requestCreateAnnouncement();
                     }
                 }
 
+                break;
+            case R.id.student_tv:
+                startActivityForResult(StudentListActivity.getIntent(mContext,Functions.getInstance().getTeacher().getClass_name(),Functions.getInstance().getTeacher().getClass_section()),200);
                 break;
         }
     }
@@ -217,13 +237,13 @@ public class CreteAnnouncementActivity extends MediaPickerActivity {
     @Override
     protected void onSingleImageSelected(int starterCode, File mFileUri, String imagPath, Bitmap bitmap) {
 
-            if (bitmap != null) {
-                path = imagPath;
-                mFileTemp = mFileUri.getPath();
-                System.out.println("Path: " + mFileTemp);
-                mHomeWorkIV.setImageBitmap(bitmap);
-                fileUri = mFileUri;
-            }
+        if (bitmap != null) {
+            path = imagPath;
+            mFileTemp = mFileUri.getPath();
+            System.out.println("Path: " + mFileTemp);
+            mHomeWorkIV.setImageBitmap(bitmap);
+            fileUri = mFileUri;
+        }
     }
 
     private void UploadProfileImage(File file) {
@@ -267,12 +287,13 @@ public class CreteAnnouncementActivity extends MediaPickerActivity {
         MultipartBody.Part body = MultipartBody.Part.createFormData("file", file.getName(), reqFile);
         JsonObject input = new JsonObject();
         input.addProperty("type", requestType);
-      //  MultipartBody.Part body1 = MultipartBody.Part.createFormData("type", requestType);
-      //  MultipartBody.Part body2 = MultipartBody.Part.createFormData("message", "");
+        //  MultipartBody.Part body1 = MultipartBody.Part.createFormData("type", requestType);
+        //  MultipartBody.Part body2 = MultipartBody.Part.createFormData("message", "");
         RequestBody reqType = RequestBody.create(MediaType.parse("text/plain"), requestType);
         RequestBody reqMessage = RequestBody.create(MediaType.parse("text/plain"), "");
         RequestBody reqTitle = RequestBody.create(MediaType.parse("text/plain"), mTitleET.getText().toString().trim());
-        baseRequest.callAPIPostImage(5, reqFile,getString( R.string.api_create_announcement),reqType,reqMessage,reqTitle);
+        RequestBody reqStudents = RequestBody.create(MediaType.parse("text/plain"), getSelectedStudent());
+        baseRequest.callAPIPostImage(5, reqFile,getString( R.string.api_create_announcement),reqType,reqMessage,reqTitle,reqStudents);
 
     }
 
@@ -286,6 +307,44 @@ public class CreteAnnouncementActivity extends MediaPickerActivity {
     }
 
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode==200 && resultCode == RESULT_OK){
+            mStudents = (ArrayList<StudentModel>) data.getSerializableExtra("students");
+            mStudentTV.setText(getStudentSelected()+" Student Selected");
+        }
+    }
+
+    private int getStudentSelected(){
+        int totalSelected = 0;
+        if(null==mStudents){
+            return 0;
+        }
+        else {
+            for (int i = 0; i < mStudents.size(); i++) {
+                if (mStudents.get(i).isSelected()) {
+                    totalSelected++;
+                }
+            }
+        }
+        return totalSelected;
+    }
+
+    private String getSelectedStudent(){
+        JSONArray jArray = new JSONArray();
+        if(null==mStudents){
+            return jArray.toString();
+        }
+        else {
+            for (int i = 0; i < mStudents.size(); i++) {
+                if (mStudents.get(i).isSelected()) {
+                    jArray.put(mStudents.get(i).getStudent_id());
+                }
+            }
+        }
+        return jArray.toString();
+    }
 
     private ActionBar mActionBar;
     private Toolbar toolbar;
