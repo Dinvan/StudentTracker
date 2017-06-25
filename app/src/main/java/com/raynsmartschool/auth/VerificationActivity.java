@@ -45,6 +45,7 @@ public class VerificationActivity extends BaseActivity {
     ProgressBar mLoader;
     String mMobile;
     int loginType;
+    private String mType;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +54,7 @@ public class VerificationActivity extends BaseActivity {
         ButterKnife.bind(this);
         initViews();
         mMobile = getIntent().getStringExtra("mobile");
+        mType = getIntent().getStringExtra("mType");
         loginType = getIntent().getIntExtra(Config.LOGIN_TYPE,0);
     }
 
@@ -235,9 +237,10 @@ public class VerificationActivity extends BaseActivity {
         }
     }
 
-    public static Intent getIntent(Context context,String mobile,int loginType) {
+    public static Intent getIntent(Context context,String mobile,int loginType,String mType) {
         Intent intent = new Intent(context, VerificationActivity.class);
         intent.putExtra("mobile",mobile);
+        intent.putExtra("mType",mType);
         intent.putExtra(Config.LOGIN_TYPE,loginType);
         return intent;
     }
@@ -311,6 +314,7 @@ public class VerificationActivity extends BaseActivity {
         object = Functions.getInstance().getJsonObject(
             //    "device_type", Config.DEVICE_TYPE_ID,
                 "device_token", "",
+                "login_type", mType,
                 "otp_code", otp);
         baseRequest.callAPIPost(2, object, getAppString(R.string.api_verify));
     }

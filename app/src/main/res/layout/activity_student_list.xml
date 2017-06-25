@@ -9,6 +9,34 @@
         android:id="@+id/header_ll"
         layout="@layout/header_toolbar"/>
 
+    <RelativeLayout
+        android:id="@+id/all_rl"
+        android:layout_marginLeft="@dimen/dimen10"
+        android:layout_marginRight="@dimen/dimen10"
+        android:background="@color/White"
+        android:layout_below="@+id/header_ll"
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+        <ImageView
+            android:id="@+id/select_iv"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_green_uncheck"
+            android:layout_margin="@dimen/dimen10"
+            android:layout_width="40dp"
+            android:layout_height="40dp" />
+
+        <TextView
+            android:id="@+id/name_tv"
+            android:layout_toRightOf="@+id/select_iv"
+            android:padding="@dimen/dimen10"
+            android:text="Select All"
+            android:layout_centerVertical="true"
+            android:textSize="@dimen/text14"
+            android:textColor="@color/black"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycle_view"
@@ -16,7 +44,7 @@
         android:layout_marginRight="@dimen/dimen10"
         android:layout_above="@+id/submit_btn"
         android:background="@color/Transparent"
-        android:layout_below="@+id/header_ll"
+        android:layout_below="@+id/all_rl"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 

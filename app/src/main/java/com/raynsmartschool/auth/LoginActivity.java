@@ -42,6 +42,7 @@ public class LoginActivity extends BaseActivity {
     private BaseRequest baseRequest;
     private String mMobileNo;
     private int LoginType;
+    private String mType = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,7 +108,7 @@ public class LoginActivity extends BaseActivity {
                     mSessionParam.setSaveSessionKey(LoginActivity.this, session_key);
                     mSessionParam.persistData(LoginActivity.this);*/
                     if(baseRequest.status) {
-                        startActivity(VerificationActivity.getIntent(mContext, mobile, LoginType));
+                        startActivity(VerificationActivity.getIntent(mContext, mobile, LoginType,mType));
                         finishAllActivities();
                     }
                     else{
@@ -138,7 +139,6 @@ public class LoginActivity extends BaseActivity {
         if (refreshedToken == null || refreshedToken.length() <= 0)
             refreshedToken = "abcd";*/
         JsonObject object = null;
-        String mType;
         if(LoginType==Config.LOGIN_TYPE_PARENT){
             mType = "parent";
         }

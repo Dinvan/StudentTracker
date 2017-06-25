@@ -18,6 +18,7 @@ import com.raynsmartschool.adapter.AnnouncementAdapter;
 import com.raynsmartschool.auth.BaseActivity;
 import com.raynsmartschool.interfaces.OnItemClickCustom;
 import com.raynsmartschool.models.Announcement;
+import com.raynsmartschool.session.SessionParam;
 import com.raynsmartschool.utility.Config;
 import com.raynsmartschool.utility.DialogUtil;
 import com.raynsmartschool.utility.Functions;
@@ -144,7 +145,7 @@ public class AnnouncementActivity extends BaseActivity {
         JsonObject object = null;
 
         object = Functions.getInstance().getJsonObject(
-                "type", requestType);
+                "type", requestType,"session_key",new SessionParam(mContext).session_key);
 
 
         baseRequest.callAPIPost(1, object, getAppString(R.string.api_announcement));

@@ -64,7 +64,7 @@ public class StudentListActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_announcement_list);
+        setContentView(R.layout.activity_student_list);
         mContext = this;
         ButterKnife.bind(this);
         mRecyclerView = (RecyclerView) findViewById(R.id.recycle_view);
