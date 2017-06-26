@@ -308,12 +308,12 @@ public class BaseRequest<T> extends BaseRequestParser {
     }
 
    // public void callAPIPostImage(final int requestCode, MultipartBody.Part image, String remainingURL,MultipartBody.Part input) {
-   public void callAPIPostImage(final int requestCode, RequestBody image, String remainingURL, RequestBody input1, RequestBody input2, RequestBody input3, RequestBody input4) {
+   public void callAPIPostImage(final int requestCode, RequestBody image, String remainingURL, RequestBody input1, RequestBody input2, RequestBody input3, RequestBody input4,RequestBody input5) {
         RequestCode = requestCode;
         showLoader();
         Log.d("BaseReq", "Input URL : " + remainingURL);
         String sess = SessionParam.getSessionKey(mContext);
-        callAPI = apiInterface.uploadImage(remainingURL, image,input1,input2,input3,input4, sess);
+        callAPI = apiInterface.uploadImage(remainingURL, image,input1,input2,input3,input4,input5, sess);
         callAPI.enqueue(responseCallback);
     }
 

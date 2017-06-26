@@ -22,6 +22,7 @@ import android.widget.TextView;
 import com.google.gson.JsonObject;
 import com.raynsmartschool.R;
 import com.raynsmartschool.models.StudentModel;
+import com.raynsmartschool.session.SessionParam;
 import com.raynsmartschool.utility.Config;
 import com.raynsmartschool.utility.DialogUtil;
 import com.raynsmartschool.utility.Functions;
@@ -139,7 +140,7 @@ public class CreteAnnouncementActivity extends MediaPickerActivity {
 
         object = Functions.getInstance().getJsonObject(
                 "type", requestType, "message", mMessageET.getText().toString().trim(),
-                "title",mTitleET.getText().toString().trim(),"students",getSelectedStudent());
+                "title",mTitleET.getText().toString().trim(),"students",getSelectedStudent(),"teacher_id",new SessionParam(mContext).user_guid);
 
 
         baseRequest.callAPIPost(1, object, getAppString(R.string.api_create_announcement));
@@ -293,7 +294,8 @@ public class CreteAnnouncementActivity extends MediaPickerActivity {
         RequestBody reqMessage = RequestBody.create(MediaType.parse("text/plain"), "");
         RequestBody reqTitle = RequestBody.create(MediaType.parse("text/plain"), mTitleET.getText().toString().trim());
         RequestBody reqStudents = RequestBody.create(MediaType.parse("text/plain"), getSelectedStudent());
-        baseRequest.callAPIPostImage(5, reqFile,getString( R.string.api_create_announcement),reqType,reqMessage,reqTitle,reqStudents);
+        RequestBody reqTeacherId = RequestBody.create(MediaType.parse("text/plain"),new SessionParam(mContext).user_guid);
+        baseRequest.callAPIPostImage(5, reqFile,getString( R.string.api_create_announcement),reqType,reqMessage,reqTitle,reqStudents,reqTeacherId);
 
     }
 
@@ -332,7 +334,22 @@ public class CreteAnnouncementActivity extends MediaPickerActivity {
     }
 
     private String getSelectedStudent(){
-        JSONArray jArray = new JSONArray();
+        StringBuilder sb = new StringBuilder();
+        if(null==mStudents){
+            return sb.toString();
+        }
+        else {
+            for (int i = 0; i < mStudents.size(); i++) {
+                if (mStudents.get(i).isSelected()) {
+                    if(!TextUtils.isEmpty(sb.toString())){
+                        sb.append(",");
+                    }
+                    sb.append(mStudents.get(i).getStudent_id());
+                }
+            }
+            return sb.toString();
+        }
+       /* JSONArray jArray = new JSONArray();
         if(null==mStudents){
             return jArray.toString();
         }
@@ -343,7 +360,7 @@ public class CreteAnnouncementActivity extends MediaPickerActivity {
                 }
             }
         }
-        return jArray.toString();
+        return jArray.toString();*/
     }
 
     private ActionBar mActionBar;

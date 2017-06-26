@@ -14,6 +14,24 @@ public class Announcement  implements Serializable{
     public String image;
     public String mediam;
     public String date_created;
+    public String sender_id;
+    public String sender_name;
+
+    public String getSender_id() {
+        return sender_id;
+    }
+
+    public void setSender_id(String sender_id) {
+        this.sender_id = sender_id;
+    }
+
+    public String getSender_name() {
+        return sender_name;
+    }
+
+    public void setSender_name(String sender_name) {
+        this.sender_name = sender_name;
+    }
 
     public String getTitle() {
         return title;

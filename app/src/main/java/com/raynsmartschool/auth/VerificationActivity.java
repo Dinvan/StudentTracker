@@ -314,6 +314,7 @@ public class VerificationActivity extends BaseActivity {
         object = Functions.getInstance().getJsonObject(
             //    "device_type", Config.DEVICE_TYPE_ID,
                 "device_token", "",
+                "mobile", mMobile,
                 "login_type", mType,
                 "otp_code", otp);
         baseRequest.callAPIPost(2, object, getAppString(R.string.api_verify));

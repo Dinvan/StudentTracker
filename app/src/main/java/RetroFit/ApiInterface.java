@@ -36,9 +36,8 @@ public interface ApiInterface {
 
     @Multipart
     @POST
-    Call<JsonElement> uploadImage(@Url String remainingURL, @Part("file\"; filename=\"test.png\" ") RequestBody file, @Part("type") RequestBody body1, @Part("message") RequestBody body2, @Part("title") RequestBody body3, @Part("students") RequestBody body4, @Header("session_key") String session_key);
+    Call<JsonElement> uploadImage(@Url String remainingURL, @Part("file\"; filename=\"school.png\" ") RequestBody file, @Part("type") RequestBody body1, @Part("message") RequestBody body2, @Part("title") RequestBody body3, @Part("students") RequestBody body4, @Part("teacher_id") RequestBody body5, @Header("session_key") String session_key);
   //  Call<JsonElement> uploadImage(@Url String remainingURL, @Part MultipartBody.Part file, @Header("session_key") String session_key);
-
 
 }
 

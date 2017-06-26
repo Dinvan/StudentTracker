@@ -36,6 +36,8 @@ public class AnnouncementDetailActivity extends BaseActivity {
     TextView mMessageTV;
     @Bind(R.id.title_tv)
     TextView mMessageTitleTV;
+    @Bind(R.id.created_by_tv)
+    TextView mCreatorTV;
     private int mType;
     private BaseRequest baseRequest;
     @Bind(R.id.progressBar)
@@ -59,11 +61,11 @@ public class AnnouncementDetailActivity extends BaseActivity {
         initToolBar();
         mAnnouncement = (Announcement) getIntent().getSerializableExtra("Announcement");
         mMessageTitleTV.setText(mAnnouncement.getTitle());
+        mCreatorTV.setText(getString(R.string.created_by)+" "+mAnnouncement.getSender_name());
         if(null!=mAnnouncement){
             if(!TextUtils.isEmpty(mAnnouncement.getMessage())){
                 mMessageTV.setText(mAnnouncement.getMessage());
                 mMessageTV.setVisibility(View.VISIBLE);
-
             }
             else{
                 mMessageTV.setVisibility(View.GONE);

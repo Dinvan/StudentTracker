@@ -34,7 +34,7 @@
     <include
         layout="@layout/progress_dialog_loader"/>
 
-    <Button
+   <!-- <Button
         android:id="@+id/submit_btn"
         android:layout_alignParentBottom="true"
         android:textSize="@dimen/text16"
@@ -45,6 +45,6 @@
         android:background="@drawable/square_button_bg"
         android:textStyle="bold"
         android:layout_width="match_parent"
-        android:layout_height="56dp" />
+        android:layout_height="56dp" />-->
 
 </RelativeLayout>

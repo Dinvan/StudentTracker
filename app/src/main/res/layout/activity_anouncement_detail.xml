@@ -11,12 +11,12 @@
 
     <ScrollView
         android:fillViewport="true"
+        android:layout_margin="@dimen/dimen20"
         android:layout_below="@id/header_ll"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
         <RelativeLayout
-            android:layout_margin="@dimen/dimen20"
             android:layout_gravity="center_horizontal"
             android:background="@drawable/input_bg"
             android:layout_width="match_parent"
@@ -24,21 +24,47 @@
 
             <TextView
                 android:id="@+id/title_tv"
-                android:layout_toLeftOf="@+id/date_tv"
+                android:background="@color/translucent_50"
                 android:textSize="@dimen/text16"
                 android:layout_alignParentLeft="true"
                 android:visibility="visible"
-                android:textColor="@color/black"
+                android:textColor="@color/White"
                 android:singleLine="false"
-                android:layout_marginRight="@dimen/dimen10"
-                android:layout_marginLeft="@dimen/dimen10"
+                android:text="@string/full_name"
                 android:paddingTop="@dimen/dimen10"
+                android:paddingBottom="@dimen/dimen10"
+                android:paddingLeft="@dimen/dimen20"
+                android:paddingRight="@dimen/dimen20"
+                android:textStyle="bold"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/created_by_tv"
+                android:layout_below="@+id/title_tv"
+                android:textSize="@dimen/text12"
+                android:layout_alignParentLeft="true"
+                android:textColor="#A9A9A9"
+                android:text="created by admiin"
+                android:layout_marginLeft="@dimen/dimen5"
+                android:padding="@dimen/dimen10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/date_tv"
+                android:layout_below="@+id/title_tv"
+                android:textSize="@dimen/text12"
+                android:layout_alignParentRight="true"
+                android:textColor="#A9A9A9"
+                android:layout_marginRight="@dimen/dimen5"
+                android:padding="@dimen/dimen10"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
             <TextView
                 android:id="@+id/message_tv"
-                android:layout_below="@+id/title_tv"
+                android:layout_below="@+id/date_tv"
                 android:textSize="@dimen/text16"
                 android:visibility="visible"
                 android:textColor="@color/black"
@@ -49,18 +75,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
-            <TextView
-                android:id="@+id/date_tv"
-                android:textSize="@dimen/text12"
-                android:layout_alignParentRight="true"
-                android:textColor="#A9A9A9"
-                android:layout_margin="@dimen/dimen5"
-                android:padding="@dimen/dimen10"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+
             <ImageView
                 android:id="@+id/announcement_iv"
-                android:layout_below="@+id/title_tv"
+                android:layout_below="@+id/date_tv"
                 android:visibility="gone"
                 android:layout_margin="@dimen/dimen10"
                 android:scaleType="fitXY"
