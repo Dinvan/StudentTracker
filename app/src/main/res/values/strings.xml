@@ -104,6 +104,7 @@
     <string name="enter_title_hint">Enter title here...</string>
     <string name="enter_message_hint">Enter message here...</string>
     <string name="submit">Send</string>
+    <string name="submit_label">Submit</string>
     <string name="select_message_type">Select Message type Text/Image</string>
     <string name="image_require">Please select image</string>
     <string name="title_require">Please enter title</string>
@@ -116,4 +117,5 @@
     <string name="done">Done</string>
     <string name="student_require">Please select at least one student</string>
     <string name="created_by">Created by: </string>
+    <string name="your_attendance">Your Attendance</string>
 </resources>

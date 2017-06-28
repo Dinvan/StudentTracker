@@ -7,5 +7,6 @@
     <string name="api_create_announcement">announcements</string>
     <string name="api_class_list">class-api</string>
     <string name="api_student_list">student-api</string>
+    <string name="api_attendance_submit">attendance-api</string>
 
 </resources>

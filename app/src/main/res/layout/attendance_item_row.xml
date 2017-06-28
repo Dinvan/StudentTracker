@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:background="@color/White"
+    android:layout_width="match_parent"
+    android:layout_height="61dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp">
+
+
+        <TextView
+            android:id="@+id/name_tv"
+            android:layout_toLeftOf="@+id/present_iv"
+            android:padding="@dimen/dimen10"
+            android:layout_centerVertical="true"
+            android:text="@string/full_name"
+            android:textSize="@dimen/text14"
+            android:textColor="@color/black"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <ImageView
+            android:id="@+id/present_iv"
+            android:layout_toLeftOf="@+id/absent_iv"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_green_uncheck"
+            android:padding="@dimen/dimen5"
+            android:layout_marginRight="@dimen/dimen10"
+            android:layout_width="40dp"
+            android:layout_height="40dp" />
+
+        <ImageView
+            android:id="@+id/absent_iv"
+            android:layout_toLeftOf="@+id/holiday_iv"
+            android:layout_centerVertical="true"
+            android:padding="@dimen/dimen5"
+            android:src="@drawable/ic_green_uncheck"
+            android:layout_marginRight="@dimen/dimen10"
+            android:layout_width="40dp"
+            android:layout_height="40dp" />
+
+        <ImageView
+            android:id="@+id/holiday_iv"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:padding="@dimen/dimen5"
+            android:src="@drawable/ic_green_uncheck"
+            android:layout_marginRight="@dimen/dimen10"
+            android:layout_width="40dp"
+            android:layout_height="40dp" />
+
+    </RelativeLayout>
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen1"
+        android:layout_below="@+id/name_tv"
+        android:background="@color/grey_200"/>
+</LinearLayout>

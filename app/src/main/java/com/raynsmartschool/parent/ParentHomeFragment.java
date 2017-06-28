@@ -24,7 +24,9 @@ import com.raynsmartschool.auth.ParentDashboardActivity;
 import com.raynsmartschool.models.Announcement;
 import com.raynsmartschool.models.TeachersClassModel;
 import com.raynsmartschool.school.AnnouncementActivity;
+import com.raynsmartschool.school.AttendanceListActivity;
 import com.raynsmartschool.school.CreteAnnouncementActivity;
+import com.raynsmartschool.school.StudentAttendanceListActivity;
 import com.raynsmartschool.session.SessionParam;
 import com.raynsmartschool.utility.Config;
 import com.raynsmartschool.utility.DialogUtil;
@@ -109,7 +111,7 @@ public class ParentHomeFragment extends BaseFragment{
                 startActivity(AnnouncementActivity.getIntent(mContext,Config.TYPE_HOMEWORK));
                 break;
             case R.id.attendance_rl:
-
+                startActivity(StudentAttendanceListActivity.getIntent(mContext));
                 break;
             case R.id.notification_rl:
                 startActivity(AnnouncementActivity.getIntent(mContext,Config.TYPE_ANNOUNCEMENT));
@@ -118,7 +120,7 @@ public class ParentHomeFragment extends BaseFragment{
                 startActivity(CreteAnnouncementActivity.getIntent(mContext,Config.TYPE_HOMEWORK));
                 break;
             case R.id.add_attendance_rl:
-
+                startActivity(AttendanceListActivity.getIntent(mContext,Functions.getInstance().getTeacher().getClass_name(),Functions.getInstance().getTeacher().getClass_section()));
                 break;
             case R.id.add_notification_rl:
                 startActivity(CreteAnnouncementActivity.getIntent(mContext,Config.TYPE_ANNOUNCEMENT));
