@@ -6,40 +6,40 @@ package com.raynsmartschool.models;
 
 public class StudentAttendanceMonthModel {
 
-    private String month_name;
-    private String present_days;
-    private String absent_days;
-    private String holidays;
+    private String month;
+    private String present_count;
+    private String absent_count;
+    private String holiday;
 
     public String getMonth_name() {
-        return month_name;
+        return month;
     }
 
     public void setMonth_name(String month_name) {
-        this.month_name = month_name;
+        this.month = month_name;
     }
 
     public String getPresent_days() {
-        return present_days;
+        return present_count;
     }
 
     public void setPresent_days(String present_days) {
-        this.present_days = present_days;
+        this.present_count = present_days;
     }
 
     public String getAbsent_days() {
-        return absent_days;
+        return absent_count;
     }
 
     public void setAbsent_days(String absent_days) {
-        this.absent_days = absent_days;
+        this.absent_count = absent_days;
     }
 
     public String getHolidays() {
-        return holidays;
+        return holiday;
     }
 
     public void setHolidays(String holidays) {
-        this.holidays = holidays;
+        this.holiday = holidays;
     }
 }

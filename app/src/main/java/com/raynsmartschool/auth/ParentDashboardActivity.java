@@ -25,6 +25,7 @@ import com.raynsmartschool.adapter.NavigationMenuAdapter;
 import com.raynsmartschool.interfaces.OnItemClickInAdapter;
 import com.raynsmartschool.models.NavigationMenuModel;
 import com.raynsmartschool.parent.ParentHomeFragment;
+import com.raynsmartschool.parent.ProfileFragment;
 import com.raynsmartschool.session.SessionParam;
 import com.raynsmartschool.utility.Config;
 import com.raynsmartschool.utility.Dialogs;
@@ -103,6 +104,16 @@ public class ParentDashboardActivity extends BaseActivity {
                 ft.commit();
             }
         }
+        else if (listString.equalsIgnoreCase(getString(R.string.profile))) {
+            if (!(mFragment instanceof ProfileFragment)) {
+                mFragment = new ProfileFragment();
+                mDrawerLayout.closeDrawer(gravity);
+                mMenuListview.setItemChecked(Selectedposition, true);
+                mNavigationMenuAdapter.notifyDataSetChanged();
+                ft.replace(R.id.fragment_container, mFragment);
+                ft.commit();
+            }
+        }
         if(listString.equalsIgnoreCase(getString(R.string.nav_logout))){
             if (mDrawerLayout.isDrawerOpen(gravity)) {
                 mDrawerLayout.closeDrawer(gravity);
@@ -149,7 +160,7 @@ public class ParentDashboardActivity extends BaseActivity {
             @Override
             public void onClick(View view) {
                 mDrawerLayout.closeDrawer(gravity);
-                switchFragment("Profile");
+          //      switchFragment(getString(R.string.profile));
             }
         });
 

@@ -96,7 +96,7 @@ public class StudentAttendanceListActivity extends BaseActivity {
                 if (dataObject != null) {
                     if(baseRequest.status) {
                         JSONObject json = (JSONObject) dataObject;
-                        mList = baseRequest.getDataList(json.optJSONArray("attendance"),StudentAttendanceMonthModel.class);
+                        mList = baseRequest.getDataList(json.optJSONArray("attandance"),StudentAttendanceMonthModel.class);
                         //     Collections.reverse(mList);
                         if(null==mList || mList.size()==0){
                             mNoItemTV.setVisibility(View.GONE);
@@ -123,7 +123,6 @@ public class StudentAttendanceListActivity extends BaseActivity {
                     DialogUtil.Alert(StudentAttendanceListActivity.this, message, DialogUtil.AlertType.Error);
 
                 }
-
             }
 
             @Override
@@ -133,8 +132,8 @@ public class StudentAttendanceListActivity extends BaseActivity {
         });
         JsonObject object = null;
         object = Functions.getInstance().getJsonObject(
-                "class", class_name,"section", section_name);
-    //    baseRequest.callAPIPost(1, object, getAppString(R.string.api_student_list));
+                "student_id", new SessionParam(mContext).session_key);
+        baseRequest.callAPIPost(1, object, getAppString(R.string.api_attendance_list));
     }
 
     private ActionBar mActionBar;

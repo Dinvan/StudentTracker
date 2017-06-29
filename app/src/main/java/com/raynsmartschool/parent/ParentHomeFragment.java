@@ -1,5 +1,6 @@
 package com.raynsmartschool.parent;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -30,6 +31,7 @@ import com.raynsmartschool.school.StudentAttendanceListActivity;
 import com.raynsmartschool.session.SessionParam;
 import com.raynsmartschool.utility.Config;
 import com.raynsmartschool.utility.DialogUtil;
+import com.raynsmartschool.utility.Dialogs;
 import com.raynsmartschool.utility.Functions;
 import com.tapadoo.alerter.OnHideAlertListener;
 
@@ -117,13 +119,28 @@ public class ParentHomeFragment extends BaseFragment{
                 startActivity(AnnouncementActivity.getIntent(mContext,Config.TYPE_ANNOUNCEMENT));
                 break;
             case R.id.add_homework_rl:
-                startActivity(CreteAnnouncementActivity.getIntent(mContext,Config.TYPE_HOMEWORK));
+                if(null==mTeachersClassAL || mTeachersClassAL.size()==0){
+                    showErrorNoClass();
+                }
+                else {
+                    startActivity(CreteAnnouncementActivity.getIntent(mContext, Config.TYPE_HOMEWORK));
+                }
                 break;
             case R.id.add_attendance_rl:
-                startActivity(AttendanceListActivity.getIntent(mContext,Functions.getInstance().getTeacher().getClass_name(),Functions.getInstance().getTeacher().getClass_section()));
+                if(null==mTeachersClassAL || mTeachersClassAL.size()==0){
+                    showErrorNoClass();
+                }
+                else {
+                    startActivity(AttendanceListActivity.getIntent(mContext, Functions.getInstance().getTeacher().getClass_name(), Functions.getInstance().getTeacher().getClass_section()));
+                }
                 break;
             case R.id.add_notification_rl:
-                startActivity(CreteAnnouncementActivity.getIntent(mContext,Config.TYPE_ANNOUNCEMENT));
+                if(null==mTeachersClassAL || mTeachersClassAL.size()==0){
+                    showErrorNoClass();
+                }
+                else {
+                    startActivity(CreteAnnouncementActivity.getIntent(mContext, Config.TYPE_ANNOUNCEMENT));
+                }
                 break;
         }
     }
@@ -177,14 +194,9 @@ public class ParentHomeFragment extends BaseFragment{
                     if(baseRequest.status) {
                         JSONObject json = (JSONObject) dataObject;
                         mTeachersClassAL = baseRequest.getDataList(json.optJSONArray("class"),TeachersClassModel.class);
-                     //   Collections.reverse(mTeachersClassAL);
+                        //   Collections.reverse(mTeachersClassAL);
                         if(null==mTeachersClassAL || mTeachersClassAL.size()==0){
-                            DialogUtil.Alert(getActivity(), "You don't have any assigned class", DialogUtil.AlertType.Error, new OnHideAlertListener() {
-                                @Override
-                                public void onHide() {
-                                    getActivity().finish();
-                                }
-                            });
+                            showErrorNoClass();
                         }
                         else{
                             Functions.getInstance().setTeacher(mTeachersClassAL.get(0));
@@ -221,4 +233,7 @@ public class ParentHomeFragment extends BaseFragment{
         baseRequest.callAPIPost(1, object, getAppString(R.string.api_class_list));
     }
 
+    private void showErrorNoClass(){
+        Dialogs.showAlertDialog("No Class Found!","There is no class assigned to you.",mContext);
+    }
 }

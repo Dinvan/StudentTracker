@@ -223,10 +223,8 @@ public class BaseRequest<T> extends BaseRequestParser {
 
         @Override
         public void onFailure(Call<JsonElement> call, Throwable t) {
-
             handler.removeCallbacksAndMessages(null);
             // First condition is for connection problem
-
             if (!TextUtils.isEmpty(t.getMessage()) && t.getMessage().startsWith("Unable to resolve") || t.getMessage().startsWith("Failed" +
                     " to connect")) {
                 handler.postDelayed(r, 1000);

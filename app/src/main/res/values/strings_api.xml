@@ -8,5 +8,6 @@
     <string name="api_class_list">class-api</string>
     <string name="api_student_list">student-api</string>
     <string name="api_attendance_submit">attendance-api</string>
+    <string name="api_attendance_list">attendance-list/</string>
 
 </resources>
