@@ -20,6 +20,7 @@ import com.raynsmartschool.R;
 import com.raynsmartschool.adapter.AttendanceAdapter;
 import com.raynsmartschool.adapter.StudentAttendanceAdapter;
 import com.raynsmartschool.auth.BaseActivity;
+import com.raynsmartschool.auth.ParentDashboardActivity;
 import com.raynsmartschool.interfaces.OnItemClickCustom;
 import com.raynsmartschool.models.AttendanceModel;
 import com.raynsmartschool.models.StudentAttendanceMonthModel;
@@ -55,6 +56,7 @@ public class StudentAttendanceListActivity extends BaseActivity {
     @Bind(R.id.progressBar)
     ProgressBar mLoader;
     private String title;
+    private boolean fromFCM = false;
 
     private boolean isAllSelected = false;
 
@@ -64,6 +66,7 @@ public class StudentAttendanceListActivity extends BaseActivity {
         setContentView(R.layout.activity_student_attendance_list);
         mContext = this;
         ButterKnife.bind(this);
+        fromFCM = getIntent().getBooleanExtra("FromFCM",false);
         mRecyclerView = (RecyclerView) findViewById(R.id.recycle_view);
         mNoItemTV = (TextView) findViewById(R.id.no_item_tv);
         class_name = getIntent().getStringExtra("classname");
@@ -152,15 +155,34 @@ public class StudentAttendanceListActivity extends BaseActivity {
 
         switch (item.getItemId()) {
             case android.R.id.home:
-                super.onBackPressed();
+                if(fromFCM){
+                    startActivity(ParentDashboardActivity.getIntent(mContext));
+                    finish();
+                }
+                else {
+                    super.onBackPressed();
+                }
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
 
-    public static Intent getIntent(Context context){
+    @Override
+    public void onBackPressed() {
+        if(fromFCM){
+            startActivity(ParentDashboardActivity.getIntent(mContext));
+            finish();
+        }
+        else {
+            super.onBackPressed();
+        }
+    }
+
+
+    public static Intent getIntent(Context context, boolean fromFCM){
         Intent intent = new Intent(context,StudentAttendanceListActivity.class);
+        intent.putExtra("FromFCM",fromFCM);
         return intent;
     }
 }

@@ -2,10 +2,12 @@ package com.raynsmartschool.parent;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.view.GravityCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
@@ -14,6 +16,7 @@ import android.widget.TextView;
 import com.google.gson.JsonObject;
 import com.raynsmartschool.R;
 import com.raynsmartschool.auth.BaseFragment;
+import com.raynsmartschool.auth.ParentDashboardActivity;
 import com.raynsmartschool.models.Announcement;
 import com.raynsmartschool.models.StudentModel;
 import com.raynsmartschool.models.StudentsModel;
@@ -73,6 +76,25 @@ public class ProfileFragment extends BaseFragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         setHasOptionsMenu(true);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        ((ParentDashboardActivity) getActivity()).hideSoftKeyboard(getActivity());
+        ((ParentDashboardActivity) getActivity()).mDrawerLayout.closeDrawers();
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                if (mActionBar != null)
+                    mActionBar.invalidateOptionsMenu();
+                if (!((ParentDashboardActivity) getActivity()).mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
+                    ((ParentDashboardActivity) getActivity()).mDrawerLayout.openDrawer(GravityCompat.START);
+                    ((ParentDashboardActivity) getActivity()).mMenuListview.bringToFront();
+                    ((ParentDashboardActivity) getActivity()).mDrawerLayout.requestLayout();
+                }
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     private ActionBar mActionBar;

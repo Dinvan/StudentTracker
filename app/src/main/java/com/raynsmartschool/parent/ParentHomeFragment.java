@@ -110,13 +110,13 @@ public class ParentHomeFragment extends BaseFragment{
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.homework_rl:
-                startActivity(AnnouncementActivity.getIntent(mContext,Config.TYPE_HOMEWORK));
+                startActivity(AnnouncementActivity.getIntent(mContext,Config.TYPE_HOMEWORK,false));
                 break;
             case R.id.attendance_rl:
-                startActivity(StudentAttendanceListActivity.getIntent(mContext));
+                startActivity(StudentAttendanceListActivity.getIntent(mContext,false));
                 break;
             case R.id.notification_rl:
-                startActivity(AnnouncementActivity.getIntent(mContext,Config.TYPE_ANNOUNCEMENT));
+                startActivity(AnnouncementActivity.getIntent(mContext,Config.TYPE_ANNOUNCEMENT,false));
                 break;
             case R.id.add_homework_rl:
                 if(null==mTeachersClassAL || mTeachersClassAL.size()==0){

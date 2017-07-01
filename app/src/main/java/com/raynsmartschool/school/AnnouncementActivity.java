@@ -16,6 +16,7 @@ import com.google.gson.JsonObject;
 import com.raynsmartschool.R;
 import com.raynsmartschool.adapter.AnnouncementAdapter;
 import com.raynsmartschool.auth.BaseActivity;
+import com.raynsmartschool.auth.ParentDashboardActivity;
 import com.raynsmartschool.interfaces.OnItemClickCustom;
 import com.raynsmartschool.models.Announcement;
 import com.raynsmartschool.session.SessionParam;
@@ -50,6 +51,7 @@ public class AnnouncementActivity extends BaseActivity {
     @Bind(R.id.progressBar)
     ProgressBar mLoader;
     private String title;
+    private boolean fromFCM = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +62,7 @@ public class AnnouncementActivity extends BaseActivity {
         mRecyclerView = (RecyclerView) findViewById(R.id.recycle_view);
         mNoItemTV = (TextView) findViewById(R.id.no_item_tv);
         mType = getIntent().getIntExtra("Type",0);
+        fromFCM = getIntent().getBooleanExtra("FromFCM",false);
         if(mType==Config.TYPE_ANNOUNCEMENT){
             mNoItemTV.setText(getString(R.string.no_announcement));
             requestType = "announcement";
@@ -167,17 +170,34 @@ public class AnnouncementActivity extends BaseActivity {
 
         switch (item.getItemId()) {
             case android.R.id.home:
-               super.onBackPressed();
+                if(fromFCM){
+                    startActivity(ParentDashboardActivity.getIntent(mContext));
+                    finish();
+                }
+                else {
+                    super.onBackPressed();
+                }
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
 
+    @Override
+    public void onBackPressed() {
+        if(fromFCM){
+            startActivity(ParentDashboardActivity.getIntent(mContext));
+            finish();
+        }
+        else {
+            super.onBackPressed();
+        }
+    }
 
-    public static Intent getIntent(Context context,int type){
+    public static Intent getIntent(Context context, int type, boolean fromFCM){
         Intent intent = new Intent(context,AnnouncementActivity.class);
         intent.putExtra("Type", type);
+        intent.putExtra("FromFCM",fromFCM);
         return intent;
     }
 }

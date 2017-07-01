@@ -1,7 +1,10 @@
 package com.raynsmartschool.school;
 
 import android.content.Context;
+import android.content.ContextWrapper;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
@@ -16,7 +19,12 @@ import com.raynsmartschool.R;
 import com.raynsmartschool.auth.BaseActivity;
 import com.raynsmartschool.models.Announcement;
 import com.raynsmartschool.utility.Config;
+import com.raynsmartschool.utility.DialogUtil;
 import com.raynsmartschool.utility.Functions;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 import RetroFit.BaseRequest;
 import butterknife.Bind;
@@ -73,6 +81,25 @@ public class AnnouncementDetailActivity extends BaseActivity {
             if(!TextUtils.isEmpty(mAnnouncement.getImage())){
                 Functions.getInstance().displayImagePlain(mContext,mAnnouncement.getImage(),false,mAnnouncementIV);
                 mAnnouncementIV.setVisibility(View.VISIBLE);
+               /* mAnnouncementIV.setOnLongClickListener(new View.OnLongClickListener() {
+                    @Override
+                    public boolean onLongClick(View v) {
+                        Bitmap bitmap = ((BitmapDrawable)mAnnouncementIV.getDrawable()).getBitmap();
+                        if(null!=bitmap) {
+                            String fileName;
+                            if(mType==Config.TYPE_HOMEWORK){
+                                fileName = "homework_"+mAnnouncement.getDate_created();
+                            }
+                            else{
+                                fileName = "announcement"+mAnnouncement.getDate_created();
+                            }
+
+                            String filePath = saveToInternalStorage(bitmap,fileName);
+                            DialogUtil.Alert(AnnouncementDetailActivity.this, "File saved as "+filePath, DialogUtil.AlertType.Success);
+                        }
+                        return false;
+                    }
+                });*/
             }
             else{
                 mAnnouncementIV.setVisibility(View.GONE);
@@ -110,5 +137,29 @@ public class AnnouncementDetailActivity extends BaseActivity {
         intent.putExtra("Type", type);
         intent.putExtra("Announcement", model);
         return intent;
+    }
+
+    private String saveToInternalStorage(Bitmap bitmapImage,String fileName){
+        ContextWrapper cw = new ContextWrapper(getApplicationContext());
+        // path to /data/data/yourapp/app_data/imageDir
+        File directory = cw.getDir("imageDir", Context.MODE_PRIVATE);
+        // Create imageDir
+        File mypath=new File(directory,fileName+".jpg");
+
+        FileOutputStream fos = null;
+        try {
+            fos = new FileOutputStream(mypath);
+            // Use the compress method on the BitMap object to write image to the OutputStream
+            bitmapImage.compress(Bitmap.CompressFormat.PNG, 100, fos);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                fos.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return directory.getAbsolutePath();
     }
 }

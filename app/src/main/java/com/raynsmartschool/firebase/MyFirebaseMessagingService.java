@@ -14,7 +14,10 @@ import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 import com.raynsmartschool.R;
 import com.raynsmartschool.auth.ParentDashboardActivity;
+import com.raynsmartschool.school.AnnouncementActivity;
+import com.raynsmartschool.school.StudentAttendanceListActivity;
 import com.raynsmartschool.session.SessionParam;
+import com.raynsmartschool.utility.Config;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -62,54 +65,26 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
         SessionParam sessionParam = new SessionParam(this);
         Intent intent = null;
-        String notification_type = "";
-        String messageBody = "";
-        String contest_id = "";
-        String contest_name = "";
-        String contest_unique_id = "";
-        String content = "";
+        String title = payload.get("title");
+        String messageBody =  payload.get("message");
+        String notification_type = payload.get("type");
 
-        for (Map.Entry<String, String> entry : payload.entrySet()) {
-            String key = entry.getKey();
-            String value = entry.getValue();
-            System.out.println("KEY : " + key);
-            System.out.println("VALUE : " + value);
-            if (key.equalsIgnoreCase("notification_type")) {
-                notification_type = value;
-            }
-            if (key.equalsIgnoreCase("body")) {
-                messageBody = value;
-            }
 
-            if (key.equalsIgnoreCase("content")) {
-                content = value;
-                JSONObject jsonObject = null;
-                try {
-                    jsonObject = new JSONObject(content);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
 
-        }
         if (!TextUtils.isEmpty(SessionParam.getSessionKey(this))) {
 
-            if (notification_type.equals("1") || notification_type.equals("6") || notification_type.equals("4") ||
-                    notification_type.equals("7") || notification_type.equals("5")
-                    ) {
-
-            } else if (notification_type.equals("3")
-                    || notification_type.equals("8")
-                    || notification_type.equals("10")
-                    || notification_type.equals("12")
-                    || notification_type.equals("13")
-
-                    ) {
-                    intent = new Intent(this, ParentDashboardActivity.class);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-
+            if (notification_type.equals("homework") ) {
+                intent = AnnouncementActivity.getIntent(this, Config.TYPE_HOMEWORK,true);
+           //     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            }
+            else if (notification_type.equals("announcement") ) {
+                intent = AnnouncementActivity.getIntent(this, Config.TYPE_ANNOUNCEMENT,true);
+            //    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            }else if (notification_type.equals("attendance")) {
+                    intent = StudentAttendanceListActivity.getIntent(this,true);
+              //      intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             } else {
-                intent = new Intent();
+                intent = new Intent(this, ParentDashboardActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             }
 
@@ -126,7 +101,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                 NotificationCompat.Builder(this)
                 //      .setLargeIcon(largeIcon)
                 .setContentTitle(getString(R.string.app_name))
-                .setContentText("You have one new message")
+                .setContentText(title)
                 .setAutoCancel(true)
                 .setContentIntent(pendingIntent);
 
@@ -141,7 +116,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         NotificationManager notificationManager =
                 (NotificationManager)
                         getSystemService(Context.NOTIFICATION_SERVICE);
-
-        notificationManager.notify(1410, notificationBuilder.build());
+        int notiId = (int)System.currentTimeMillis();
+        notificationManager.notify(notiId, notificationBuilder.build());
     }
 }
