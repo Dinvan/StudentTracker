@@ -84,7 +84,6 @@ public class ParentDashboardActivity extends BaseActivity {
             } else {
                 switchFragment(getAppString(R.string.nav_home));
             }
-            finishAllActivities();
         }
     }
 
@@ -160,7 +159,7 @@ public class ParentDashboardActivity extends BaseActivity {
             @Override
             public void onClick(View view) {
                 mDrawerLayout.closeDrawer(gravity);
-          //      switchFragment(getString(R.string.profile));
+                switchFragment(getString(R.string.profile));
             }
         });
 

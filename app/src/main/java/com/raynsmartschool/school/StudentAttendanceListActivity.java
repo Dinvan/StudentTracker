@@ -132,7 +132,7 @@ public class StudentAttendanceListActivity extends BaseActivity {
         });
         JsonObject object = null;
         object = Functions.getInstance().getJsonObject(
-                "student_id", new SessionParam(mContext).session_key);
+                "session_key", new SessionParam(mContext).session_key);
         baseRequest.callAPIPost(1, object, getAppString(R.string.api_attendance_list));
     }
 

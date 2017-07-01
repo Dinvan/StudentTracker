@@ -295,6 +295,7 @@ public class VerificationActivity extends BaseActivity {
                         finishAllActivities();
                     }
                     else{
+                        resetFields();
                         DialogUtil.Alert(VerificationActivity.this, baseRequest.message, DialogUtil.AlertType.Error);
                     }
                 }
@@ -302,11 +303,13 @@ public class VerificationActivity extends BaseActivity {
 
             @Override
             public void onFailure(int requestCode, String errorCode, String message) {
+                resetFields();
                 DialogUtil.Alert(VerificationActivity.this, message, DialogUtil.AlertType.Error);
             }
 
             @Override
             public void onNetworkFailure(int requestCode, String message) {
+                resetFields();
 
             }
         });
@@ -318,5 +321,14 @@ public class VerificationActivity extends BaseActivity {
                 "login_type", mType,
                 "otp_code", otp);
         baseRequest.callAPIPost(2, object, getAppString(R.string.api_verify));
+    }
+
+    private void resetFields(){
+        otp1.setText("");
+        otp2.setText("");
+        otp3.setText("");
+        otp4.setText("");
+        otp5.setText("");
+        otp6.setText("");
     }
 }

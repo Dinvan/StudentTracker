@@ -8,14 +8,32 @@ import java.io.Serializable;
 
 public class Announcement  implements Serializable{
 
-    public String id;
-    public String message;
-    public String title;
-    public String image;
-    public String mediam;
-    public String date_created;
-    public String sender_id;
-    public String sender_name;
+    private String id;
+    private String mid;
+    private String message;
+    private String title;
+    private String image;
+    private String mediam;
+    private String date_created;
+    private String sender_id;
+    private String sender_name;
+    private String read_status;
+
+    public String getRead_status() {
+        return read_status;
+    }
+
+    public void setRead_status(String read_status) {
+        this.read_status = read_status;
+    }
+
+    public String getMid() {
+        return mid;
+    }
+
+    public void setMid(String mid) {
+        this.mid = mid;
+    }
 
     public String getSender_id() {
         return sender_id;
