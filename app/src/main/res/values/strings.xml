@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Rayn \nSmart School</string>
-
+    <string name="app_name_full">Rayn Smart School</string>
 
     <string name="retry">Retry</string>
     <string name="email_id">Email ID</string>
@@ -89,6 +89,8 @@
     <string name="nav_help">Help</string>
     <string name="nav_logout">Logout</string>
     <string name="profile">Profile</string>
+    <string name="profile_teacher">Profile Teacher</string>
+    <string name="profile_parent">Profile Parent</string>
 
     <string name="drawer_close">Close</string>
     <string name="drawer_open">Open</string>

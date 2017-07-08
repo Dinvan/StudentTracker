@@ -17,18 +17,15 @@ import com.google.gson.JsonObject;
 import com.raynsmartschool.R;
 import com.raynsmartschool.auth.BaseFragment;
 import com.raynsmartschool.auth.ParentDashboardActivity;
-import com.raynsmartschool.models.Announcement;
-import com.raynsmartschool.models.StudentModel;
 import com.raynsmartschool.models.StudentsModel;
-import com.raynsmartschool.school.AnnouncementActivity;
 import com.raynsmartschool.session.SessionParam;
+import com.raynsmartschool.utility.Config;
 import com.raynsmartschool.utility.DialogUtil;
 import com.raynsmartschool.utility.Functions;
 
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
 import RetroFit.BaseRequest;
 import RetroFit.RequestReceiver;
@@ -39,7 +36,7 @@ import butterknife.ButterKnife;
  * Created by Ravi on 6/29/2017.
  */
 
-public class ProfileFragment extends BaseFragment {
+public class ParentProfileFragment extends BaseFragment {
 
     @Bind(R.id.full_name_tv)
     TextView mFullNameTV;
@@ -65,7 +62,7 @@ public class ProfileFragment extends BaseFragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_profile,container,false);
+        View view = inflater.inflate(R.layout.fragment_parent_profile,container,false);
         initToolBar(view);
         ButterKnife.bind(this,view);
         requestProfile();
@@ -165,12 +162,18 @@ public class ProfileFragment extends BaseFragment {
 
             }
         });
-
+        SessionParam session = new SessionParam(getActivity());
+        String type;
+        if(session.loginType== Config.LOGIN_TYPE_TEACHER){
+            type = "teacher";
+        }
+        else{
+            type = "parent";
+        }
         JsonObject object = null;
 
-        object = Functions.getInstance().getJsonObject("session_key",new SessionParam(getActivity()).session_key);
-
-
+        object = Functions.getInstance().getJsonObject("session_key",session.session_key,
+                "type",type);
         baseRequest.callAPIPost(1, object, getAppString(R.string.api_get_profile));
     }
 

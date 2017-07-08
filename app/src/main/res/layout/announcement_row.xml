@@ -6,9 +6,10 @@
     android:layout_height="wrap_content">
 
     <RelativeLayout
+        android:id="@+id/box_rl"
         android:layout_margin="@dimen/dimen10"
         android:background="@color/White"
-        android:elevation="@dimen/dimen4"
+        android:elevation="@dimen/dimen5"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">

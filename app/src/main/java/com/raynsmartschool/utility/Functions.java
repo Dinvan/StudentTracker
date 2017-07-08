@@ -48,6 +48,16 @@ import java.util.Locale;
  */
 public class Functions extends Application {
 
+    private ArrayList<TeachersClassModel> mTeachersClassAL;
+
+    public ArrayList<TeachersClassModel> getmTeachersClassAL() {
+        return mTeachersClassAL;
+    }
+
+    public void setmTeachersClassAL(ArrayList<TeachersClassModel> mTeachersClassAL) {
+        this.mTeachersClassAL = mTeachersClassAL;
+    }
+
     private static TeachersClassModel Teacher;
 
     public TeachersClassModel getTeacher() {

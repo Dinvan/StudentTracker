@@ -75,6 +75,11 @@ public class AnnouncementActivity extends BaseActivity {
         }
         initToolBar();
         initRecycleView();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
         requestAnnouncementList();
     }
 

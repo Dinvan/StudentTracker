@@ -196,9 +196,11 @@ public class ParentHomeFragment extends BaseFragment{
                         mTeachersClassAL = baseRequest.getDataList(json.optJSONArray("class"),TeachersClassModel.class);
                         //   Collections.reverse(mTeachersClassAL);
                         if(null==mTeachersClassAL || mTeachersClassAL.size()==0){
+                            Functions.getInstance().setmTeachersClassAL(new ArrayList<TeachersClassModel>());
                             showErrorNoClass();
                         }
                         else{
+                            Functions.getInstance().setmTeachersClassAL(mTeachersClassAL);
                             Functions.getInstance().setTeacher(mTeachersClassAL.get(0));
                         }
                     }

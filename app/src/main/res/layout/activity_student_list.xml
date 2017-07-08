@@ -11,6 +11,7 @@
 
     <RelativeLayout
         android:id="@+id/all_rl"
+        android:visibility="gone"
         android:layout_marginLeft="@dimen/dimen10"
         android:layout_marginRight="@dimen/dimen10"
         android:background="@color/White"

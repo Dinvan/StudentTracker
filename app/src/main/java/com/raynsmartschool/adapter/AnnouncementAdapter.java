@@ -6,6 +6,7 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.raynsmartschool.R;
@@ -70,12 +71,13 @@ public class AnnouncementAdapter extends RecyclerView.Adapter<AnnouncementAdapte
 
         public TextView mTitleTV;
         public TextView mDateTV;
+        public RelativeLayout mBoxRL;
 
         public ViewHolder(View itemView) {
             super(itemView);
             mTitleTV = (TextView) itemView.findViewById(R.id.title_tv);
             mDateTV = (TextView) itemView.findViewById(R.id.time_tv);
-
+            mBoxRL = (RelativeLayout) itemView.findViewById(R.id.box_rl);
 
         }
 
@@ -100,6 +102,12 @@ public class AnnouncementAdapter extends RecyclerView.Adapter<AnnouncementAdapte
                     listner.onClick(0,position,item);
                 }
             });
+            if(mList.get(position).getRead_status().equals("1")){
+                mBoxRL.setBackgroundColor(mContext.getResources().getColor(R.color.White));
+            }
+            else{
+                mBoxRL.setBackgroundColor(mContext.getResources().getColor(R.color.text_secondary));
+            }
         }
     }
 }

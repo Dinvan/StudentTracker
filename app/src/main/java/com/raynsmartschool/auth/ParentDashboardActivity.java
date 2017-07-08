@@ -25,7 +25,8 @@ import com.raynsmartschool.adapter.NavigationMenuAdapter;
 import com.raynsmartschool.interfaces.OnItemClickInAdapter;
 import com.raynsmartschool.models.NavigationMenuModel;
 import com.raynsmartschool.parent.ParentHomeFragment;
-import com.raynsmartschool.parent.ProfileFragment;
+import com.raynsmartschool.parent.ParentProfileFragment;
+import com.raynsmartschool.parent.TeacherProfileFragment;
 import com.raynsmartschool.session.SessionParam;
 import com.raynsmartschool.utility.Config;
 import com.raynsmartschool.utility.Dialogs;
@@ -103,9 +104,19 @@ public class ParentDashboardActivity extends BaseActivity {
                 ft.commit();
             }
         }
-        else if (listString.equalsIgnoreCase(getString(R.string.profile))) {
-            if (!(mFragment instanceof ProfileFragment)) {
-                mFragment = new ProfileFragment();
+        else if (listString.equalsIgnoreCase(getString(R.string.profile_parent))) {
+            if (!(mFragment instanceof ParentProfileFragment)) {
+                mFragment = new ParentProfileFragment();
+                mDrawerLayout.closeDrawer(gravity);
+                mMenuListview.setItemChecked(Selectedposition, true);
+                mNavigationMenuAdapter.notifyDataSetChanged();
+                ft.replace(R.id.fragment_container, mFragment);
+                ft.commit();
+            }
+        }
+        else if (listString.equalsIgnoreCase(getString(R.string.profile_teacher))) {
+            if (!(mFragment instanceof TeacherProfileFragment)) {
+                mFragment = new TeacherProfileFragment();
                 mDrawerLayout.closeDrawer(gravity);
                 mMenuListview.setItemChecked(Selectedposition, true);
                 mNavigationMenuAdapter.notifyDataSetChanged();
@@ -159,7 +170,12 @@ public class ParentDashboardActivity extends BaseActivity {
             @Override
             public void onClick(View view) {
                 mDrawerLayout.closeDrawer(gravity);
-                switchFragment(getString(R.string.profile));
+                if(mSessionParam.loginType== Config.LOGIN_TYPE_TEACHER){
+                    switchFragment(getString(R.string.profile_teacher));
+                }
+                else{
+                    switchFragment(getString(R.string.profile_parent));
+                }
             }
         });
 

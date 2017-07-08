@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.google.gson.JsonObject;
@@ -58,6 +59,8 @@ public class StudentListActivity extends BaseActivity {
     private String title;
     @Bind(R.id.select_iv)
     ImageView mSelectAllIV;
+    @Bind(R.id.all_rl)
+    RelativeLayout mAllRL;
 
     private boolean isAllSelected = false;
 
@@ -128,13 +131,16 @@ public class StudentListActivity extends BaseActivity {
                    //     Collections.reverse(mList);
                         if(null==mList || mList.size()==0){
                             mNoItemTV.setVisibility(View.GONE);
+                            mAllRL.setVisibility(View.GONE);
                         }
                         else{
                             mAdapter.setList(mList);
+                            mAllRL.setVisibility(View.VISIBLE);
                             mNoItemTV.setVisibility(View.GONE);
                         }
                     }
                     else{
+                        mAllRL.setVisibility(View.GONE);
                         mNoItemTV.setVisibility(View.GONE);
                         DialogUtil.Alert(StudentListActivity.this, baseRequest.message, DialogUtil.AlertType.Error);
                     }
