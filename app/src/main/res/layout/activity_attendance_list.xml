@@ -106,7 +106,7 @@
         android:textColor="@color/black"
         android:padding="@dimen/dimen10"
         android:visibility="gone"
-        android:text="@string/add_class_attendance"
+        android:text="There is no student in your class"
         android:layout_centerInParent="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />

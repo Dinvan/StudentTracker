@@ -9,6 +9,13 @@
         android:id="@+id/headerll"
         layout="@layout/header_toolbar"/>
 
+    <View
+        android:id="@+id/clickable_view"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/headerll"
+        android:layout_width="50dp"
+        android:layout_height="1dp"/>
+
     <ScrollView
         android:layout_below="@+id/headerll"
         android:layout_width="match_parent"

@@ -106,7 +106,7 @@ public class AnnouncementAdapter extends RecyclerView.Adapter<AnnouncementAdapte
                 mBoxRL.setBackgroundColor(mContext.getResources().getColor(R.color.White));
             }
             else{
-                mBoxRL.setBackgroundColor(mContext.getResources().getColor(R.color.text_secondary));
+                mBoxRL.setBackgroundColor(mContext.getResources().getColor(R.color.White));
             }
         }
     }

@@ -28,6 +28,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.raynsmartschool.R;
 import com.raynsmartschool.interfaces.OnItemClickCustom;
+import com.raynsmartschool.models.StudentsModel;
 import com.raynsmartschool.models.TeachersClassModel;
 
 import java.io.BufferedReader;
@@ -47,6 +48,25 @@ import java.util.Locale;
  * Created by ravib on 05/20/2017.
  */
 public class Functions extends Application {
+
+    private ArrayList<StudentsModel> mStudentsAL;
+    private StudentsModel mStudent;
+
+    public ArrayList<StudentsModel> getmStudentsAL() {
+        return mStudentsAL;
+    }
+
+    public void setmStudentsAL(ArrayList<StudentsModel> mStudentsAL) {
+        this.mStudentsAL = mStudentsAL;
+    }
+
+    public StudentsModel getmStudent() {
+        return mStudent;
+    }
+
+    public void setmStudent(StudentsModel mStudent) {
+        this.mStudent = mStudent;
+    }
 
     private ArrayList<TeachersClassModel> mTeachersClassAL;
 

@@ -7,10 +7,16 @@
 
 
     <item
-        android:id="@+id/action_switch"
+        android:id="@+id/action_switch_teacher"
         android:visible="false"
-        android:title="Switch Class"
+        android:icon="@drawable/ic_switch_profile"
         app:showAsAction="always"/>
 
+
+    <item
+        android:id="@+id/action_switch_student"
+        android:visible="false"
+        android:icon="@drawable/ic_switch_profile"
+        app:showAsAction="always"/>
 
 </menu>

@@ -104,7 +104,7 @@ public class AttendanceListActivity extends BaseActivity {
                         mList = baseRequest.getDataList(json.optJSONArray("student"),AttendanceModel.class);
                         //     Collections.reverse(mList);
                         if(null==mList || mList.size()==0){
-                            mNoItemTV.setVisibility(View.GONE);
+                            mNoItemTV.setVisibility(View.VISIBLE);
                         }
                         else{
                             mAdapter.setList(mList);
@@ -112,7 +112,7 @@ public class AttendanceListActivity extends BaseActivity {
                         }
                     }
                     else{
-                        mNoItemTV.setVisibility(View.GONE);
+                        mNoItemTV.setVisibility(View.VISIBLE);
                         DialogUtil.Alert(AttendanceListActivity.this, baseRequest.message, DialogUtil.AlertType.Error);
                     }
                 }

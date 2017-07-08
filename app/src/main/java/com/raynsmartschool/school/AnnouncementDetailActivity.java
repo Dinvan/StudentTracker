@@ -1,5 +1,6 @@
 package com.raynsmartschool.school;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.Intent;
@@ -7,6 +8,7 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.os.Environment;
+import android.provider.MediaStore;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
@@ -90,7 +92,7 @@ public class AnnouncementDetailActivity extends BaseActivity {
             if(!TextUtils.isEmpty(mAnnouncement.getImage())){
                 Functions.getInstance().displayImagePlain(mContext,mAnnouncement.getImage(),false,mAnnouncementIV);
                 mAnnouncementIV.setVisibility(View.VISIBLE);
-               /* mAnnouncementIV.setOnLongClickListener(new View.OnLongClickListener() {
+                mAnnouncementIV.setOnLongClickListener(new View.OnLongClickListener() {
                     @Override
                     public boolean onLongClick(View v) {
                         ArrayList<String> options = new ArrayList<String>();
@@ -109,14 +111,14 @@ public class AnnouncementDetailActivity extends BaseActivity {
                                     }
 
                                     String filePath = saveToInternalStorage(bitmap,fileName);
-                                    DialogUtil.Alert(AnnouncementDetailActivity.this, "File saved as "+filePath, DialogUtil.AlertType.Success);
+                                    DialogUtil.Alert(AnnouncementDetailActivity.this, "File saved", DialogUtil.AlertType.Success);
                                 }
                             }
                         },options);
 
                         return false;
                     }
-                });*/
+                });
             }
             else{
                 mAnnouncementIV.setVisibility(View.GONE);
@@ -178,6 +180,7 @@ public class AnnouncementDetailActivity extends BaseActivity {
             fos = new FileOutputStream(mypath);
             // Use the compress method on the BitMap object to write image to the OutputStream
             bitmapImage.compress(Bitmap.CompressFormat.PNG, 100, fos);
+            addImageToGallery(mypath.getAbsolutePath(),AnnouncementDetailActivity.this);
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -189,6 +192,18 @@ public class AnnouncementDetailActivity extends BaseActivity {
         }
         return directory.getAbsolutePath();
     }
+
+    public static void addImageToGallery(final String filePath, final Context context) {
+
+        ContentValues values = new ContentValues();
+
+        values.put(MediaStore.Images.Media.DATE_TAKEN, System.currentTimeMillis());
+        values.put(MediaStore.Images.Media.MIME_TYPE, "image/jpeg");
+        values.put(MediaStore.MediaColumns.DATA, filePath);
+
+        context.getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
+    }
+
 
     public void requestMarkAsRead(String mid) {
 
