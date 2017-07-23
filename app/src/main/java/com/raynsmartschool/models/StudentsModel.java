@@ -25,6 +25,25 @@ public class StudentsModel implements Serializable{
     private String Feegroup;
     private String user_id;
     private String mobile;
+    private String student_id;
+
+    public String getStudent_id() {
+        return student_id;
+    }
+
+    public void setStudent_id(String student_id) {
+        this.student_id = student_id;
+    }
+
+    private String profile_image;
+
+    public String getProfile_image() {
+        return profile_image;
+    }
+
+    public void setProfile_image(String profile_image) {
+        this.profile_image = profile_image;
+    }
 
     public String getScholarno() {
         return Scholarno;

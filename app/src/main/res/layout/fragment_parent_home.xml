@@ -29,7 +29,7 @@
 
             <LinearLayout
                 android:id="@+id/parent_ll"
-                android:visibility="gone"
+                android:visibility="visible"
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
@@ -50,12 +50,26 @@
                         android:layout_height="match_parent">
 
                         <TextView
+                            android:id="@+id/label1_tv"
                             android:layout_centerInParent="true"
                             android:textColor="@color/White"
                             android:textSize="@dimen/text18"
                             android:gravity="center"
                             android:textStyle="bold"
                             android:text="@string/class_home_work"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                        <TextView
+                            android:id="@+id/homework_count_tv"
+                            android:background="@drawable/red_circle"
+                            android:layout_below="@+id/label1_tv"
+                            android:visibility="gone"
+                            android:layout_margin="@dimen/dimen5"
+                            android:layout_centerHorizontal="true"
+                            android:gravity="center"
+                            android:textSize="@dimen/text16"
+                            android:textColor="@color/White"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" />
 
@@ -93,12 +107,26 @@
                         android:layout_height="match_parent">
 
                         <TextView
+                            android:id="@+id/label2_tv"
                             android:layout_centerInParent="true"
                             android:textColor="@color/White"
                             android:textSize="@dimen/text18"
                             android:gravity="center"
                             android:textStyle="bold"
                             android:text="@string/class_attendance"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                        <TextView
+                            android:id="@+id/attendance_count_tv"
+                            android:background="@drawable/red_circle"
+                            android:layout_below="@id/label2_tv"
+                            android:visibility="gone"
+                            android:layout_centerHorizontal="true"
+                            android:layout_margin="@dimen/dimen5"
+                            android:gravity="center"
+                            android:textSize="@dimen/text16"
+                            android:textColor="@color/White"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" />
 
@@ -135,12 +163,26 @@
                         android:layout_height="match_parent">
 
                         <TextView
+                            android:id="@+id/label3_tv"
                             android:layout_centerInParent="true"
                             android:textColor="@color/White"
                             android:textSize="@dimen/text18"
                             android:gravity="center"
                             android:textStyle="bold"
                             android:text="@string/notification"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                        <TextView
+                            android:id="@+id/announcement_count_tv"
+                            android:background="@drawable/red_circle"
+                            android:layout_below="@id/label3_tv"
+                            android:visibility="gone"
+                            android:layout_centerHorizontal="true"
+                            android:layout_margin="@dimen/dimen5"
+                            android:gravity="center"
+                            android:textSize="@dimen/text16"
+                            android:textColor="@color/White"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" />
 

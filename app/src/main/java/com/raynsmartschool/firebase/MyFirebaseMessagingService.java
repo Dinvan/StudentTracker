@@ -5,6 +5,9 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.Build;
 import android.support.v4.app.NotificationCompat;
 import android.text.TextUtils;
@@ -75,13 +78,16 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
             if (notification_type.equals("homework") ) {
                 intent = AnnouncementActivity.getIntent(this, Config.TYPE_HOMEWORK,true);
+                SessionParam.setNotificationPref(this,1);
            //     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             }
             else if (notification_type.equals("announcement") ) {
                 intent = AnnouncementActivity.getIntent(this, Config.TYPE_ANNOUNCEMENT,true);
+                SessionParam.setNotificationPref(this,2);
             //    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             }else if (notification_type.equals("attendance")) {
                     intent = StudentAttendanceListActivity.getIntent(this,true);
+                SessionParam.setNotificationPref(this,3);
               //      intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             } else {
                 intent = new Intent(this, ParentDashboardActivity.class);
@@ -108,10 +114,20 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             notificationBuilder.setColor(getResources().getColor(R.color.colorPrimary));
             notificationBuilder.setPriority(NotificationCompat.PRIORITY_HIGH);
-            notificationBuilder.setVibrate(new long[0]);
+            notificationBuilder.setVibrate(new long[] { 1000, 1000, 1000, 1000, 1000 });
+            notificationBuilder.setLights(Color.RED, 3000, 3000);
+            Uri alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+            notificationBuilder.setSound(alarmSound);
             notificationBuilder.setSmallIcon(R.mipmap.ic_launcher);
-        } else
+        } else{
+
+            notificationBuilder.setVibrate(new long[] { 1000, 1000, 1000, 1000, 1000 });
+            notificationBuilder.setLights(Color.RED, 3000, 3000);
+            Uri alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+            notificationBuilder.setSound(alarmSound);
             notificationBuilder.setSmallIcon(R.mipmap.ic_launcher);
+        }
+
 
         NotificationManager notificationManager =
                 (NotificationManager)

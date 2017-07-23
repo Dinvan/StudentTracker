@@ -67,11 +67,13 @@ public class AnnouncementActivity extends BaseActivity {
             mNoItemTV.setText(getString(R.string.no_announcement));
             requestType = "announcement";
             title = getString(R.string.announcement_header);
+            SessionParam.resetNotificationPref(this,2);
         }
         else if(mType==Config.TYPE_HOMEWORK){
             mNoItemTV.setText(getString(R.string.no_homework));
             requestType = "homework";
             title = getString(R.string.home_work_header);
+            SessionParam.resetNotificationPref(this,1);
         }
         initToolBar();
         initRecycleView();
@@ -151,9 +153,13 @@ public class AnnouncementActivity extends BaseActivity {
         });
 
         JsonObject object = null;
-
+        String StudentId = "";
+        if(null!=Functions.getInstance().getmStudent()){
+            StudentId = Functions.getInstance().getmStudent().getStudent_id();
+        }
         object = Functions.getInstance().getJsonObject(
-                "type", requestType,"session_key",new SessionParam(mContext).session_key);
+                "type", requestType,"session_key",new SessionParam(mContext).session_key,
+                "student_id",StudentId);
 
 
         baseRequest.callAPIPost(1, object, getAppString(R.string.api_announcement));

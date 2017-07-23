@@ -6,10 +6,12 @@ import android.support.v4.view.GravityCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -54,6 +56,8 @@ public class ParentProfileFragment extends BaseFragment {
     TextView mEmailTV;
     @Bind(R.id.gender_tv)
     TextView mGenderTV;
+    @Bind(R.id.student_iv)
+    ImageView mProfileIV;
     @Bind(R.id.progressBar)
     ProgressBar mLoader;
 
@@ -112,17 +116,27 @@ public class ParentProfileFragment extends BaseFragment {
     }
 
     private void setProfileData(){
-        if(null!=mStudentAL && mStudentAL.size()>0){
-            StudentsModel student = mStudentAL.get(0);
-            mFullNameTV.setText(student.getMname()+" "+student.getSname());
-            mClassTV.setText(student.getClassName()+" "+student.getSection());
-            mFatherNameTV.setText(student.getFname()+" "+student.getFsname());
-            mMotherNameTV.setText(student.getMothname()+" "+student.getMothsname());
+        StudentsModel student = null;
+        if(null!=Functions.getInstance().getmStudent()){
+            student = Functions.getInstance().getmStudent();
+        }
+        else if(null!=mStudentAL && mStudentAL.size()>0) {
+                student = mStudentAL.get(0);
+        }
+        if(null!=student) {
+            mFullNameTV.setText(student.getMname() + " " + student.getSname());
+            mClassTV.setText(student.getClassName() + " " + student.getSection());
+            mFatherNameTV.setText(student.getFname() + " " + student.getFsname());
+            mMotherNameTV.setText(student.getMothname() + " " + student.getMothsname());
             mAddressTV.setText(student.getAddress());
             mMobileTV.setText(student.getMobile());
             mGenderTV.setText(student.getSex());
             mEmailTV.setText(student.getEmail());
+            if (!TextUtils.isEmpty(student.getProfile_image())) {
+                Functions.getInstance().displayRoundImage(getActivity(), student.getProfile_image(), mProfileIV);
+            }
         }
+
     }
 
     public void requestProfile() {

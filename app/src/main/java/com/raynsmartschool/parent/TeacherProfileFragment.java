@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -54,6 +55,8 @@ public class TeacherProfileFragment extends BaseFragment {
     TextView mEmailTV;
     @Bind(R.id.gender_tv)
     TextView mGenderTV;
+    @Bind(R.id.student_iv)
+    ImageView mProfileIV;
     @Bind(R.id.progressBar)
     ProgressBar mLoader;
     SessionParam session;
@@ -122,6 +125,9 @@ public class TeacherProfileFragment extends BaseFragment {
             mMobileTV.setText(mTeachersModel.getUser_phone());
             mGenderTV.setText(mTeachersModel.getUser_gender());
             mEmailTV.setText(mTeachersModel.getEmail());
+            if(!TextUtils.isEmpty(mTeachersModel.getProfile_image())){
+                    Functions.getInstance().displayRoundImage(getActivity(),mTeachersModel.getProfile_image(),mProfileIV);
+            }
         }
     }
 
@@ -197,7 +203,8 @@ public class TeacherProfileFragment extends BaseFragment {
                                 StringBuilder builder = new StringBuilder();
                                 for(int i=0;i<myClasses.size();i++){
                                     if(!TextUtils.isEmpty(builder.toString())){
-                                        builder.append("\n");
+                                    //    builder.append("\n");
+                                        builder.append(", ");
                                     }
                                     builder.append(myClasses.get(i).getClass_name()+" "+myClasses.get(i).getClass_section());
                                 }

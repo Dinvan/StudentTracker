@@ -85,11 +85,13 @@ public class AnnouncementDetailActivity extends BaseActivity {
             if(!TextUtils.isEmpty(mAnnouncement.getMessage())){
                 mMessageTV.setText(mAnnouncement.getMessage());
                 mMessageTV.setVisibility(View.VISIBLE);
+                mAnnouncementIV.setVisibility(View.GONE);
             }
             else{
+                mAnnouncementIV.setVisibility(View.INVISIBLE);
                 mMessageTV.setVisibility(View.GONE);
             }
-            if(!TextUtils.isEmpty(mAnnouncement.getImage())){
+            if(!TextUtils.isEmpty(mAnnouncement.getImage()) && !mAnnouncement.getImage().equals("false")){
                 Functions.getInstance().displayImagePlain(mContext,mAnnouncement.getImage(),false,mAnnouncementIV);
                 mAnnouncementIV.setVisibility(View.VISIBLE);
                 mAnnouncementIV.setOnLongClickListener(new View.OnLongClickListener() {
@@ -121,7 +123,7 @@ public class AnnouncementDetailActivity extends BaseActivity {
                 });
             }
             else{
-                mAnnouncementIV.setVisibility(View.GONE);
+                mAnnouncementIV.setVisibility(View.INVISIBLE);
             }
             String date = Functions.getInstance().formatDate(mAnnouncement.getDate_created(), "dd-MM-yyyy hh:mm:ss", "MMM dd, yyyy hh:mm a");
             mDateTV.setText(date);

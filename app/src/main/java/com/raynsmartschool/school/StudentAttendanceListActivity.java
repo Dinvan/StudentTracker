@@ -71,6 +71,7 @@ public class StudentAttendanceListActivity extends BaseActivity {
         mNoItemTV = (TextView) findViewById(R.id.no_item_tv);
         class_name = getIntent().getStringExtra("classname");
         section_name = getIntent().getStringExtra("section");
+        SessionParam.resetNotificationPref(this,3);
         initToolBar();
         initRecycleView();
         requestAttendanceList();
@@ -105,8 +106,13 @@ public class StudentAttendanceListActivity extends BaseActivity {
                             mNoItemTV.setVisibility(View.GONE);
                         }
                         else{
-                            mAdapter.setList(mList);
-                            mNoItemTV.setVisibility(View.GONE);
+                            if(formatedList().size()==0){
+                                mNoItemTV.setVisibility(View.VISIBLE);
+                            }
+                            else{
+                                mNoItemTV.setVisibility(View.GONE);
+                            }
+                            mAdapter.setList(formatedList());
                         }
                     }
                     else{
@@ -134,9 +140,35 @@ public class StudentAttendanceListActivity extends BaseActivity {
             }
         });
         JsonObject object = null;
+        String StudentId = "";
+        if(null!=Functions.getInstance().getmStudent()){
+            StudentId = Functions.getInstance().getmStudent().getStudent_id();
+        }
         object = Functions.getInstance().getJsonObject(
-                "session_key", new SessionParam(mContext).session_key);
+                "session_key", new SessionParam(mContext).session_key,
+                "student_id",StudentId);
         baseRequest.callAPIPost(1, object, getAppString(R.string.api_attendance_list));
+    }
+
+    private String[] months = new String[]{"April","May","June","july","August","September","October","November","December","January","February","March"};
+    private ArrayList<StudentAttendanceMonthModel> formatedList(){
+        ArrayList<StudentAttendanceMonthModel> mMonthSortedList = new ArrayList<>();
+        for(int m=0;m<months.length;m++) {
+            for (int i = 0; i < mList.size(); i++) {
+                StudentAttendanceMonthModel model = mList.get(i);
+                if(months[m].equalsIgnoreCase(model.getMonth_name())){
+                    int presentCount = Integer.parseInt(model.getPresent_days());
+                    int absentCount = Integer.parseInt(model.getAbsent_count());
+                    int holidayCount = Integer.parseInt(model.getHolidays());
+                    int sum = presentCount+absentCount+holidayCount;
+                    if(sum>0){
+                        mMonthSortedList.add(model);
+                    }
+                    break;
+                }
+            }
+        }
+        return mMonthSortedList;
     }
 
     private ActionBar mActionBar;

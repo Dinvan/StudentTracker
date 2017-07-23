@@ -10,6 +10,24 @@ public class StudentAttendanceMonthModel {
     private String present_count;
     private String absent_count;
     private String holiday;
+    private String[] absent_days;
+
+
+    public String getAbsent_count() {
+        return absent_count;
+    }
+
+    public void setAbsent_count(String absent_count) {
+        this.absent_count = absent_count;
+    }
+
+    public String[] getAbsent_days() {
+        return absent_days;
+    }
+
+    public void setAbsent_days(String[] absent_days) {
+        this.absent_days = absent_days;
+    }
 
     public String getMonth_name() {
         return month;
@@ -27,14 +45,6 @@ public class StudentAttendanceMonthModel {
         this.present_count = present_days;
     }
 
-    public String getAbsent_days() {
-        return absent_count;
-    }
-
-    public void setAbsent_days(String absent_days) {
-        this.absent_count = absent_days;
-    }
-
     public String getHolidays() {
         return holiday;
     }
@@ -42,4 +52,7 @@ public class StudentAttendanceMonthModel {
     public void setHolidays(String holidays) {
         this.holiday = holidays;
     }
+
+
+
 }

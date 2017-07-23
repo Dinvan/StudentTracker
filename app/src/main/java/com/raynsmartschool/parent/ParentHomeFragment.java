@@ -22,6 +22,7 @@ import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.google.gson.JsonObject;
 import com.raynsmartschool.R;
@@ -47,6 +48,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Map;
 
 import RetroFit.BaseRequest;
 import RetroFit.RequestReceiver;
@@ -82,11 +84,20 @@ public class ParentHomeFragment extends BaseFragment{
     @Bind(R.id.progressBar)
     ProgressBar mLoader;
 
+    @Bind(R.id.homework_count_tv)
+    TextView mHomeworkCountTV;
+    @Bind(R.id.announcement_count_tv)
+    TextView mAnnouncementCountTV;
+    @Bind(R.id.attendance_count_tv)
+    TextView mAttendanceCountTV;
+
     private BaseRequest baseRequest;
     private SessionParam mSessionParam;
     private Context mContext;
     private ArrayList<TeachersClassModel> mTeachersClassAL;
     private boolean isOpenPopUp = false;
+    private boolean isTeacherSwitchAvail  = false;
+    private boolean isStudentSwitchAvail  = false;
 
 
     @Nullable
@@ -109,8 +120,53 @@ public class ParentHomeFragment extends BaseFragment{
             mParentLL.setVisibility(View.VISIBLE);
             mTeacherLL.setVisibility(View.GONE);
             requestProfile();
+            refreshNotificationCount();
         }
         return view;
+    }
+
+    private void refreshNotificationCount(){
+        Map<String,Integer> notiCount = SessionParam.getNotificationCount(getActivity());
+        if(notiCount.get("homework")!=null){
+            int count =  notiCount.get("homework");
+            if(count>0){
+                mHomeworkCountTV.setVisibility(View.VISIBLE);
+                mHomeworkCountTV.setText(""+count);
+            }
+            else{
+                mHomeworkCountTV.setVisibility(View.GONE);
+            }
+        }
+        if(notiCount.get("announcement")!=null){
+            int count =  notiCount.get("announcement");
+            if(count>0){
+                mAnnouncementCountTV.setVisibility(View.VISIBLE);
+                mAnnouncementCountTV.setText(""+count);
+            }
+            else{
+
+                mAnnouncementCountTV.setVisibility(View.GONE);
+            }
+        }
+        if(notiCount.get("attendance")!=null){
+            int count =  notiCount.get("attendance");
+            if(count>0){
+                mAttendanceCountTV.setVisibility(View.VISIBLE);
+                mAttendanceCountTV.setText(""+count);
+            }
+            else{
+                mAttendanceCountTV.setVisibility(View.GONE);
+            }
+        }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        mSessionParam = new SessionParam(mContext);
+        if(mSessionParam.loginType== Config.LOGIN_TYPE_PARENT){
+            refreshNotificationCount();
+        }
     }
 
     MenuItem mSwitchTeacherMenu,mSwitchStudentMenu;
@@ -122,6 +178,21 @@ public class ParentHomeFragment extends BaseFragment{
         mMenu = menu;
         mSwitchTeacherMenu = menu.findItem(R.id.action_switch_teacher);
         mSwitchStudentMenu = menu.findItem(R.id.action_switch_student);
+        if(mSessionParam.loginType== Config.LOGIN_TYPE_TEACHER) {
+            if (isTeacherSwitchAvail) {
+                mSwitchTeacherMenu.setVisible(true);
+            } else {
+                mSwitchTeacherMenu.setVisible(false);
+            }
+        }
+        else{
+            if (isStudentSwitchAvail) {
+                mSwitchStudentMenu.setVisible(true);
+            } else {
+                mSwitchStudentMenu.setVisible(false);
+            }
+        }
+
     }
 
     @OnClick({R.id.homework_rl,R.id.attendance_rl,R.id.notification_rl,R.id.add_homework_rl,R.id.add_attendance_rl,R.id.add_notification_rl})
@@ -230,9 +301,11 @@ public class ParentHomeFragment extends BaseFragment{
 
                             if(mTeachersClassAL.size()>1) {
                                 mSwitchTeacherMenu.setVisible(true);
+                                isTeacherSwitchAvail = true;
                             }
                             else{
                                 mSwitchTeacherMenu.setVisible(false);
+                                isTeacherSwitchAvail = false;
                             }
                         }
                     }
@@ -352,9 +425,11 @@ public class ParentHomeFragment extends BaseFragment{
                             mSessionParam.persistData(mContext);
                             if(mStudentAL.size()>1) {
                                 mSwitchStudentMenu.setVisible(true);
+                                isStudentSwitchAvail = true;
                             }
                             else{
                                 mSwitchStudentMenu.setVisible(false);
+                                isStudentSwitchAvail = false;
                             }
                         }
                     }

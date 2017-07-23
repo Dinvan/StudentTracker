@@ -16,6 +16,15 @@ public class TeachersModel implements Serializable{
     private String user_gender;
     private String user_address;
     private String email;
+    private String profile_image;
+
+    public String getProfile_image() {
+        return profile_image;
+    }
+
+    public void setProfile_image(String profile_image) {
+        this.profile_image = profile_image;
+    }
 
     public String getSession_key() {
         return session_key;

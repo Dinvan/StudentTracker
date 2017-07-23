@@ -121,4 +121,5 @@
     <string name="student_require">Please select at least one student</string>
     <string name="created_by">Created by: </string>
     <string name="your_attendance">Your Attendance</string>
+    <string name="absents">Absents</string>
 </resources>

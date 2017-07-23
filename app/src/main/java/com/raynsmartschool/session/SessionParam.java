@@ -6,6 +6,8 @@ import android.content.SharedPreferences;
 import org.json.JSONObject;
 
 import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
 
 public class SessionParam implements Serializable {
 
@@ -21,6 +23,8 @@ public class SessionParam implements Serializable {
     public String active_profile_type;
     public int loginType;
 
+    public String profile_image;
+
     //Please verify your mobile number first.
     public void persistData(Context activity) {
         SharedPreferences prefs = activity.getSharedPreferences(PREFRENCE_NAME,
@@ -34,6 +38,7 @@ public class SessionParam implements Serializable {
         editor.putString("last_login_at", last_login_at);
         editor.putString("active_profile_type", active_profile_type);
         editor.putInt("login_type", loginType);
+        editor.putString("profile_image", profile_image);
         editor.commit();
     }
 
@@ -57,6 +62,7 @@ public class SessionParam implements Serializable {
             default_profile_type = prefs.getString("default_profile_type", "");
             last_login_at = prefs.getString("last_login_at", "");
             active_profile_type = prefs.getString("active_profile_type", "");
+            profile_image = prefs.getString("profile_image", "");
             loginType = prefs.getInt("login_type", 0);
         }
     }
@@ -85,6 +91,7 @@ public class SessionParam implements Serializable {
             last_login_at = jsonObject.optString("last_login_at", "");
             active_profile_type = jsonObject.optString("active_profile_type", "");
             loginType = jsonObject.optInt("login_type");
+            profile_image = jsonObject.optString("profile_image");
         }
     }
 
@@ -124,5 +131,59 @@ public class SessionParam implements Serializable {
         SharedPreferences prefs = activity.getSharedPreferences(PREFRENCE_NAME,
                 Context.MODE_PRIVATE);
         return prefs.getString(key, "");
+    }
+
+    public static void setNotificationPref(Context activity,
+                                   int type) {
+        SharedPreferences prefs = activity.getSharedPreferences(PREFRENCE_NAME,
+                Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        if(type==1){
+            int count = prefs.getInt("noti_type_homework",0);
+            count++;
+            editor.putInt("noti_type_homework", count);
+
+        }
+        else if(type==2){
+            int count = prefs.getInt("noti_type_announcement",0);
+            count++;
+            editor.putInt("noti_type_announcement", count);
+        }
+        else if(type==3){
+            int count = prefs.getInt("noti_type_attendance",0);
+            count++;
+            editor.putInt("noti_type_attendance", count);
+        }
+        editor.commit();
+    }
+
+    public static Map<String,Integer> getNotificationCount(Context ctx){
+
+        Map<String,Integer> counts = new HashMap<>();
+        SharedPreferences prefs = ctx.getSharedPreferences(PREFRENCE_NAME,
+                Context.MODE_PRIVATE);
+        counts.put("homework",prefs.getInt("noti_type_homework", 0));
+        counts.put("announcement",prefs.getInt("noti_type_announcement", 0));
+        counts.put("attendance",prefs.getInt("noti_type_attendance", 0));
+        return counts;
+    }
+
+
+    public static void resetNotificationPref(Context activity,
+                                           int type) {
+        SharedPreferences prefs = activity.getSharedPreferences(PREFRENCE_NAME,
+                Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        if(type==1){
+            editor.putInt("noti_type_homework", 0);
+
+        }
+        else if(type==2){
+            editor.putInt("noti_type_announcement", 0);
+        }
+        else if(type==3){
+            editor.putInt("noti_type_attendance", 0);
+        }
+        editor.commit();
     }
 }

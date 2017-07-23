@@ -30,6 +30,7 @@ import com.raynsmartschool.parent.TeacherProfileFragment;
 import com.raynsmartschool.session.SessionParam;
 import com.raynsmartschool.utility.Config;
 import com.raynsmartschool.utility.Dialogs;
+import com.raynsmartschool.utility.Functions;
 
 import java.util.ArrayList;
 
@@ -166,6 +167,9 @@ public class ParentDashboardActivity extends BaseActivity {
         ViewGroup header = (ViewGroup) inflater.inflate(R.layout.nav_header_main, null, false);
         mUserName = (TextView) header.findViewById(R.id.user_name_tv);
         mprofile_image_iv = (ImageView) header.findViewById(R.id.profile_image_iv);
+        if(!TextUtils.isEmpty(mSessionParam.profile_image)){
+            Functions.getInstance().displayRoundImage(this,mSessionParam.profile_image,mprofile_image_iv);
+        }
         mprofile_image_iv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

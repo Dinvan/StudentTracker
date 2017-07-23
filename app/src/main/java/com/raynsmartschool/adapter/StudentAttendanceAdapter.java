@@ -2,16 +2,20 @@ package com.raynsmartschool.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.raynsmartschool.R;
 import com.raynsmartschool.interfaces.OnItemClickCustom;
 import com.raynsmartschool.models.AttendanceModel;
 import com.raynsmartschool.models.StudentAttendanceMonthModel;
+import com.raynsmartschool.utility.Dialogs;
+import com.raynsmartschool.utility.Functions;
 
 import java.util.ArrayList;
 
@@ -55,6 +59,7 @@ public class StudentAttendanceAdapter extends RecyclerView.Adapter<StudentAttend
     public class ViewHolder extends RecyclerView.ViewHolder{
 
         public TextView mMonthNameTV,mPresentDaysTV,mAbsentDaysTV,mHolidaysTV;
+        public RelativeLayout mAbsentRL;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -62,13 +67,31 @@ public class StudentAttendanceAdapter extends RecyclerView.Adapter<StudentAttend
             mPresentDaysTV = (TextView) itemView.findViewById(R.id.present_days_tv);
             mAbsentDaysTV = (TextView) itemView.findViewById(R.id.absent_days_tv);
             mHolidaysTV = (TextView) itemView.findViewById(R.id.holiday_days_tv);
+            mAbsentRL = (RelativeLayout) itemView.findViewById(R.id.absents_rl);
         }
 
         public void bind(final StudentAttendanceMonthModel item, final OnItemClickCustom listner, final int position) {
             mMonthNameTV.setText(item.getMonth_name());
             mPresentDaysTV.setText(item.getPresent_days());
-            mAbsentDaysTV.setText(item.getAbsent_days());
+            mAbsentDaysTV.setText(item.getAbsent_count());
             mHolidaysTV.setText(item.getHolidays());
+            if(!TextUtils.isEmpty(item.getAbsent_count())){
+                int abs = Integer.parseInt(item.getAbsent_count());
+                if(abs>0){
+                    mAbsentRL.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            ArrayList<String> dates = new ArrayList<String>();
+                            for(int i=0;i<item.getAbsent_days().length;i++){
+                                String date = Functions.getInstance().formatDate(item.getAbsent_days()[i], "yyyy-MM-dd HH:mm:ss", "MMM dd, yyyy");
+                                dates.add(date);
+                            }
+                            Dialogs.showListSelection(mContext,R.string.absents,null,dates);
+                        }
+                    });
+                }
+            }
+
         }
     }
 }
