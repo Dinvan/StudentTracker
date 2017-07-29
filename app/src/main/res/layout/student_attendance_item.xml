@@ -44,7 +44,7 @@
         android:layout_height="wrap_content">
 
         <RelativeLayout
-            android:background="@color/translucent_50"
+            android:background="#0BB798"
             android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="100dp">
@@ -78,7 +78,7 @@
 
         <RelativeLayout
             android:id="@+id/absents_rl"
-            android:background="@color/translucent_50"
+            android:background="#FF6C5A"
             android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="100dp">
@@ -112,7 +112,7 @@
 
 
         <RelativeLayout
-            android:background="@color/translucent_50"
+            android:background="#B784CF"
             android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="100dp">

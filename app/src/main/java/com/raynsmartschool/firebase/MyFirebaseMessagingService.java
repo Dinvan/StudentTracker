@@ -16,6 +16,7 @@ import android.util.Log;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 import com.raynsmartschool.R;
+import com.raynsmartschool.auth.LoginActivity;
 import com.raynsmartschool.auth.ParentDashboardActivity;
 import com.raynsmartschool.school.AnnouncementActivity;
 import com.raynsmartschool.school.StudentAttendanceListActivity;
@@ -95,7 +96,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
             }
 
         } else {
-            intent = new Intent(this, ParentDashboardActivity.class);
+            intent = new Intent(this, LoginActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         }
 

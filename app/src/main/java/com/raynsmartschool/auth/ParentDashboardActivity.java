@@ -66,12 +66,9 @@ public class ParentDashboardActivity extends BaseActivity {
         switchFragment(getString(R.string.nav_home));
     }
 
-
     public void initViews() {
-
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mMenuListview = (ListView) findViewById(R.id.navigation_lv);
-
         mMenuListview.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
     }
 

@@ -120,7 +120,6 @@ public class ParentHomeFragment extends BaseFragment{
             mParentLL.setVisibility(View.VISIBLE);
             mTeacherLL.setVisibility(View.GONE);
             requestProfile();
-            refreshNotificationCount();
         }
         return view;
     }
@@ -431,6 +430,8 @@ public class ParentHomeFragment extends BaseFragment{
                                 mSwitchStudentMenu.setVisible(false);
                                 isStudentSwitchAvail = false;
                             }
+
+                            refreshNotificationCount();
                         }
                     }
                     else{

@@ -31,7 +31,10 @@ import com.tapadoo.alerter.OnHideAlertListener;
 
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.TimeZone;
 
 import RetroFit.BaseRequest;
 import RetroFit.RequestReceiver;
@@ -152,8 +155,11 @@ public class StudentAttendanceListActivity extends BaseActivity {
 
     private String[] months = new String[]{"April","May","June","july","August","September","October","November","December","January","February","March"};
     private ArrayList<StudentAttendanceMonthModel> formatedList(){
+        Calendar calendar = Calendar.getInstance(TimeZone.getDefault());
+        SimpleDateFormat month_date = new SimpleDateFormat("MMMM");
+        String month_name = month_date.format(calendar.getTime());
         ArrayList<StudentAttendanceMonthModel> mMonthSortedList = new ArrayList<>();
-        for(int m=0;m<months.length;m++) {
+       /* for(int m=0;m<months.length;m++) {
             for (int i = 0; i < mList.size(); i++) {
                 StudentAttendanceMonthModel model = mList.get(i);
                 if(months[m].equalsIgnoreCase(model.getMonth_name())){
@@ -167,7 +173,17 @@ public class StudentAttendanceListActivity extends BaseActivity {
                     break;
                 }
             }
-        }
+        }*/
+       // for(int m=0;m<months.length;m++) {
+            for (int i = 0; i < mList.size(); i++) {
+                mMonthSortedList.add(mList.get(i));
+                if(months[i].equalsIgnoreCase(month_name)) {
+                    break;
+                }
+            }
+
+
+    //    }
         return mMonthSortedList;
     }
 

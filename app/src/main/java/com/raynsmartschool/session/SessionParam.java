@@ -169,14 +169,12 @@ public class SessionParam implements Serializable {
     }
 
 
-    public static void resetNotificationPref(Context activity,
-                                           int type) {
+    public static void resetNotificationPref(Context activity,int type) {
         SharedPreferences prefs = activity.getSharedPreferences(PREFRENCE_NAME,
                 Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
         if(type==1){
             editor.putInt("noti_type_homework", 0);
-
         }
         else if(type==2){
             editor.putInt("noti_type_announcement", 0);

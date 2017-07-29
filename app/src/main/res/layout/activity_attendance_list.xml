@@ -83,7 +83,7 @@
             android:id="@+id/holiday_tv"
             android:textColor="@color/black"
             android:textSize="@dimen/text12"
-            android:text="Holiday"
+            android:text="Leave"
             android:layout_marginRight="@dimen/dimen10"
             android:layout_alignParentRight="true"
             android:layout_width="wrap_content"
