@@ -74,7 +74,8 @@ public class StudentAttendanceListActivity extends BaseActivity {
         mNoItemTV = (TextView) findViewById(R.id.no_item_tv);
         class_name = getIntent().getStringExtra("classname");
         section_name = getIntent().getStringExtra("section");
-        SessionParam.resetNotificationPref(this,3);
+        if(null!=Functions.getInstance().getmStudent())
+            SessionParam.resetNotificationPref(this,3,Functions.getInstance().getmStudent().getStudent_id());
         initToolBar();
         initRecycleView();
         requestAttendanceList();

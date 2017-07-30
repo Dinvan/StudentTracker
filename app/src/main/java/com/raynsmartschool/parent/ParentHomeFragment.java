@@ -125,36 +125,35 @@ public class ParentHomeFragment extends BaseFragment{
     }
 
     private void refreshNotificationCount(){
-        Map<String,Integer> notiCount = SessionParam.getNotificationCount(getActivity());
-        if(notiCount.get("homework")!=null){
-            int count =  notiCount.get("homework");
-            if(count>0){
-                mHomeworkCountTV.setVisibility(View.VISIBLE);
-                mHomeworkCountTV.setText(""+count);
+        if(null!=Functions.getInstance().getmStudent()) {
+            Map<String, Integer> notiCount = SessionParam.getNotificationCount(getActivity(), Functions.getInstance().getmStudent().getStudent_id());
+            if (notiCount.get("homework") != null) {
+                int count = notiCount.get("homework");
+                if (count > 0) {
+                    mHomeworkCountTV.setVisibility(View.VISIBLE);
+                    mHomeworkCountTV.setText("" + count);
+                } else {
+                    mHomeworkCountTV.setVisibility(View.GONE);
+                }
             }
-            else{
-                mHomeworkCountTV.setVisibility(View.GONE);
-            }
-        }
-        if(notiCount.get("announcement")!=null){
-            int count =  notiCount.get("announcement");
-            if(count>0){
-                mAnnouncementCountTV.setVisibility(View.VISIBLE);
-                mAnnouncementCountTV.setText(""+count);
-            }
-            else{
+            if (notiCount.get("announcement") != null) {
+                int count = notiCount.get("announcement");
+                if (count > 0) {
+                    mAnnouncementCountTV.setVisibility(View.VISIBLE);
+                    mAnnouncementCountTV.setText("" + count);
+                } else {
 
-                mAnnouncementCountTV.setVisibility(View.GONE);
+                    mAnnouncementCountTV.setVisibility(View.GONE);
+                }
             }
-        }
-        if(notiCount.get("attendance")!=null){
-            int count =  notiCount.get("attendance");
-            if(count>0){
-                mAttendanceCountTV.setVisibility(View.VISIBLE);
-                mAttendanceCountTV.setText(""+count);
-            }
-            else{
-                mAttendanceCountTV.setVisibility(View.GONE);
+            if (notiCount.get("attendance") != null) {
+                int count = notiCount.get("attendance");
+                if (count > 0) {
+                    mAttendanceCountTV.setVisibility(View.VISIBLE);
+                    mAttendanceCountTV.setText("" + count);
+                } else {
+                    mAttendanceCountTV.setVisibility(View.GONE);
+                }
             }
         }
     }
@@ -508,6 +507,7 @@ public class ParentHomeFragment extends BaseFragment{
                 isOpenPopUp = false;
                 Functions.getInstance().setmStudent(students.get(pos));
                 listPopupWindow.dismiss();
+                refreshNotificationCount();
             }
         });
         listPopupWindow.setAdapter(adapter);

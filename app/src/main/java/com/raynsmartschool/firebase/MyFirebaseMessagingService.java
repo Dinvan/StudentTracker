@@ -72,6 +72,8 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         String title = payload.get("title");
         String messageBody =  payload.get("message");
         String notification_type = payload.get("type");
+        String student_id = payload.get("id");
+        String student_name = payload.get("stname");
 
 
 
@@ -79,61 +81,62 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
             if (notification_type.equals("homework") ) {
                 intent = AnnouncementActivity.getIntent(this, Config.TYPE_HOMEWORK,true);
-                SessionParam.setNotificationPref(this,1);
-           //     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                SessionParam.setNotificationPref(this,1,student_id);
+                //     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             }
             else if (notification_type.equals("announcement") ) {
                 intent = AnnouncementActivity.getIntent(this, Config.TYPE_ANNOUNCEMENT,true);
-                SessionParam.setNotificationPref(this,2);
-            //    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                SessionParam.setNotificationPref(this,2,student_id);
+                //    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             }else if (notification_type.equals("attendance")) {
-                    intent = StudentAttendanceListActivity.getIntent(this,true);
-                SessionParam.setNotificationPref(this,3);
-              //      intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent = StudentAttendanceListActivity.getIntent(this,true);
+                SessionParam.setNotificationPref(this,3,student_id);
+                //      intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             } else {
                 intent = new Intent(this, ParentDashboardActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             }
 
-        } else {
+        } /*else {
             intent = new Intent(this, LoginActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        }*/
+
+        if(null!=intent) {
+            PendingIntent pendingIntent = PendingIntent.getActivity(this, 1410,
+                    intent, PendingIntent.FLAG_ONE_SHOT);
+
+            NotificationCompat.Builder notificationBuilder = new
+                    NotificationCompat.Builder(this)
+                    //      .setLargeIcon(largeIcon)
+                    .setContentTitle(getString(R.string.app_name))
+                    .setContentText(title)
+                    .setAutoCancel(true)
+                    .setContentIntent(pendingIntent);
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                notificationBuilder.setColor(getResources().getColor(R.color.colorPrimary));
+                notificationBuilder.setPriority(NotificationCompat.PRIORITY_HIGH);
+                notificationBuilder.setVibrate(new long[]{1000, 1000, 1000, 1000, 1000});
+                notificationBuilder.setLights(Color.RED, 3000, 3000);
+                Uri alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+                notificationBuilder.setSound(alarmSound);
+                notificationBuilder.setSmallIcon(R.mipmap.ic_launcher);
+            } else {
+
+                notificationBuilder.setVibrate(new long[]{1000, 1000, 1000, 1000, 1000});
+                notificationBuilder.setLights(Color.RED, 3000, 3000);
+                Uri alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+                notificationBuilder.setSound(alarmSound);
+                notificationBuilder.setSmallIcon(R.mipmap.ic_launcher);
+            }
+
+
+            NotificationManager notificationManager =
+                    (NotificationManager)
+                            getSystemService(Context.NOTIFICATION_SERVICE);
+            int notiId = (int) System.currentTimeMillis();
+            notificationManager.notify(notiId, notificationBuilder.build());
         }
-
-
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, 1410,
-                intent, PendingIntent.FLAG_ONE_SHOT);
-
-        NotificationCompat.Builder notificationBuilder = new
-                NotificationCompat.Builder(this)
-                //      .setLargeIcon(largeIcon)
-                .setContentTitle(getString(R.string.app_name))
-                .setContentText(title)
-                .setAutoCancel(true)
-                .setContentIntent(pendingIntent);
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            notificationBuilder.setColor(getResources().getColor(R.color.colorPrimary));
-            notificationBuilder.setPriority(NotificationCompat.PRIORITY_HIGH);
-            notificationBuilder.setVibrate(new long[] { 1000, 1000, 1000, 1000, 1000 });
-            notificationBuilder.setLights(Color.RED, 3000, 3000);
-            Uri alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-            notificationBuilder.setSound(alarmSound);
-            notificationBuilder.setSmallIcon(R.mipmap.ic_launcher);
-        } else{
-
-            notificationBuilder.setVibrate(new long[] { 1000, 1000, 1000, 1000, 1000 });
-            notificationBuilder.setLights(Color.RED, 3000, 3000);
-            Uri alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-            notificationBuilder.setSound(alarmSound);
-            notificationBuilder.setSmallIcon(R.mipmap.ic_launcher);
-        }
-
-
-        NotificationManager notificationManager =
-                (NotificationManager)
-                        getSystemService(Context.NOTIFICATION_SERVICE);
-        int notiId = (int)System.currentTimeMillis();
-        notificationManager.notify(notiId, notificationBuilder.build());
     }
 }

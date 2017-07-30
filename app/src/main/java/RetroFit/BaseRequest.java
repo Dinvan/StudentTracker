@@ -3,6 +3,7 @@ package RetroFit;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.ColorDrawable;
@@ -14,11 +15,13 @@ import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.raynsmartschool.R;
+import com.raynsmartschool.auth.SplashActivity;
 import com.raynsmartschool.interfaces.OnItemClickInAdapter;
 import com.raynsmartschool.session.SessionParam;
 import com.raynsmartschool.utility.Dialogs;
@@ -186,6 +189,23 @@ public class BaseRequest<T> extends BaseRequestParser {
 
             logFullResponse(responseServer, "OUTPUT + CODE "+mResponseCode);
             parseJson(responseServer);
+            String logoutError = "You are not a valid user";
+            try {
+                JSONObject data = new JSONObject(responseServer);
+                String responseMesage = data.optString("message");
+                if(responseMesage.equalsIgnoreCase(logoutError)){
+                    SessionParam.deletePrefrenceData(mContext);
+                    Toast.makeText(mContext,"Your login session is expired, Please login",Toast.LENGTH_SHORT).show();
+                    Intent in = new Intent(mContext,SplashActivity.class);
+                    in.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+                    mContext.startActivity(in);
+                    return;
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+
             if (mResponseCode == 200) {
                 new FileCacheBGTask(responseServer).execute();
                 if (null != requestReciever && !((Activity) mContext).isDestroyed()) {

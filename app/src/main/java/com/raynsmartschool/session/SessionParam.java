@@ -133,54 +133,66 @@ public class SessionParam implements Serializable {
         return prefs.getString(key, "");
     }
 
+    private static String key1 = "noti_type_homework";
+    private static String key2 = "noti_type_announcement";
+    private static String key3 = "noti_type_attendance";
     public static void setNotificationPref(Context activity,
-                                   int type) {
+                                   int type,String studentId) {
         SharedPreferences prefs = activity.getSharedPreferences(PREFRENCE_NAME,
                 Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
         if(type==1){
-            int count = prefs.getInt("noti_type_homework",0);
+            String mKey = key1+"_" +studentId;
+            int count = prefs.getInt(mKey,0);
             count++;
-            editor.putInt("noti_type_homework", count);
+            editor.putInt(mKey, count);
 
         }
         else if(type==2){
-            int count = prefs.getInt("noti_type_announcement",0);
+            String mKey = key2+"_" +studentId;
+            int count = prefs.getInt(mKey,0);
             count++;
-            editor.putInt("noti_type_announcement", count);
+            editor.putInt(mKey, count);
         }
         else if(type==3){
-            int count = prefs.getInt("noti_type_attendance",0);
+            String mKey = key3+"_" +studentId;
+            int count = prefs.getInt(mKey,0);
             count++;
-            editor.putInt("noti_type_attendance", count);
+            editor.putInt(mKey, count);
         }
         editor.commit();
     }
 
-    public static Map<String,Integer> getNotificationCount(Context ctx){
+    public static Map<String,Integer> getNotificationCount(Context ctx,String studentId){
 
         Map<String,Integer> counts = new HashMap<>();
         SharedPreferences prefs = ctx.getSharedPreferences(PREFRENCE_NAME,
                 Context.MODE_PRIVATE);
-        counts.put("homework",prefs.getInt("noti_type_homework", 0));
-        counts.put("announcement",prefs.getInt("noti_type_announcement", 0));
-        counts.put("attendance",prefs.getInt("noti_type_attendance", 0));
+        String mKey1 = key1+"_" +studentId;
+        String mKey2 = key2+"_" +studentId;
+        String mKey3 = key3+"_" +studentId;
+        counts.put("homework",prefs.getInt(mKey1, 0));
+        counts.put("announcement",prefs.getInt(mKey2, 0));
+        counts.put("attendance",prefs.getInt(mKey3, 0));
         return counts;
     }
 
 
-    public static void resetNotificationPref(Context activity,int type) {
+    public static void resetNotificationPref(Context activity,int type,String studentId) {
         SharedPreferences prefs = activity.getSharedPreferences(PREFRENCE_NAME,
                 Context.MODE_PRIVATE);
+        String mKey1 = key1+"_" +studentId;
+        String mKey2 = key2+"_" +studentId;
+        String mKey3 = key3+"_" +studentId;
         SharedPreferences.Editor editor = prefs.edit();
         if(type==1){
-            editor.putInt("noti_type_homework", 0);
+            editor.putInt(mKey1, 0);
         }
         else if(type==2){
-            editor.putInt("noti_type_announcement", 0);
+            editor.putInt(mKey2, 0);
         }
         else if(type==3){
-            editor.putInt("noti_type_attendance", 0);
+            editor.putInt(mKey3, 0);
         }
         editor.commit();
     }

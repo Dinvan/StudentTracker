@@ -67,13 +67,15 @@ public class AnnouncementActivity extends BaseActivity {
             mNoItemTV.setText(getString(R.string.no_announcement));
             requestType = "announcement";
             title = getString(R.string.announcement_header);
-            SessionParam.resetNotificationPref(this,2);
+            if(null!=Functions.getInstance().getmStudent())
+            SessionParam.resetNotificationPref(this,2,Functions.getInstance().getmStudent().getStudent_id());
         }
         else if(mType==Config.TYPE_HOMEWORK){
             mNoItemTV.setText(getString(R.string.no_homework));
             requestType = "homework";
             title = getString(R.string.home_work_header);
-            SessionParam.resetNotificationPref(this,1);
+            if(null!=Functions.getInstance().getmStudent())
+                SessionParam.resetNotificationPref(this,1,Functions.getInstance().getmStudent().getStudent_id());
         }
         initToolBar();
         initRecycleView();
