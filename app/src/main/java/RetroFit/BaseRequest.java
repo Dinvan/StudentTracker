@@ -174,8 +174,6 @@ public class BaseRequest<T> extends BaseRequestParser {
             String responseServer = "";
             mResponseCode = response.code();
             hideLoader();
-
-
             if (null != response.body()) {
                 JsonElement jsonElement = (JsonElement) response.body();
                 if (null != jsonElement) {
@@ -186,7 +184,6 @@ public class BaseRequest<T> extends BaseRequestParser {
                 responseServer = readStreamFully(response.errorBody().contentLength(),
                         response.errorBody().byteStream());
             }
-
             logFullResponse(responseServer, "OUTPUT + CODE "+mResponseCode);
             parseJson(responseServer);
             String logoutError = "You are not a valid user";
@@ -204,8 +201,6 @@ public class BaseRequest<T> extends BaseRequestParser {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-
-
             if (mResponseCode == 200) {
                 new FileCacheBGTask(responseServer).execute();
                 if (null != requestReciever && !((Activity) mContext).isDestroyed()) {
