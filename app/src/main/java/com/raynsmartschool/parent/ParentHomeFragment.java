@@ -90,6 +90,8 @@ public class ParentHomeFragment extends BaseFragment{
     TextView mAnnouncementCountTV;
     @Bind(R.id.attendance_count_tv)
     TextView mAttendanceCountTV;
+    @Bind(R.id.child_selection_tv)
+    TextView mChildSelectionTV;
 
     private BaseRequest baseRequest;
     private SessionParam mSessionParam;
@@ -120,6 +122,25 @@ public class ParentHomeFragment extends BaseFragment{
             mParentLL.setVisibility(View.VISIBLE);
             mTeacherLL.setVisibility(View.GONE);
             requestProfile();
+        }
+
+        if(mSessionParam.loginType== Config.LOGIN_TYPE_TEACHER) {
+            if (isTeacherSwitchAvail) {
+           //     mSwitchTeacherMenu.setVisible(true);
+                mChildSelectionTV.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.ic_down_arrow,0);
+            } else {
+              //  mSwitchTeacherMenu.setVisible(false);
+                mChildSelectionTV.setCompoundDrawablesWithIntrinsicBounds(0,0,0,0);
+            }
+        }
+        else{
+            if (isStudentSwitchAvail) {
+               // mSwitchStudentMenu.setVisible(true);
+                mChildSelectionTV.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.ic_down_arrow,0);
+            } else {
+              //  mSwitchStudentMenu.setVisible(false);
+                mChildSelectionTV.setCompoundDrawablesWithIntrinsicBounds(0,0,0,0);
+            }
         }
         return view;
     }
@@ -167,7 +188,7 @@ public class ParentHomeFragment extends BaseFragment{
         }
     }
 
-    MenuItem mSwitchTeacherMenu,mSwitchStudentMenu;
+   /* MenuItem mSwitchTeacherMenu,mSwitchStudentMenu;
     Menu mMenu;
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
@@ -191,9 +212,9 @@ public class ParentHomeFragment extends BaseFragment{
             }
         }
 
-    }
+    }*/
 
-    @OnClick({R.id.homework_rl,R.id.attendance_rl,R.id.notification_rl,R.id.add_homework_rl,R.id.add_attendance_rl,R.id.add_notification_rl})
+    @OnClick({R.id.homework_rl,R.id.attendance_rl,R.id.notification_rl,R.id.add_homework_rl,R.id.add_attendance_rl,R.id.add_notification_rl,R.id.child_selection_tv})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.homework_rl:
@@ -227,6 +248,14 @@ public class ParentHomeFragment extends BaseFragment{
                 }
                 else {
                     startActivity(CreteAnnouncementActivity.getIntent(mContext, Config.TYPE_ANNOUNCEMENT));
+                }
+                break;
+            case R.id.child_selection_tv:
+                if(mSessionParam.loginType== Config.LOGIN_TYPE_TEACHER) {
+                    showPopupMenu();
+                }
+                else{
+                    showStudentPopupMenu();
                 }
                 break;
         }
@@ -297,12 +326,16 @@ public class ParentHomeFragment extends BaseFragment{
                             Functions.getInstance().setmTeachersClassAL(mTeachersClassAL);
                             Functions.getInstance().setTeacher(mTeachersClassAL.get(0));
 
+                            mChildSelectionTV.setText(mTeachersClassAL.get(0).getClass_name()+" "+mTeachersClassAL.get(0).getClass_section());
                             if(mTeachersClassAL.size()>1) {
-                                mSwitchTeacherMenu.setVisible(true);
+                             //   mSwitchTeacherMenu.setVisible(true);
+
+                                mChildSelectionTV.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.ic_down_arrow,0);
                                 isTeacherSwitchAvail = true;
                             }
                             else{
-                                mSwitchTeacherMenu.setVisible(false);
+                             //   mSwitchTeacherMenu.setVisible(false);
+                                mChildSelectionTV.setCompoundDrawablesWithIntrinsicBounds(0,0,0,0);
                                 isTeacherSwitchAvail = false;
                             }
                         }
@@ -376,7 +409,7 @@ public class ParentHomeFragment extends BaseFragment{
     private void setPopUpWindow(final ArrayList<String> list,final ArrayList<TeachersClassModel> classList) {
         listPopupWindow = new ListPopupWindow(getActivity());
         listPopupWindow.setContentWidth(500);
-        listPopupWindow.setDropDownGravity(Gravity.CENTER | Gravity.RIGHT);
+        listPopupWindow.setDropDownGravity(Gravity.LEFT | Gravity.LEFT);
         listPopupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
             @Override
             public void onDismiss() {
@@ -390,12 +423,13 @@ public class ParentHomeFragment extends BaseFragment{
                 mSelectedPos = pos;
                 isOpenPopUp = false;
                 Functions.getInstance().setTeacher(classList.get(pos));
+                mChildSelectionTV.setText(classList.get(pos).getClass_name()+" "+classList.get(pos).getClass_section());
                 listPopupWindow.dismiss();
             }
         });
         listPopupWindow.setAdapter(adapter);
         adapter.selectedPos(mSelectedPos);
-        listPopupWindow.setAnchorView(mMenuAnchorView);
+        listPopupWindow.setAnchorView(mChildSelectionTV);
         listPopupWindow.setForceIgnoreOutsideTouch(false);
         listPopupWindow.setBackgroundDrawable(new ColorDrawable( Color.GRAY));
         listPopupWindow.show();
@@ -421,12 +455,15 @@ public class ParentHomeFragment extends BaseFragment{
                             Functions.getInstance().setmStudent(mStudentAL.get(0));
                             mSessionParam.name = mStudentAL.get(0).getFname()+" "+mStudentAL.get(0).getFsname();
                             mSessionParam.persistData(mContext);
+                            mChildSelectionTV.setText(mStudentAL.get(0).getFname()+ " "+mStudentAL.get(0).getSname());
                             if(mStudentAL.size()>1) {
-                                mSwitchStudentMenu.setVisible(true);
+                                //mSwitchStudentMenu.setVisible(true);
+                                mChildSelectionTV.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.ic_down_arrow,0);
                                 isStudentSwitchAvail = true;
                             }
                             else{
-                                mSwitchStudentMenu.setVisible(false);
+                             //   mSwitchStudentMenu.setVisible(false);
+                                mChildSelectionTV.setCompoundDrawablesWithIntrinsicBounds(0,0,0,0);
                                 isStudentSwitchAvail = false;
                             }
 
@@ -492,7 +529,7 @@ public class ParentHomeFragment extends BaseFragment{
     private void setStudentPopUpWindow(final ArrayList<String> list,final ArrayList<StudentsModel> students) {
         listPopupWindow = new ListPopupWindow(getActivity());
         listPopupWindow.setContentWidth(500);
-        listPopupWindow.setDropDownGravity(Gravity.CENTER | Gravity.RIGHT);
+        listPopupWindow.setDropDownGravity(Gravity.LEFT | Gravity.LEFT);
         listPopupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
             @Override
             public void onDismiss() {
@@ -506,13 +543,14 @@ public class ParentHomeFragment extends BaseFragment{
                 mSelectedPos = pos;
                 isOpenPopUp = false;
                 Functions.getInstance().setmStudent(students.get(pos));
+                mChildSelectionTV.setText(students.get(pos).getFname()+ " "+students.get(pos).getSname());
                 listPopupWindow.dismiss();
                 refreshNotificationCount();
             }
         });
         listPopupWindow.setAdapter(adapter);
         adapter.selectedPos(mSelectedPos);
-        listPopupWindow.setAnchorView(mMenuAnchorView);
+        listPopupWindow.setAnchorView(mChildSelectionTV);
         listPopupWindow.setForceIgnoreOutsideTouch(false);
         listPopupWindow.setBackgroundDrawable(new ColorDrawable( Color.GRAY));
         listPopupWindow.show();

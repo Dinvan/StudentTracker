@@ -11,13 +11,26 @@
 
     <View
         android:id="@+id/clickable_view"
-        android:layout_alignParentRight="true"
         android:layout_below="@+id/headerll"
-        android:layout_width="50dp"
+        android:layout_width="match_parent"
+        android:background="@color/translucent_50"
         android:layout_height="1dp"/>
 
+
+    <TextView
+        android:id="@+id/child_selection_tv"
+        android:layout_below="@+id/clickable_view"
+        android:text=""
+        android:textColor="@color/White"
+        android:drawablePadding="@dimen/dimen5"
+        android:drawableRight="@drawable/ic_down_arrow"
+        android:background="@color/colorPrimary"
+        android:padding="@dimen/dimen10"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
     <ScrollView
-        android:layout_below="@+id/headerll"
+        android:layout_below="@+id/child_selection_tv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fillViewport="true">
