@@ -58,10 +58,13 @@ public class StudentAttendanceListActivity extends BaseActivity {
 
     @Bind(R.id.progressBar)
     ProgressBar mLoader;
+    @Bind(R.id.child_selection_tv)
+    TextView mChildSelectionTV;
     private String title;
     private boolean fromFCM = false;
 
     private boolean isAllSelected = false;
+    private String child_name;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,11 +72,13 @@ public class StudentAttendanceListActivity extends BaseActivity {
         setContentView(R.layout.activity_student_attendance_list);
         mContext = this;
         ButterKnife.bind(this);
+        child_name = getIntent().getStringExtra("child_name");
         fromFCM = getIntent().getBooleanExtra("FromFCM",false);
         mRecyclerView = (RecyclerView) findViewById(R.id.recycle_view);
         mNoItemTV = (TextView) findViewById(R.id.no_item_tv);
         class_name = getIntent().getStringExtra("classname");
         section_name = getIntent().getStringExtra("section");
+        mChildSelectionTV.setText(child_name);
         if(null!=Functions.getInstance().getmStudent())
             SessionParam.resetNotificationPref(this,3,Functions.getInstance().getmStudent().getStudent_id());
         initToolBar();
@@ -229,9 +234,10 @@ public class StudentAttendanceListActivity extends BaseActivity {
     }
 
 
-    public static Intent getIntent(Context context, boolean fromFCM){
+    public static Intent getIntent(Context context, boolean fromFCM,String childName){
         Intent intent = new Intent(context,StudentAttendanceListActivity.class);
         intent.putExtra("FromFCM",fromFCM);
+        intent.putExtra("child_name",childName);
         return intent;
     }
 }

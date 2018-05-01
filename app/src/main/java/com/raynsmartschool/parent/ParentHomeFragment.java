@@ -101,6 +101,8 @@ public class ParentHomeFragment extends BaseFragment{
     private boolean isTeacherSwitchAvail  = false;
     private boolean isStudentSwitchAvail  = false;
 
+    private String ChildName = "";
+
 
     @Nullable
     @Override
@@ -218,13 +220,13 @@ public class ParentHomeFragment extends BaseFragment{
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.homework_rl:
-                startActivity(AnnouncementActivity.getIntent(mContext,Config.TYPE_HOMEWORK,false));
+                startActivity(AnnouncementActivity.getIntent(mContext,Config.TYPE_HOMEWORK,false,ChildName));
                 break;
             case R.id.attendance_rl:
-                startActivity(StudentAttendanceListActivity.getIntent(mContext,false));
+                startActivity(StudentAttendanceListActivity.getIntent(mContext,false,ChildName));
                 break;
             case R.id.notification_rl:
-                startActivity(AnnouncementActivity.getIntent(mContext,Config.TYPE_ANNOUNCEMENT,false));
+                startActivity(AnnouncementActivity.getIntent(mContext,Config.TYPE_ANNOUNCEMENT,false,ChildName));
                 break;
             case R.id.add_homework_rl:
                 if(null==mTeachersClassAL || mTeachersClassAL.size()==0){
@@ -455,7 +457,8 @@ public class ParentHomeFragment extends BaseFragment{
                             Functions.getInstance().setmStudent(mStudentAL.get(0));
                             mSessionParam.name = mStudentAL.get(0).getFname()+" "+mStudentAL.get(0).getFsname();
                             mSessionParam.persistData(mContext);
-                            mChildSelectionTV.setText(mStudentAL.get(0).getFname()+ " "+mStudentAL.get(0).getSname());
+                            ChildName = mStudentAL.get(0).getMname()+ " "+mStudentAL.get(0).getSname();
+                            mChildSelectionTV.setText(ChildName);
                             if(mStudentAL.size()>1) {
                                 //mSwitchStudentMenu.setVisible(true);
                                 mChildSelectionTV.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.ic_down_arrow,0);
@@ -543,7 +546,8 @@ public class ParentHomeFragment extends BaseFragment{
                 mSelectedPos = pos;
                 isOpenPopUp = false;
                 Functions.getInstance().setmStudent(students.get(pos));
-                mChildSelectionTV.setText(students.get(pos).getFname()+ " "+students.get(pos).getSname());
+                ChildName = students.get(pos).getMname()+ " "+students.get(pos).getSname();
+                mChildSelectionTV.setText(ChildName);
                 listPopupWindow.dismiss();
                 refreshNotificationCount();
             }

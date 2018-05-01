@@ -48,10 +48,13 @@ public class AnnouncementActivity extends BaseActivity {
     private ArrayList<Announcement> mList;
     private String requestType;
 
+    @Bind(R.id.child_selection_tv)
+    TextView mChildSelectionTV;
     @Bind(R.id.progressBar)
     ProgressBar mLoader;
     private String title;
     private boolean fromFCM = false;
+    private String child_name;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,8 +64,12 @@ public class AnnouncementActivity extends BaseActivity {
         ButterKnife.bind(this);
         mRecyclerView = (RecyclerView) findViewById(R.id.recycle_view);
         mNoItemTV = (TextView) findViewById(R.id.no_item_tv);
+
+        child_name = getIntent().getStringExtra("child_name");
         mType = getIntent().getIntExtra("Type",0);
         fromFCM = getIntent().getBooleanExtra("FromFCM",false);
+
+        mChildSelectionTV.setText(child_name);
         if(mType==Config.TYPE_ANNOUNCEMENT){
             mNoItemTV.setText(getString(R.string.no_announcement));
             requestType = "announcement";
@@ -77,6 +84,7 @@ public class AnnouncementActivity extends BaseActivity {
             if(null!=Functions.getInstance().getmStudent())
                 SessionParam.resetNotificationPref(this,1,Functions.getInstance().getmStudent().getStudent_id());
         }
+
         initToolBar();
         initRecycleView();
     }
@@ -207,10 +215,11 @@ public class AnnouncementActivity extends BaseActivity {
         }
     }
 
-    public static Intent getIntent(Context context, int type, boolean fromFCM){
+    public static Intent getIntent(Context context, int type, boolean fromFCM,String childName){
         Intent intent = new Intent(context,AnnouncementActivity.class);
         intent.putExtra("Type", type);
         intent.putExtra("FromFCM",fromFCM);
+        intent.putExtra("child_name",childName);
         return intent;
     }
 }

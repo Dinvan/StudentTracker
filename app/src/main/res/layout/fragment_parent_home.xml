@@ -262,6 +262,7 @@
                     android:layout_height="@dimen/divider_height"/>
 
                 <RelativeLayout
+                    android:visibility="gone"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dimen_box_height">
 
@@ -303,6 +304,7 @@
                     android:layout_height="@dimen/divider_height"/>
 
                 <RelativeLayout
+                    android:visibility="gone"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dimen_box_height">
 
@@ -344,6 +346,7 @@
                     android:layout_height="@dimen/divider_height"/>
 
                 <RelativeLayout
+                    android:visibility="gone"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dimen_box_height">
 
