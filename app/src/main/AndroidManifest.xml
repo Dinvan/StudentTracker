@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.raynsmartschool">
+    package="com.ibsglobal">
 
     <!-- Required permissions Network Connectivity -->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
@@ -19,7 +19,7 @@
         android:theme="@style/MyTheme">
 
         <activity
-            android:name="com.raynsmartschool.auth.SplashActivity"
+            android:name="com.ibsglobal.auth.SplashActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden">
 
@@ -31,61 +31,61 @@
 
 
         <activity
-            android:name="com.raynsmartschool.auth.ParentDashboardActivity"
+            android:name="com.ibsglobal.auth.ParentDashboardActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden"></activity>
 
         <activity
-            android:name="com.raynsmartschool.auth.PreLoginActivity"
+            android:name="com.ibsglobal.auth.PreLoginActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden"/>
 
 
         <activity
-            android:name="com.raynsmartschool.auth.LoginActivity"
+            android:name="com.ibsglobal.auth.LoginActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden"/>
         <activity
-            android:name="com.raynsmartschool.auth.VerificationActivity"
+            android:name="com.ibsglobal.auth.VerificationActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden"/>
 
         <activity
-            android:name="com.raynsmartschool.school.AnnouncementActivity"
+            android:name="com.ibsglobal.school.AnnouncementActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden"/>
 
         <activity
-            android:name="com.raynsmartschool.school.CreteAnnouncementActivity"
+            android:name="com.ibsglobal.school.CreteAnnouncementActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden"/>
 
         <activity
-            android:name="com.raynsmartschool.school.AnnouncementDetailActivity"
+            android:name="com.ibsglobal.school.AnnouncementDetailActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden"/>
 
         <activity
-            android:name="com.raynsmartschool.school.StudentListActivity"
+            android:name="com.ibsglobal.school.StudentListActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden"/>
 
         <activity
-            android:name="com.raynsmartschool.school.AttendanceListActivity"
+            android:name="com.ibsglobal.school.AttendanceListActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden"/>
 
         <activity
-            android:name="com.raynsmartschool.school.StudentAttendanceListActivity"
+            android:name="com.ibsglobal.school.StudentAttendanceListActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden"/>
 
-        <service android:name="com.raynsmartschool.firebase.MyFirebaseMessagingService">
+        <service android:name="com.ibsglobal.firebase.MyFirebaseMessagingService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
-        <service android:name="com.raynsmartschool.firebase.MyFirebaseInstanceIDService">
+        <service android:name="com.ibsglobal.firebase.MyFirebaseInstanceIDService">
             <intent-filter>
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>

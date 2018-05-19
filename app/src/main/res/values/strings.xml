@@ -79,8 +79,8 @@
 
     <string-array name="nav_menu">
         <item>@string/nav_home</item>
-        <item>@string/nav_about</item>
-        <item>@string/nav_help</item>
+      <!--  <item>@string/nav_about</item>
+        <item>@string/nav_help</item>-->
         <item>@string/nav_logout</item>
 
     </string-array>

@@ -1,39 +1,35 @@
 {
   "project_info": {
-    "project_number": "694645582624",
-    "firebase_url": "https://raynsmartschool.firebaseio.com",
-    "project_id": "raynsmartschool",
-    "storage_bucket": "raynsmartschool.appspot.com"
+    "project_number": "781022567264",
+    "firebase_url": "https://ibsglobalacademy.firebaseio.com",
+    "project_id": "ibsglobalacademy",
+    "storage_bucket": "ibsglobalacademy.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:694645582624:android:632a47e64a0df537",
+        "mobilesdk_app_id": "1:781022567264:android:ebbaa58d9cd997a6",
         "android_client_info": {
-          "package_name": "com.raynsmartschool"
+          "package_name": "com.ibsglobal"
         }
       },
       "oauth_client": [
         {
-          "client_id": "694645582624-eo874jv1ld8gkqe5egsgqg7hbtptbb7p.apps.googleusercontent.com",
+          "client_id": "781022567264-mqep6poome0fird1172pl4eauhrcvnh0.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.raynsmartschool",
+            "package_name": "com.ibsglobal",
             "certificate_hash": "7a1a93a677867bd579cbc19bd0ec4169a24d4264"
           }
         },
         {
-          "client_id": "694645582624-3hpntpch7o38e8tmu4clgicsikk3uokp.apps.googleusercontent.com",
-          "client_type": 3
-        },
-        {
-          "client_id": "694645582624-j5ccf0k4vj478vnukeb7bo0p7bsfvuke.apps.googleusercontent.com",
+          "client_id": "781022567264-quvdcjtm8d0a3inu7dbudt6pc77a192n.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAY_v1wKZVNQY4K1Ws7XWJTJ6n4u6aZeNY"
+          "current_key": "AIzaSyDwzG-WitdyUQCIW5t-WMUKemDAHJJQD5s"
         }
       ],
       "services": {
@@ -44,7 +40,7 @@
           "status": 2,
           "other_platform_oauth_client": [
             {
-              "client_id": "694645582624-3hpntpch7o38e8tmu4clgicsikk3uokp.apps.googleusercontent.com",
+              "client_id": "781022567264-quvdcjtm8d0a3inu7dbudt6pc77a192n.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

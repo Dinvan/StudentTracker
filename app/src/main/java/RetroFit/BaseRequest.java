@@ -20,12 +20,12 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import com.raynsmartschool.R;
-import com.raynsmartschool.auth.SplashActivity;
-import com.raynsmartschool.interfaces.OnItemClickInAdapter;
-import com.raynsmartschool.session.SessionParam;
-import com.raynsmartschool.utility.Dialogs;
-import com.raynsmartschool.utility.FileCache;
+import com.ibsglobal.R;
+import com.ibsglobal.auth.SplashActivity;
+import com.ibsglobal.interfaces.OnItemClickInAdapter;
+import com.ibsglobal.session.SessionParam;
+import com.ibsglobal.utility.Dialogs;
+import com.ibsglobal.utility.FileCache;
 
 import org.json.JSONArray;
 import org.json.JSONException;

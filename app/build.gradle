@@ -5,11 +5,11 @@ android {
     compileSdkVersion 25
     buildToolsVersion "25.0.0"
     defaultConfig {
-        applicationId "com.raynsmartschool"
+        applicationId "com.ibsglobal"
         minSdkVersion 15
         targetSdkVersion 25
-        versionCode 3
-        versionName "1.2"
+        versionCode 1
+        versionName "1.0"
         multiDexEnabled true
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
