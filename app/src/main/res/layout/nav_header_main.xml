@@ -5,7 +5,7 @@
     android:background="@color/colorPrimary"
     android:layout_height="135dp">
 
-    <com.ibsglobal.utility.CirculerImageView
+    <com.rayn.utility.CirculerImageView
         android:id="@+id/profile_image_iv"
         android:layout_width="70dp"
         android:layout_height="70dp"

@@ -1,35 +1,35 @@
 {
   "project_info": {
-    "project_number": "781022567264",
-    "firebase_url": "https://ibsglobalacademy.firebaseio.com",
-    "project_id": "ibsglobalacademy",
-    "storage_bucket": "ibsglobalacademy.appspot.com"
+    "project_number": "906824827512",
+    "firebase_url": "https://rayn-efaf3.firebaseio.com",
+    "project_id": "rayn-efaf3",
+    "storage_bucket": "rayn-efaf3.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:781022567264:android:ebbaa58d9cd997a6",
+        "mobilesdk_app_id": "1:906824827512:android:09d69d7c0458809c",
         "android_client_info": {
-          "package_name": "com.ibsglobal"
+          "package_name": "com.rayn"
         }
       },
       "oauth_client": [
         {
-          "client_id": "781022567264-mqep6poome0fird1172pl4eauhrcvnh0.apps.googleusercontent.com",
+          "client_id": "906824827512-sh8k4bfr3ejih5vjkgode5ho8tu054g7.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.ibsglobal",
+            "package_name": "com.rayn",
             "certificate_hash": "7a1a93a677867bd579cbc19bd0ec4169a24d4264"
           }
         },
         {
-          "client_id": "781022567264-quvdcjtm8d0a3inu7dbudt6pc77a192n.apps.googleusercontent.com",
+          "client_id": "906824827512-eptq0l6gqhcp6ec3reqj49g8f6feidg3.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDwzG-WitdyUQCIW5t-WMUKemDAHJJQD5s"
+          "current_key": "AIzaSyAHsY3Z6LaH67chSZE2cvo3DkhGSMDcIus"
         }
       ],
       "services": {
@@ -40,7 +40,7 @@
           "status": 2,
           "other_platform_oauth_client": [
             {
-              "client_id": "781022567264-quvdcjtm8d0a3inu7dbudt6pc77a192n.apps.googleusercontent.com",
+              "client_id": "906824827512-eptq0l6gqhcp6ec3reqj49g8f6feidg3.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
@@ -53,4 +53,3 @@
   ],
   "configuration_version": "1"
 }
-
