@@ -1,6 +1,7 @@
 <resources>
-    <string name="app_name">Rayn</string>
-    <string name="app_name_full">Rayn</string>
+    <string name="app_name">Rayn InfoLabs</string>
+    <string name="app_name_full">Rayn InfoLabs
+    </string>
 
     <string name="retry">Retry</string>
     <string name="email_id">Email ID</string>
