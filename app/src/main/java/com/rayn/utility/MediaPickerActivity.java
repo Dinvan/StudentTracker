@@ -4,6 +4,7 @@ import android.Manifest;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.ActivityNotFoundException;
+import android.content.ClipData;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
@@ -17,6 +18,7 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.rayn.R;
@@ -24,6 +26,7 @@ import com.rayn.auth.BaseActivity;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -50,6 +53,16 @@ MediaPickerActivity   extends BaseActivity {
     final int REQ_CODE_READ_WRITE_PER = 8;
     private static final String IMAGE_UNSPECIFIED = "image/*";
     private Uri pickedURI, cropUri;
+
+    String imageEncoded;
+    List<String> imagesEncodedList;
+    public boolean isMultipleEnable = false;
+
+
+
+    public void setMultipleEnable(boolean multipleEnable) {
+        isMultipleEnable = multipleEnable;
+    }
 
     public enum MediaPicker {
         Gellery, GelleryWithCropper, Camera, CameraWithCropper, VideoCamera, VideoGallery
@@ -256,6 +269,7 @@ MediaPickerActivity   extends BaseActivity {
                 Intent intent = new Intent(
                         Intent.ACTION_PICK,
                         MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, isMultipleEnable);
                 intent.setType("image/*");
                 this.startActivityForResult(intent,
                         RequstCode);
@@ -460,8 +474,68 @@ MediaPickerActivity   extends BaseActivity {
                 break;
             case REQ_CODE_PICK_FROM_GALLERY: {
                 if (resultCode == Activity.RESULT_OK) {
+                    String[] filePathColumn = { MediaStore.Images.Media.DATA };
+                    imagesEncodedList = new ArrayList<String>();
 
-                    Uri selectedImage = data.getData();
+                    if (data.getClipData() != null) {
+                        ClipData mClipData = data.getClipData();
+                        ArrayList<Uri> mArrayUri = new ArrayList<Uri>();
+                        for (int i = 0; i < mClipData.getItemCount(); i++) {
+
+                            ClipData.Item item = mClipData.getItemAt(i);
+                            Uri uri = item.getUri();
+                            mArrayUri.add(uri);
+                            // Get the cursor
+                            Cursor cursor = getContentResolver().query(uri, filePathColumn, null, null, null);
+                            // Move to first row
+                            cursor.moveToFirst();
+
+                            int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+                            imageEncoded  = cursor.getString(columnIndex);
+                            imagesEncodedList.add(imageEncoded);
+                            cursor.close();
+                            onMultipleImageSelected(REQ_CODE_PICK_FROM_GALLERY,imagesEncodedList);
+                        }
+                        Log.v("LOG_TAG", "Selected Images" + mArrayUri.size());
+                    }
+                    /*if(data.getData()!=null){
+                        Uri mImageUri=data.getData();
+                        // Get the cursor
+                        Cursor cursor = getContentResolver().query(mImageUri,
+                                filePathColumn, null, null, null);
+                        // Move to first row
+                        cursor.moveToFirst();
+
+                        int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+                        imageEncoded  = cursor.getString(columnIndex);
+                        imagesEncodedList.add(imageEncoded);
+                        cursor.close();
+
+                    }
+                    else {
+                        if (data.getClipData() != null) {
+                            ClipData mClipData = data.getClipData();
+                            ArrayList<Uri> mArrayUri = new ArrayList<Uri>();
+                            for (int i = 0; i < mClipData.getItemCount(); i++) {
+
+                                ClipData.Item item = mClipData.getItemAt(i);
+                                Uri uri = item.getUri();
+                                mArrayUri.add(uri);
+                                // Get the cursor
+                                Cursor cursor = getContentResolver().query(uri, filePathColumn, null, null, null);
+                                // Move to first row
+                                cursor.moveToFirst();
+
+                                int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+                                imageEncoded  = cursor.getString(columnIndex);
+                                imagesEncodedList.add(imageEncoded);
+                                cursor.close();
+
+                            }
+                            Log.v("LOG_TAG", "Selected Images" + mArrayUri.size());
+                        }
+                    }*/
+                   /* Uri selectedImage = data.getData();
                     String[] filePathColumn = {MediaStore.Images.Media.DATA};
                     Cursor cursor = this.getContentResolver().query(selectedImage,
                             filePathColumn, null, null, null);
@@ -470,7 +544,7 @@ MediaPickerActivity   extends BaseActivity {
                     String picturePath = cursor.getString(columnIndex);
                     File file = new File(picturePath);
                     onSingleImageSelected(REQ_CODE_PICK_FROM_GALLERY, file, picturePath,
-                            get_Picture_bitmap(file));
+                            get_Picture_bitmap(file));*/
                 } else {
                     onMediaPickCanceled(MediaPicker.Gellery);
                 }
@@ -635,6 +709,9 @@ MediaPickerActivity   extends BaseActivity {
 
     protected abstract void onSingleImageSelected(int starterCode,
                                                   File fileUri, String imagPath, Bitmap bitmap);
+
+    protected abstract void onMultipleImageSelected(int starterCode,
+                                                    List<String> imagesEncodedList);
 
     protected abstract void onVideoCaptured(String videoPath);
 

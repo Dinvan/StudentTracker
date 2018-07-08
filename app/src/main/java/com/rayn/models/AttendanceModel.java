@@ -10,7 +10,7 @@ public class AttendanceModel implements Serializable{
     private String fname;
     private String sname;
     private String id;
-    private int presentStatus = 1;
+    private int status = 1;
 
     public String getFname() {
         return fname;
@@ -36,11 +36,11 @@ public class AttendanceModel implements Serializable{
         this.id = student_id;
     }
 
-    public int getPresentStatus() {
-        return presentStatus;
+    public int getStatus() {
+        return status;
     }
 
-    public void setPresentStatus(int presentStatus) {
-        this.presentStatus = presentStatus;
+    public void setStatus(int status) {
+        this.status = status;
     }
 }

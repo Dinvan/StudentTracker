@@ -3,6 +3,7 @@ package RetroFit;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
+import java.util.List;
 import java.util.Map;
 
 import okhttp3.MultipartBody;
@@ -36,9 +37,12 @@ public interface ApiInterface {
 
     @Multipart
     @POST
-    Call<JsonElement> uploadImage(@Url String remainingURL, @Part("file\"; filename=\"school.png\" ") RequestBody file, @Part("type") RequestBody body1, @Part("message") RequestBody body2, @Part("title") RequestBody body3, @Part("students") RequestBody body4, @Part("teacher_id") RequestBody body5, @Header("session_key") String session_key);
+    Call<JsonElement>   uploadImage(@Url String remainingURL, @Part("file\"; filename=\"school.png\" ") RequestBody file, @Part("type") RequestBody body1, @Part("message") RequestBody body2, @Part("title") RequestBody body3, @Part("students") RequestBody body4, @Part("teacher_id") RequestBody body5, @Header("session_key") String session_key);
   //  Call<JsonElement> uploadImage(@Url String remainingURL, @Part MultipartBody.Part file, @Header("session_key") String session_key);
 
+    @Multipart
+    @POST
+    Call<JsonElement> uploadImageMultiple(@Url String remainingURL,@Part List<MultipartBody.Part> file, @Part("type") RequestBody body1, @Part("message") RequestBody body2, @Part("title") RequestBody body3, @Part("students") RequestBody body4, @Part("teacher_id") RequestBody body5, @Header("session_key") String session_key);
 }
 
 

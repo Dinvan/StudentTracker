@@ -65,17 +65,17 @@ public class AttendanceAdapter extends RecyclerView.Adapter<AttendanceAdapter.Vi
         }
 
         public void bind(final AttendanceModel item, final OnItemClickCustom listner, final int position) {
-            if(item.getPresentStatus()==1){
+            if(item.getStatus()==1){
                 mPresentIV.setImageResource(R.drawable.ic_green_check);
                 mAbsentIV.setImageResource(R.drawable.ic_green_uncheck);
                 mHolidayIV.setImageResource(R.drawable.ic_green_uncheck);
             }
-            else if(item.getPresentStatus()==2){
+            else if(item.getStatus()==2){
                 mPresentIV.setImageResource(R.drawable.ic_green_uncheck);
                 mAbsentIV.setImageResource(R.drawable.ic_green_check);
                 mHolidayIV.setImageResource(R.drawable.ic_green_uncheck);
             }
-            else if(item.getPresentStatus()==3){
+            else if(item.getStatus()==3){
                 mPresentIV.setImageResource(R.drawable.ic_green_uncheck);
                 mAbsentIV.setImageResource(R.drawable.ic_green_uncheck);
                 mHolidayIV.setImageResource(R.drawable.ic_green_check);

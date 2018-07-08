@@ -80,7 +80,7 @@ public class AttendanceListActivity extends BaseActivity {
 
             @Override
             public void onClick(int id, int position, Object object) {
-                mList.get(position).setPresentStatus(id);
+                mList.get(position).setStatus(id);
                 mAdapter.setList(mList);
             }
         });
@@ -88,9 +88,7 @@ public class AttendanceListActivity extends BaseActivity {
         mRecyclerView.setAdapter(mAdapter);
     }
 
-
     public void requestStudentList() {
-
         baseRequest = new BaseRequest(this);
         baseRequest.setLoaderView(mLoader);
         baseRequest.setBaseRequestListner(new RequestReceiver() {
@@ -189,7 +187,7 @@ public class AttendanceListActivity extends BaseActivity {
         for(int i=0;i<mList.size();i++){
             JsonObject student = new JsonObject();
             student.addProperty("student_id",mList.get(i).getStudent_id());
-            student.addProperty("status",mList.get(i).getPresentStatus());
+            student.addProperty("status",mList.get(i).getStatus());
             jArray.add(student);
         }
         object.add("students",jArray);

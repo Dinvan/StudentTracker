@@ -44,8 +44,10 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
+import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -327,6 +329,15 @@ public class BaseRequest<T> extends BaseRequestParser {
         Log.d("BaseReq", "Input URL : " + remainingURL);
         String sess = SessionParam.getSessionKey(mContext);
         callAPI = apiInterface.uploadImage(remainingURL, image,input1,input2,input3,input4,input5, sess);
+        callAPI.enqueue(responseCallback);
+    }
+
+    public void callAPIPostImageMultiple(final int requestCode, List<MultipartBody.Part> images, String remainingURL, RequestBody input1, RequestBody input2, RequestBody input3, RequestBody input4, RequestBody input5) {
+        RequestCode = requestCode;
+        showLoader();
+        Log.d("BaseReq", "Input URL : " + remainingURL);
+        String sess = SessionParam.getSessionKey(mContext);
+        callAPI = apiInterface.uploadImageMultiple(remainingURL, images,input1,input2,input3,input4,input5, sess);
         callAPI.enqueue(responseCallback);
     }
 
