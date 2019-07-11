@@ -59,8 +59,9 @@ dependencies {
     implementation 'com.zoonref:simple-view-behavior:1.0'
     implementation 'com.roomorama:caldroid:3.0.1'
     implementation 'com.facebook.shimmer:shimmer:0.1.0'
-    implementation 'com.google.firebase:firebase-messaging:19.0.1'
+    implementation 'com.google.firebase:firebase-messaging:17.3.4'
     implementation 'com.android.support:multidex:1.0.3'
     implementation 'com.splunk.mint:mint:5.0.0'
 }
 
+apply plugin: 'com.google.gms.google-services'

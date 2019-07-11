@@ -3,13 +3,19 @@ package com.rayn.auth;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
 import com.google.gson.JsonObject;
 import com.rayn.R;
 import com.rayn.utility.Config;
@@ -59,6 +65,18 @@ public class LoginActivity extends BaseActivity {
             mHeaderTV.setText(getString(R.string.parent_login));
             mLogoIV.setImageResource(R.drawable.ic_parent);
         }
+
+        FirebaseInstanceId.getInstance().getInstanceId()
+                .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<InstanceIdResult> task) {
+                        if (!task.isSuccessful()) {
+                            return;
+                        }
+                        // Get new Instance ID token
+                        refreshedToken = task.getResult().getToken();
+                    }
+                });
 //
     }
 
@@ -72,7 +90,7 @@ public class LoginActivity extends BaseActivity {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.login_btn:
-                refreshedToken = FirebaseInstanceId.getInstance().getToken();
+
                 if (refreshedToken == null || refreshedToken.length() <= 0)
                     refreshedToken = "abcd";
                 if (checkValidation()) {
