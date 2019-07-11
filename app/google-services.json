@@ -1,52 +1,45 @@
 {
   "project_info": {
-    "project_number": "906824827512",
-    "firebase_url": "https://rayn-efaf3.firebaseio.com",
-    "project_id": "rayn-efaf3",
-    "storage_bucket": "rayn-efaf3.appspot.com"
+    "project_number": "156481081507",
+    "firebase_url": "https://nationalpublicschool-2890f.firebaseio.com",
+    "project_id": "nationalpublicschool-2890f",
+    "storage_bucket": "nationalpublicschool-2890f.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:906824827512:android:09d69d7c0458809c",
+        "mobilesdk_app_id": "1:156481081507:android:ec90c4820516b593",
         "android_client_info": {
-          "package_name": "com.rayn"
+          "package_name": "com.npsindore"
         }
       },
       "oauth_client": [
         {
-          "client_id": "906824827512-sh8k4bfr3ejih5vjkgode5ho8tu054g7.apps.googleusercontent.com",
+          "client_id": "156481081507-9tfb7j9t1hq9ejgs5lbg0sh8859pq4as.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.rayn",
-            "certificate_hash": "7a1a93a677867bd579cbc19bd0ec4169a24d4264"
+            "package_name": "com.npsindore",
+            "certificate_hash": "7bce01141081e953f5d892905867397cf923230b"
           }
         },
         {
-          "client_id": "906824827512-eptq0l6gqhcp6ec3reqj49g8f6feidg3.apps.googleusercontent.com",
+          "client_id": "156481081507-pok2chtpkgqhe32fv1hshnc0c1pe6qun.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAHsY3Z6LaH67chSZE2cvo3DkhGSMDcIus"
+          "current_key": "AIzaSyBck7zQ6eRl6xFniAxhibPP5IuHG8n4S1E"
         }
       ],
       "services": {
-        "analytics_service": {
-          "status": 1
-        },
         "appinvite_service": {
-          "status": 2,
           "other_platform_oauth_client": [
             {
-              "client_id": "906824827512-eptq0l6gqhcp6ec3reqj49g8f6feidg3.apps.googleusercontent.com",
+              "client_id": "156481081507-pok2chtpkgqhe32fv1hshnc0c1pe6qun.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
-        },
-        "ads_service": {
-          "status": 2
         }
       }
     }

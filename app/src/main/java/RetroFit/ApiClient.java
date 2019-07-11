@@ -1,6 +1,6 @@
 package RetroFit;
 
-import com.rayn.utility.Config;
+import com.npsindore.utility.Config;
 
 import java.util.concurrent.TimeUnit;
 import okhttp3.OkHttpClient;
