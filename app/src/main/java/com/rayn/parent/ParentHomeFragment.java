@@ -46,7 +46,7 @@ import java.util.Map;
 
 import RetroFit.BaseRequest;
 import RetroFit.RequestReceiver;
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
@@ -56,35 +56,35 @@ import butterknife.OnClick;
 
 public class ParentHomeFragment extends BaseFragment{
 
-    @Bind(R.id.teacher_ll)
+    @BindView(R.id.teacher_ll)
     LinearLayout mTeacherLL;
-    @Bind(R.id.parent_ll)
+    @BindView(R.id.parent_ll)
     LinearLayout mParentLL;
-    @Bind(R.id.homework_rl)
+    @BindView(R.id.homework_rl)
     RelativeLayout mHomeWorkRL;
-    @Bind(R.id.attendance_rl)
+    @BindView(R.id.attendance_rl)
     RelativeLayout mAttendanceRL;
-    @Bind(R.id.notification_rl)
+    @BindView(R.id.notification_rl)
     RelativeLayout mNotificationRL;
-    @Bind(R.id.clickable_view)
+    @BindView(R.id.clickable_view)
     View mMenuAnchorView;
 
-    @Bind(R.id.add_homework_rl)
+    @BindView(R.id.add_homework_rl)
     RelativeLayout mAddHomeWorkRL;
-    @Bind(R.id.add_attendance_rl)
+    @BindView(R.id.add_attendance_rl)
     RelativeLayout mAddAttendanceRL;
-    @Bind(R.id.add_notification_rl)
+    @BindView(R.id.add_notification_rl)
     RelativeLayout mAddNotificationRL;
-    @Bind(R.id.progressBar)
+    @BindView(R.id.progressBar)
     ProgressBar mLoader;
 
-    @Bind(R.id.homework_count_tv)
+    @BindView(R.id.homework_count_tv)
     TextView mHomeworkCountTV;
-    @Bind(R.id.announcement_count_tv)
+    @BindView(R.id.announcement_count_tv)
     TextView mAnnouncementCountTV;
-    @Bind(R.id.attendance_count_tv)
+    @BindView(R.id.attendance_count_tv)
     TextView mAttendanceCountTV;
-    @Bind(R.id.child_selection_tv)
+    @BindView(R.id.child_selection_tv)
     TextView mChildSelectionTV;
 
     private BaseRequest baseRequest;

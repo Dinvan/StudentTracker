@@ -3,13 +3,14 @@ package com.rayn.firebase;
 import android.util.Log;
 
 import com.google.firebase.iid.FirebaseInstanceId;
-import com.google.firebase.iid.FirebaseInstanceIdService;
+import com.google.firebase.messaging.FirebaseMessagingService;
+
 
 /**
  * Created by ravib 30/05/2017.
  */
 
-public class MyFirebaseInstanceIDService  extends FirebaseInstanceIdService {
+public class MyFirebaseInstanceIDService  extends FirebaseMessagingService {
 
     private static final String TAG = "MyFirebaseIIDService";
 
@@ -19,13 +20,17 @@ public class MyFirebaseInstanceIDService  extends FirebaseInstanceIdService {
      * is initially generated so this is where you would retrieve the token.
      */
     // [START refresh_token]
+
+
     @Override
-    public void onTokenRefresh() {
-        // Get updated InstanceID token.
+    public void onNewToken(String s) {
+        super.onNewToken(s);
         String refreshedToken = FirebaseInstanceId.getInstance().getToken();
         Log.d(TAG, "Refreshed token: " + refreshedToken);
         sendRegistrationToServer(refreshedToken);
+
     }
+
     // [END refresh_token]
 
     /**

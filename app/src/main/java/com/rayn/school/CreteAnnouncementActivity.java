@@ -43,7 +43,7 @@ import java.util.List;
 
 import RetroFit.BaseRequest;
 import RetroFit.RequestReceiver;
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import okhttp3.MediaType;
@@ -59,23 +59,23 @@ public class CreteAnnouncementActivity extends MediaPickerActivity {
 
     private int mType;
     private BaseRequest baseRequest;
-    @Bind(R.id.text_rb)
+    @BindView(R.id.text_rb)
     RadioButton mTextRB;
-    @Bind(R.id.image_rb)
+    @BindView(R.id.image_rb)
     RadioButton mImageRB;
-    @Bind(R.id.message_et)
+    @BindView(R.id.message_et)
     EditText mMessageET;
-    @Bind(R.id.title_et)
+    @BindView(R.id.title_et)
     EditText mTitleET;
-    @Bind(R.id.image_container_rl)
+    @BindView(R.id.image_container_rl)
     RelativeLayout mImageRL;
-    @Bind(R.id.progressBar)
+    @BindView(R.id.progressBar)
     ProgressBar mLoader;
-    @Bind(R.id.submit_btn)
+    @BindView(R.id.submit_btn)
     Button mSubmitBtn;
-    @Bind(R.id.image_iv)
+    @BindView(R.id.image_iv)
     ImageView mHomeWorkIV;
-    @Bind(R.id.student_tv)
+    @BindView(R.id.student_tv)
     TextView mStudentTV;
     private String title;
     private String requestType;

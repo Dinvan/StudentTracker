@@ -9,7 +9,7 @@ import android.widget.RelativeLayout;
 import com.rayn.R;
 import com.rayn.utility.Config;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
@@ -19,9 +19,9 @@ import butterknife.OnClick;
 
 public class PreLoginActivity extends BaseActivity {
 
-    @Bind(R.id.parent_rl)
+    @BindView(R.id.parent_rl)
     RelativeLayout mParentRL;
-    @Bind(R.id.teacher_rl)
+    @BindView(R.id.teacher_rl)
     RelativeLayout mTeacherRL;
 
     @Override

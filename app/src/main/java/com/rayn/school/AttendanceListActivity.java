@@ -32,7 +32,7 @@ import java.util.ArrayList;
 
 import RetroFit.BaseRequest;
 import RetroFit.RequestReceiver;
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
@@ -50,12 +50,12 @@ public class AttendanceListActivity extends BaseActivity {
     private ArrayList<AttendanceModel> mList;
     private String requestType;
 
-    @Bind(R.id.progressBar)
+    @BindView(R.id.progressBar)
     ProgressBar mLoader;
-    @Bind(R.id.submit_btn)
+    @BindView(R.id.submit_btn)
     Button mSubmitBtn;
     private String title;
-    @Bind(R.id.select_iv)
+    @BindView(R.id.select_iv)
     ImageView mSelectAllIV;
 
     private boolean isAllSelected = false;

@@ -20,28 +20,28 @@ import org.json.JSONObject;
 
 import RetroFit.BaseRequest;
 import RetroFit.RequestReceiver;
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class VerificationActivity extends BaseActivity {
 
 
-    @Bind(R.id.verify_btn)
+    @BindView(R.id.verify_btn)
     Button verifyBtn;
-    @Bind(R.id.otp_1)
+    @BindView(R.id.otp_1)
     EditText otp1;
-    @Bind(R.id.otp_2)
+    @BindView(R.id.otp_2)
     EditText otp2;
-    @Bind(R.id.otp_3)
+    @BindView(R.id.otp_3)
     EditText otp3;
-    @Bind(R.id.otp_4)
+    @BindView(R.id.otp_4)
     EditText otp4;
-    @Bind(R.id.otp_5)
+    @BindView(R.id.otp_5)
     EditText otp5;
-    @Bind(R.id.otp_6)
+    @BindView(R.id.otp_6)
     EditText otp6;
-    @Bind(R.id.progressBar)
+    @BindView(R.id.progressBar)
     ProgressBar mLoader;
     String mMobile;
     int loginType;

@@ -36,7 +36,7 @@ import java.util.ArrayList;
 
 import RetroFit.BaseRequest;
 import RetroFit.RequestReceiver;
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
@@ -45,19 +45,19 @@ import butterknife.ButterKnife;
 
 public class AnnouncementDetailActivity extends BaseActivity {
 
-    @Bind(R.id.announcement_iv)
+    @BindView(R.id.announcement_iv)
     ImageView mAnnouncementIV;
-    @Bind(R.id.date_tv)
+    @BindView(R.id.date_tv)
     TextView mDateTV;
-    @Bind(R.id.message_tv)
+    @BindView(R.id.message_tv)
     TextView mMessageTV;
-    @Bind(R.id.title_tv)
+    @BindView(R.id.title_tv)
     TextView mMessageTitleTV;
-    @Bind(R.id.created_by_tv)
+    @BindView(R.id.created_by_tv)
     TextView mCreatorTV;
     private int mType;
     private BaseRequest baseRequest;
-    @Bind(R.id.progressBar)
+    @BindView(R.id.progressBar)
     ProgressBar mLoader;
     private String title;
     private Announcement mAnnouncement;

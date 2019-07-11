@@ -31,7 +31,7 @@ import java.util.ArrayList;
 
 import RetroFit.BaseRequest;
 import RetroFit.RequestReceiver;
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
@@ -40,25 +40,25 @@ import butterknife.ButterKnife;
 
 public class ParentProfileFragment extends BaseFragment {
 
-    @Bind(R.id.full_name_tv)
+    @BindView(R.id.full_name_tv)
     TextView mFullNameTV;
-    @Bind(R.id.class_tv)
+    @BindView(R.id.class_tv)
     TextView mClassTV;
-    @Bind(R.id.fathername_tv)
+    @BindView(R.id.fathername_tv)
     TextView mFatherNameTV;
-    @Bind(R.id.mother_tv)
+    @BindView(R.id.mother_tv)
     TextView mMotherNameTV;
-    @Bind(R.id.mobile_tv)
+    @BindView(R.id.mobile_tv)
     TextView mMobileTV;
-    @Bind(R.id.address_tv)
+    @BindView(R.id.address_tv)
     TextView mAddressTV;
-    @Bind(R.id.email_tv)
+    @BindView(R.id.email_tv)
     TextView mEmailTV;
-    @Bind(R.id.gender_tv)
+    @BindView(R.id.gender_tv)
     TextView mGenderTV;
-    @Bind(R.id.student_iv)
+    @BindView(R.id.student_iv)
     ImageView mProfileIV;
-    @Bind(R.id.progressBar)
+    @BindView(R.id.progressBar)
     ProgressBar mLoader;
 
     ArrayList<StudentsModel> mStudentAL;

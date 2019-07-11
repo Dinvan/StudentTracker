@@ -32,7 +32,7 @@ import java.util.TimeZone;
 
 import RetroFit.BaseRequest;
 import RetroFit.RequestReceiver;
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
@@ -49,9 +49,9 @@ public class StudentAttendanceListActivity extends BaseActivity {
     private ArrayList<StudentAttendanceMonthModel> mList;
     private String requestType;
 
-    @Bind(R.id.progressBar)
+    @BindView(R.id.progressBar)
     ProgressBar mLoader;
-    @Bind(R.id.child_selection_tv)
+    @BindView(R.id.child_selection_tv)
     TextView mChildSelectionTV;
     private String title;
     private boolean fromFCM = false;

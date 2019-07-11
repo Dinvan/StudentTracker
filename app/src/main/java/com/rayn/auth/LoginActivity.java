@@ -19,7 +19,7 @@ import com.rayn.utility.UtilityFunctions;
 
 import RetroFit.BaseRequest;
 import RetroFit.RequestReceiver;
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
@@ -29,13 +29,13 @@ import butterknife.OnClick;
 
 public class LoginActivity extends BaseActivity {
 
-    @Bind(R.id.mobile_et)
+    @BindView(R.id.mobile_et)
     EditText mobileEt;
-    @Bind(R.id.login_texttv)
+    @BindView(R.id.login_texttv)
     TextView mHeaderTV;
-    @Bind(R.id.logo_iv)
+    @BindView(R.id.logo_iv)
     ImageView mLogoIV;
-    @Bind(R.id.progressBar)
+    @BindView(R.id.progressBar)
     ProgressBar mLoader;
 
     private String refreshedToken;
