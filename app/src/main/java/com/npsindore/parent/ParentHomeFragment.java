@@ -95,7 +95,7 @@ public class ParentHomeFragment extends BaseFragment{
     private boolean isTeacherSwitchAvail  = false;
     private boolean isStudentSwitchAvail  = false;
 
-    private String ChildName = "";
+    private String ChildName = "",ChildId = "";
 
 
     @Nullable
@@ -214,13 +214,13 @@ public class ParentHomeFragment extends BaseFragment{
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.homework_rl:
-                startActivity(AnnouncementActivity.getIntent(mContext,Config.TYPE_HOMEWORK,false,ChildName));
+                startActivity(AnnouncementActivity.getIntent(mContext,Config.TYPE_HOMEWORK,false,ChildName,ChildId));
                 break;
             case R.id.attendance_rl:
-                startActivity(StudentAttendanceListActivity.getIntent(mContext,false,ChildName));
+                startActivity(StudentAttendanceListActivity.getIntent(mContext,false,ChildName,ChildId));
                 break;
             case R.id.notification_rl:
-                startActivity(AnnouncementActivity.getIntent(mContext,Config.TYPE_ANNOUNCEMENT,false,ChildName));
+                startActivity(AnnouncementActivity.getIntent(mContext,Config.TYPE_ANNOUNCEMENT,false,ChildName,ChildId));
                 break;
             case R.id.add_homework_rl:
                 if(null==mTeachersClassAL || mTeachersClassAL.size()==0){

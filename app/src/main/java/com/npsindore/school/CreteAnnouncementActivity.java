@@ -35,11 +35,7 @@ import com.npsindore.utility.UtilityFunctions;
 import com.tapadoo.alerter.OnHideAlertListener;
 
 import java.io.File;
-import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.util.ArrayList;
-import java.util.List;
 
 import RetroFit.BaseRequest;
 import RetroFit.RequestReceiver;
@@ -225,8 +221,8 @@ public class CreteAnnouncementActivity extends MediaPickerActivity {
         alertDialog.setPositiveButton(getString(R.string.existing_picture),
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        isMultipleEnable= false;
-                        PickMedia(MediaPicker.Gellery);
+
+                        PickMedia(MediaPickerActivity.MediaPicker.Gellery);
 
                     }
                 });
@@ -234,7 +230,7 @@ public class CreteAnnouncementActivity extends MediaPickerActivity {
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
 
-                        PickMedia(MediaPicker.Camera);
+                        PickMedia(MediaPickerActivity.MediaPicker.CameraWithCropper);
 
                     }
                 });
@@ -252,73 +248,6 @@ public class CreteAnnouncementActivity extends MediaPickerActivity {
             fileUri = mFileUri;
         }
     }
-
-
-    @Override
-    protected void onMultipleImageSelected(int starterCode, List<String> imagesEncodedList) {
-        if(null!=imagesEncodedList && imagesEncodedList.size()>0){
-            String uri = imagesEncodedList.get(0);
-            File file  = new File(uri);
-            Bitmap bitmap = get_Picture_bitmap(file);
-            mHomeWorkIV.setImageBitmap(bitmap);
-
-            path = uri;
-            mFileTemp = file.getPath();
-            System.out.println("Path: " + mFileTemp);
-            mHomeWorkIV.setImageBitmap(bitmap);
-            fileUri = file;
-        }
-    }
-
-    public Bitmap get_Picture_bitmap(File nFile) {
-        long size_file = getFileSize(nFile);
-        size_file = (size_file) / 1000;// in Kb now
-        int ample_size = 1;
-        if (size_file > 251 && size_file < 1500) {
-            ample_size = 2;
-        } else if (size_file >= 1500 && size_file < 4500) {
-            ample_size = 4;
-        } else if (size_file >= 4500 && size_file <= 8000) {
-            ample_size = 8;
-        } else if (size_file > 8000) {
-            ample_size = 16;
-        }
-        Bitmap bitmap = null;
-        BitmapFactory.Options bitoption = new BitmapFactory.Options();
-        bitoption.inSampleSize = ample_size;
-        Bitmap bitmapPhoto = BitmapFactory.decodeFile(nFile.getAbsolutePath(),
-                bitoption);
-        ExifInterface exif = null;
-        try {
-            exif = new ExifInterface(nFile.getAbsolutePath());
-        } catch (IOException e) {
-            // Auto-generated catch block
-            e.printStackTrace();
-        }
-        int orientation = exif
-                .getAttributeInt(ExifInterface.TAG_ORIENTATION, 1);
-        Matrix matrix = new Matrix();
-
-        if ((orientation == 3)) {
-            matrix.postRotate(180);
-
-        } else if (orientation == 6) {
-            matrix.postRotate(90);
-
-        } else if (orientation == 8) {
-            matrix.postRotate(270);
-
-        } else {
-            matrix.postRotate(0);
-
-        }
-        bitmap = Bitmap.createBitmap(bitmapPhoto, 0, 0, bitmapPhoto.getWidth(),
-                bitmapPhoto.getHeight(), matrix, true);
-        return bitmap;
-    }
-
-
-    private ArrayList<Uri> mFileList = new ArrayList<>();
 
     private void UploadProfileImage(File file) {
 
@@ -357,16 +286,12 @@ public class CreteAnnouncementActivity extends MediaPickerActivity {
             }
         });
 
-        List<MultipartBody.Part> parts = new ArrayList<>();
-
-        for (int i=0; i < mFileList.size(); i++){
-            parts.add(prepareFilePart("my_file["+i+"]", mFileList.get(i)));
-        }
-
         RequestBody reqFile = RequestBody.create(MediaType.parse("image/*"), file);
         MultipartBody.Part body = MultipartBody.Part.createFormData("file", file.getName(), reqFile);
         JsonObject input = new JsonObject();
         input.addProperty("type", requestType);
+        //  MultipartBody.Part body1 = MultipartBody.Part.createFormData("type", requestType);
+        //  MultipartBody.Part body2 = MultipartBody.Part.createFormData("message", "");
         RequestBody reqType = RequestBody.create(MediaType.parse("text/plain"), requestType);
         RequestBody reqMessage = RequestBody.create(MediaType.parse("text/plain"), "");
         RequestBody reqTitle = RequestBody.create(MediaType.parse("text/plain"), mTitleET.getText().toString().trim());
@@ -374,31 +299,6 @@ public class CreteAnnouncementActivity extends MediaPickerActivity {
         RequestBody reqTeacherId = RequestBody.create(MediaType.parse("text/plain"),new SessionParam(mContext).user_guid);
         baseRequest.callAPIPostImage(5, reqFile,getString( R.string.api_create_announcement),reqType,reqMessage,reqTitle,reqStudents,reqTeacherId);
 
-       /* RequestBody reqFile = RequestBody.create(MediaType.parse("image*//*"), file);
-        MultipartBody.Part body = MultipartBody.Part.createFormData("file", file.getName(), reqFile);
-        JsonObject input = new JsonObject();
-        input.addProperty("type", requestType);
-        RequestBody reqType = RequestBody.create(MediaType.parse("text/plain"), requestType);
-        RequestBody reqMessage = RequestBody.create(MediaType.parse("text/plain"), "");
-        RequestBody reqTitle = RequestBody.create(MediaType.parse("text/plain"), mTitleET.getText().toString().trim());
-        RequestBody reqStudents = RequestBody.create(MediaType.parse("text/plain"), getSelectedStudent());
-        RequestBody reqTeacherId = RequestBody.create(MediaType.parse("text/plain"),new SessionParam(mContext).user_guid);
-        baseRequest.callAPIPostImage(5, reqFile,getString( R.string.api_create_announcement),reqType,reqMessage,reqTitle,reqStudents,reqTeacherId);*/
-
-    }
-
-    private MultipartBody.Part prepareFilePart(String partName, Uri fileUri){
-
-        File file = null;
-        try {
-            file = new File(new URI(fileUri.getPath()));
-        } catch (URISyntaxException e) {
-            e.printStackTrace();
-        }
-
-        RequestBody requestBody = RequestBody.create(MediaType.parse(getContentResolver().getType(fileUri)), file);
-
-        return MultipartBody.Part.createFormData(partName, file.getName(),requestBody);
     }
 
 

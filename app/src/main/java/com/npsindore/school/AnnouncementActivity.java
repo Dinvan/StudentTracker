@@ -47,7 +47,7 @@ public class AnnouncementActivity extends BaseActivity {
     private BaseRequest baseRequest;
     private ArrayList<Announcement> mList;
     private String requestType;
-
+    private String student_id;
     @BindView(R.id.child_selection_tv)
     TextView mChildSelectionTV;
     @BindView(R.id.progressBar)
@@ -68,6 +68,7 @@ public class AnnouncementActivity extends BaseActivity {
         child_name = getIntent().getStringExtra("child_name");
         mType = getIntent().getIntExtra("Type",0);
         fromFCM = getIntent().getBooleanExtra("FromFCM",false);
+        student_id = getIntent().getStringExtra("student_id");
 
         mChildSelectionTV.setText(child_name);
         if(mType==Config.TYPE_ANNOUNCEMENT){
@@ -215,11 +216,12 @@ public class AnnouncementActivity extends BaseActivity {
         }
     }
 
-    public static Intent getIntent(Context context, int type, boolean fromFCM,String childName){
+    public static Intent getIntent(Context context, int type, boolean fromFCM,String childName,String student_id){
         Intent intent = new Intent(context,AnnouncementActivity.class);
         intent.putExtra("Type", type);
         intent.putExtra("FromFCM",fromFCM);
         intent.putExtra("child_name",childName);
+        intent.putExtra("student_id",student_id);
         return intent;
     }
 }

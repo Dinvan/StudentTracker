@@ -69,6 +69,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         String messageBody =  payload.get("message");
         String notification_type = payload.get("type");
         String student_id = payload.get("id");
+      //  String student_id = payload.get("student_id");
         String student_name = payload.get("stname");
 
 
@@ -76,16 +77,16 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         if (!TextUtils.isEmpty(SessionParam.getSessionKey(this))) {
 
             if (notification_type.equals("homework") ) {
-                intent = AnnouncementActivity.getIntent(this, Config.TYPE_HOMEWORK,true,"");
+                intent = AnnouncementActivity.getIntent(this, Config.TYPE_HOMEWORK,true,"",student_id);
                 SessionParam.setNotificationPref(this,1,student_id);
                 //     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             }
             else if (notification_type.equals("announcement") ) {
-                intent = AnnouncementActivity.getIntent(this, Config.TYPE_ANNOUNCEMENT,true,"");
+                intent = AnnouncementActivity.getIntent(this, Config.TYPE_ANNOUNCEMENT,true,"",student_id);
                 SessionParam.setNotificationPref(this,2,student_id);
                 //    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             }else if (notification_type.equals("attendance")) {
-                intent = StudentAttendanceListActivity.getIntent(this,true,"");
+                intent = StudentAttendanceListActivity.getIntent(this,true,"",student_id);
                 SessionParam.setNotificationPref(this,3,student_id);
                 //      intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             } else {

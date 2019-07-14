@@ -43,7 +43,7 @@ public class StudentAttendanceListActivity extends BaseActivity {
 
     private RecyclerView mRecyclerView;
     private TextView mNoItemTV;
-    private String  class_name,section_name;
+    private String  class_name,section_name,student_id;
     private StudentAttendanceAdapter mAdapter;
     private BaseRequest baseRequest;
     private ArrayList<StudentAttendanceMonthModel> mList;
@@ -71,6 +71,7 @@ public class StudentAttendanceListActivity extends BaseActivity {
         mNoItemTV = (TextView) findViewById(R.id.no_item_tv);
         class_name = getIntent().getStringExtra("classname");
         section_name = getIntent().getStringExtra("section");
+        student_id = getIntent().getStringExtra("student_id");
         mChildSelectionTV.setText(child_name);
         if(null!=Functions.getInstance().getmStudent())
             SessionParam.resetNotificationPref(this,3,Functions.getInstance().getmStudent().getStudent_id());
@@ -145,6 +146,9 @@ public class StudentAttendanceListActivity extends BaseActivity {
         String StudentId = "";
         if(null!=Functions.getInstance().getmStudent()){
             StudentId = Functions.getInstance().getmStudent().getStudent_id();
+        }
+        else{
+            StudentId = student_id;
         }
         object = Functions.getInstance().getJsonObject(
                 "session_key", new SessionParam(mContext).session_key,
@@ -227,10 +231,11 @@ public class StudentAttendanceListActivity extends BaseActivity {
     }
 
 
-    public static Intent getIntent(Context context, boolean fromFCM,String childName){
+    public static Intent getIntent(Context context, boolean fromFCM,String childName,String student_id){
         Intent intent = new Intent(context,StudentAttendanceListActivity.class);
         intent.putExtra("FromFCM",fromFCM);
         intent.putExtra("child_name",childName);
+        intent.putExtra("student_id",student_id);
         return intent;
     }
 }
