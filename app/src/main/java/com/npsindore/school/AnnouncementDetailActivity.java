@@ -1,11 +1,14 @@
 package com.npsindore.school;
 
+import android.Manifest;
+import android.app.DownloadManager;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
@@ -17,8 +20,16 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.JsonObject;
+import com.karumi.dexter.Dexter;
+import com.karumi.dexter.MultiplePermissionsReport;
+import com.karumi.dexter.PermissionToken;
+import com.karumi.dexter.listener.DexterError;
+import com.karumi.dexter.listener.PermissionRequest;
+import com.karumi.dexter.listener.PermissionRequestErrorListener;
+import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 import com.npsindore.R;
 import com.npsindore.auth.BaseActivity;
 import com.npsindore.interfaces.OnItemClickAdapter;
@@ -28,11 +39,13 @@ import com.npsindore.utility.Config;
 import com.npsindore.utility.DialogUtil;
 import com.npsindore.utility.Dialogs;
 import com.npsindore.utility.Functions;
+import com.npsindore.utility.PermissionUtils;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import RetroFit.BaseRequest;
 import RetroFit.RequestReceiver;
@@ -100,20 +113,7 @@ public class AnnouncementDetailActivity extends BaseActivity {
                         Dialogs.showListSelection(mContext, 0, new OnItemClickAdapter() {
                             @Override
                             public void onClick(int i, int position, String item) {
-                                Bitmap bitmap = ((BitmapDrawable)mAnnouncementIV.getDrawable()).getBitmap();
-                                if(null!=bitmap) {
-                                    String fileName;
-                                    if(mType==Config.TYPE_HOMEWORK){
-                                        fileName = "homework_"+mAnnouncement.getDate_created();
-                                    }
-                                    else{
-                                        fileName = "announcement"+mAnnouncement.getDate_created();
-                                    }
-
-                                    String filePath = saveToInternalStorage(bitmap,fileName);
-                                    DialogUtil.Alert(AnnouncementDetailActivity.this, "File saved", DialogUtil.AlertType.Success);
-                                }
-                            }
+                               downloadImage();         }
                         },options);
 
                         return false;
@@ -138,6 +138,71 @@ public class AnnouncementDetailActivity extends BaseActivity {
         mActionBar = getSupportActionBar();
         mActionBar.setDisplayHomeAsUpEnabled(true);
         mActionBar.setTitle(title);
+    }
+
+    public void downloadImage(){
+        String[] permission={Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                Manifest.permission.READ_EXTERNAL_STORAGE};
+        if(!PermissionUtils.isAllPermissionGranted(AnnouncementDetailActivity.this,permission)){
+            requestMultiplePermissions(permission);
+        }else{
+            Uri uri=Uri.parse(mAnnouncement.getImage());
+            DownloadManager downloadManager = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
+            DownloadManager.Request request = new DownloadManager.Request(uri);
+            request.setAllowedNetworkTypes(DownloadManager.Request.NETWORK_WIFI |
+                    DownloadManager.Request.NETWORK_MOBILE);
+
+// set title and description
+            String fileName=System.currentTimeMillis()+".jpg";
+            request.setTitle(fileName);
+            request.setDescription(mAnnouncement.getTitle());
+
+            request.allowScanningByMediaScanner();
+            request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
+
+//set the local destination for download file to a path within the application's external files directory
+            request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS,fileName);
+            request.setMimeType("image/*");
+            downloadManager.enqueue(request);
+
+        }
+    }
+
+    private void  requestMultiplePermissions(String[] permissions){
+
+
+        Dexter.withActivity(this)
+                .withPermissions(
+                        permissions
+                )
+                .withListener(new MultiplePermissionsListener() {
+                    @Override
+                    public void onPermissionsChecked(MultiplePermissionsReport report) {
+                        // check if all permissions are granted
+                        if (report.areAllPermissionsGranted()) {
+                            downloadImage();
+                        }
+
+                        // check for permanent denial of any permission
+                        if (report.isAnyPermissionPermanentlyDenied()) {
+                            // show alert dialog navigating to Settings
+                            //openSettingsDialog();
+                        }
+                    }
+
+                    @Override
+                    public void onPermissionRationaleShouldBeShown(List<PermissionRequest> permissions, PermissionToken token) {
+                        token.continuePermissionRequest();
+                    }
+                }).
+                withErrorListener(new PermissionRequestErrorListener() {
+                    @Override
+                    public void onError(DexterError error) {
+                        Toast.makeText(getApplicationContext(), "Some Error! ", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .onSameThread()
+                .check();
     }
 
     @Override
@@ -179,7 +244,7 @@ public class AnnouncementDetailActivity extends BaseActivity {
         try {
             fos = new FileOutputStream(mypath);
             // Use the compress method on the BitMap object to write image to the OutputStream
-            bitmapImage.compress(Bitmap.CompressFormat.PNG, 100, fos);
+            bitmapImage.compress(Bitmap.CompressFormat.JPEG, 100, fos);
             addImageToGallery(mypath.getAbsolutePath(),AnnouncementDetailActivity.this);
         } catch (Exception e) {
             e.printStackTrace();

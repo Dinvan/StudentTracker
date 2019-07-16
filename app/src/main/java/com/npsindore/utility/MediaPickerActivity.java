@@ -17,13 +17,17 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.content.FileProvider;
 import android.widget.Toast;
 
+import com.npsindore.BuildConfig;
 import com.npsindore.R;
 import com.npsindore.auth.BaseActivity;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -50,6 +54,7 @@ MediaPickerActivity   extends BaseActivity {
     final int REQ_CODE_READ_WRITE_PER = 8;
     private static final String IMAGE_UNSPECIFIED = "image/*";
     private Uri pickedURI, cropUri;
+    private String filePath;
 
     public enum MediaPicker {
         Gellery, GelleryWithCropper, Camera, CameraWithCropper, VideoCamera, VideoGallery
@@ -134,73 +139,35 @@ MediaPickerActivity   extends BaseActivity {
     }
 
     private void initCropImageURI() {
-        String appName = this.getResources().getString(R.string.app_name);
-        File proejctDirectory = new File(
-                Environment.getExternalStorageDirectory() + File.separator
-                        + appName.replaceAll(" ",""));
-
-        if (!proejctDirectory.exists()) {
-            proejctDirectory.mkdir();
-        }
-        File tempDirectory = new File(proejctDirectory, "temp");
-        if (!tempDirectory.exists()) {
-            tempDirectory.mkdir();
-        } else {
-           /* // delete all old files
-            for (File file : tempDirectory.listFiles()) {
-                if (file.getName().startsWith("tmp_")
-                        || file.getName().startsWith("croped_")) {
-                    file.delete();
-                }
-            }*/
-
-        }
-
-        File extraOutputFile = new File(tempDirectory,
-                String.valueOf(System.currentTimeMillis()) + ".jpg");
-
-        extraOutputFile.setWritable(true);
-
-        cropUri = Uri.fromFile(extraOutputFile);
+        cropUri=pickedURI;
 
     }
 
     private void initTemperoryURICamera() {
 
-        String appName = this.getResources().getString(R.string.app_name);
-        File proejctDirectory = new File(
-                Environment.getExternalStorageDirectory() + File.separator
-                        + appName.replaceAll(" ",""));
 
-        if (!proejctDirectory.exists()) {
-            proejctDirectory.mkdir();
+        File f= null;
+        try {
+            f = createImageFile();
+            filePath=f.getAbsolutePath();
+            pickedURI=FileProvider.getUriForFile(MediaPickerActivity.this,BuildConfig.APPLICATION_ID,f);
+
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        File tempDirectory = new File(proejctDirectory, "temp");
-        if (!tempDirectory.exists()) {
-            tempDirectory.mkdir();
-        } else {
-            // delete all old files
-            for (File file : tempDirectory.listFiles()) {
-                if (file.getName().startsWith("tmp_")
-                        || file.getName().startsWith("croped_")) {
-                    //file.delete();
-                }
-            }
-
-        }
-        pickedURI = Uri.fromFile(new File(tempDirectory, "tmp_"
-                + String.valueOf(System.currentTimeMillis()) + ".jpg"));
-
-      /*  File extraOutputFile = new File(tempDirectory, "croped_"
-                + String.valueOf(System.currentTimeMillis()) + ".jpg");
-
-        extraOutputFile.setWritable(true);*/
-        // cropImageUri = Uri.fromFile(extraOutputFile);
-
     }
 
-    public void intiNews() {
-
+    private File createImageFile() throws IOException {
+        // Create an image file name
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        String imageFileName = "JPEG_" + timeStamp + "_";
+        File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+        File image = File.createTempFile(
+                imageFileName,  /* prefix */
+                ".jpg",         /* suffix */
+                storageDir      /* directory */
+        );
+        return image;
     }
 
     @TargetApi(23)
@@ -215,6 +182,8 @@ MediaPickerActivity   extends BaseActivity {
             Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
             intent.putExtra(MediaStore.EXTRA_OUTPUT,
                     pickedURI);
+            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+            intent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
             intent.putExtra("return-data", true);
             try {
                 startActivityForResult(intent,
@@ -430,8 +399,9 @@ MediaPickerActivity   extends BaseActivity {
                 break;
             case REQ_CODE_PICK_FROM_GALLERY_WITH_CROP:
                 if (resultCode == Activity.RESULT_OK && data.getData() != null) {
-                    initCropImageURI();
                     pickedURI = data.getData();
+                    filePath=FileHelper.getPath(this,pickedURI);
+                    initCropImageURI();
 
                     cropImage();
                 } else {
@@ -441,10 +411,7 @@ MediaPickerActivity   extends BaseActivity {
             case REQ_CODE_CROP_PHOTO:
                 if (resultCode == Activity.RESULT_OK) {
 
-                    String imagePath = cropUri.getPath();
-                    File file = new File(imagePath);
-                    onSingleImageSelected(REQ_CODE_CROP_PHOTO, file, imagePath,
-                            get_Picture_bitmap(file));
+                    onSingleImageSelected(REQ_CODE_CROP_PHOTO, cropUri,filePath);
 
                 } else {
                     onMediaPickCanceled(MediaPicker.Camera);
@@ -463,15 +430,8 @@ MediaPickerActivity   extends BaseActivity {
                 if (resultCode == Activity.RESULT_OK) {
 
                     Uri selectedImage = data.getData();
-                    String[] filePathColumn = {MediaStore.Images.Media.DATA};
-                    Cursor cursor = this.getContentResolver().query(selectedImage,
-                            filePathColumn, null, null, null);
-                    cursor.moveToFirst();
-                    int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
-                    String picturePath = cursor.getString(columnIndex);
-                    File file = new File(picturePath);
-                    onSingleImageSelected(REQ_CODE_PICK_FROM_GALLERY, file, picturePath,
-                            get_Picture_bitmap(file));
+                    filePath=FileHelper.getPath(this,selectedImage);
+                    onSingleImageSelected(REQ_CODE_PICK_FROM_GALLERY,selectedImage,filePath);
                 } else {
                     onMediaPickCanceled(MediaPicker.Gellery);
                 }
@@ -481,11 +441,7 @@ MediaPickerActivity   extends BaseActivity {
             case REQ_CODE_PICK_FROM_CAMERA: {
 
                 if (resultCode == Activity.RESULT_OK) {
-
-                    String imagePath = pickedURI.getPath();
-                    File file = new File(imagePath);
-                    onSingleImageSelected(REQ_CODE_PICK_FROM_CAMERA, file, imagePath,
-                            get_Picture_bitmap(file));
+                    onSingleImageSelected(REQ_CODE_PICK_FROM_CAMERA, pickedURI,filePath);
 
                 } else {
                     onMediaPickCanceled(MediaPicker.Camera);
@@ -543,9 +499,9 @@ MediaPickerActivity   extends BaseActivity {
         }
 
         intent.putExtra("scale", true);
-         /*  intent.putExtra("return-data", true);*/
         intent.putExtra(MediaStore.EXTRA_OUTPUT, cropUri);
-
+        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+        intent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
         startActivityForResult(intent, REQ_CODE_CROP_PHOTO);
     }
 
@@ -635,7 +591,7 @@ MediaPickerActivity   extends BaseActivity {
     }
 
     protected abstract void onSingleImageSelected(int starterCode,
-                                                  File fileUri, String imagPath, Bitmap bitmap);
+                                                  Uri fileUri,String filePath);
 
     protected abstract void onVideoCaptured(String videoPath);
 

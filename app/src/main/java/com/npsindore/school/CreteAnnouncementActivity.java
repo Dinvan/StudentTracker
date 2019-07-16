@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
@@ -29,6 +30,7 @@ import com.npsindore.models.StudentModel;
 import com.npsindore.session.SessionParam;
 import com.npsindore.utility.Config;
 import com.npsindore.utility.DialogUtil;
+import com.npsindore.utility.FileHelper;
 import com.npsindore.utility.Functions;
 import com.npsindore.utility.MediaPickerActivity;
 import com.npsindore.utility.UtilityFunctions;
@@ -78,7 +80,6 @@ public class CreteAnnouncementActivity extends MediaPickerActivity {
     private File fileUri;
     private int type = 0;
     private String path;
-    private String mFileTemp;
     private ArrayList<StudentModel> mStudents;
 
     @Override
@@ -230,7 +231,7 @@ public class CreteAnnouncementActivity extends MediaPickerActivity {
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
 
-                        PickMedia(MediaPickerActivity.MediaPicker.CameraWithCropper);
+                        PickMedia(MediaPicker.Camera);
 
                     }
                 });
@@ -238,16 +239,44 @@ public class CreteAnnouncementActivity extends MediaPickerActivity {
     }
 
     @Override
-    protected void onSingleImageSelected(int starterCode, File mFileUri, String imagPath, Bitmap bitmap) {
+    protected void onSingleImageSelected(int starterCode, Uri mFileUri,String filePath) {
 
-        if (bitmap != null) {
-            path = imagPath;
-            mFileTemp = mFileUri.getPath();
-            System.out.println("Path: " + mFileTemp);
-            mHomeWorkIV.setImageBitmap(bitmap);
-            fileUri = mFileUri;
+        if (mFileUri != null) {
+            path =filePath;
+            setHomeWorkImage();
+            fileUri =  new File(path);
         }
     }
+
+
+    private void setHomeWorkImage() {
+        // Get the dimensions of the View
+        int targetW = getScreenWidth();
+        int targetH = targetW/2;
+
+        // Get the dimensions of the bitmap
+        BitmapFactory.Options bmOptions = new BitmapFactory.Options();
+        bmOptions.inJustDecodeBounds = true;
+        BitmapFactory.decodeFile(path, bmOptions);
+        int photoW = bmOptions.outWidth;
+        int photoH = bmOptions.outHeight;
+
+        // Determine how much to scale down the image
+        int scaleFactor = Math.min(photoW / targetW, photoH / targetH);
+
+        // Decode the image file into a Bitmap sized to fill the View
+        bmOptions.inJustDecodeBounds = false;
+        bmOptions.inSampleSize = scaleFactor;
+        bmOptions.inPurgeable = true;
+
+        Bitmap bitmap = BitmapFactory.decodeFile(path, bmOptions);
+        mHomeWorkIV.setImageBitmap(bitmap);
+    }
+
+    public static int getScreenWidth() {
+        return Resources.getSystem().getDisplayMetrics().widthPixels;
+    }
+
 
     private void UploadProfileImage(File file) {
 
@@ -285,8 +314,8 @@ public class CreteAnnouncementActivity extends MediaPickerActivity {
 
             }
         });
-
-        RequestBody reqFile = RequestBody.create(MediaType.parse("image/*"), file);
+        File compressedFile=FileHelper.compressBitmap(file, 3, 100,this);
+        RequestBody reqFile = RequestBody.create(MediaType.parse("image/*"), compressedFile);
         MultipartBody.Part body = MultipartBody.Part.createFormData("file", file.getName(), reqFile);
         JsonObject input = new JsonObject();
         input.addProperty("type", requestType);
