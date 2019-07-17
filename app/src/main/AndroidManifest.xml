@@ -17,6 +17,7 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:usesCleartextTraffic="true"
         tools:replace="android:appComponentFactory"
         android:appComponentFactory="android.support.v4.app.CoreComponentFactory"
         android:name="com.npsindore.auth.StudentTrackerApplication"
