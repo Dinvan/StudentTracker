@@ -2,6 +2,9 @@
     <string name="app_name">National Public School</string>
     <string name="app_name_full">National Public School
     </string>
+    <string name="channel_name">NSP Indore Notifications</string>
+    <string name="channel_description">Showing various notifications related to NSP Indore</string>
+
 
     <string name="retry">Retry</string>
     <string name="email_id">Email ID</string>
@@ -65,7 +68,7 @@
 
     <string name="class_home_work">Class \nHome Work</string>
     <string name="class_attendance">Class \nAttendance</string>
-    <string name="notification">LATEST \n Notification</string>
+    <string name="notification">Latest \n Notification</string>
     <string name="timetable">Class \nTime Table</string>
     <string name="school_fee">School \nFees</string>
     <string name="bus_route">Track \n Bus Route</string>

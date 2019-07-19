@@ -10,7 +10,7 @@ public class Config {
     public static final String DEVICE_TYPE_ID = "android";
     public static String DEVICETOKEN_GCMID = "";
     public static String USER_TYPE_ID = "1";
-
+    public static String NOTIFICATION_CHANNEL_ID = "NPS_Notification_1";
     /**
      * Application mode development-devel or production-prod
      */
